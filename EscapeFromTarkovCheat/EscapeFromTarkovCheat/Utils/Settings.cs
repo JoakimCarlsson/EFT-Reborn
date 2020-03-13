@@ -12,6 +12,8 @@ namespace EscapeFromTarkovCheat.Utils
     class Settings
     {
         internal static bool DrawLootItems = false;
+        internal static KeyCode ItemCategory = KeyCode.Keypad5;
+
         internal static bool DrawLootableContainers = false;
         internal static bool DrawExfiltrationPoints = true;
 
@@ -34,6 +36,5 @@ namespace EscapeFromTarkovCheat.Utils
         internal static bool AimbotDrawFOV = true;
 
         internal static KeyCode UnlockDoors = KeyCode.Keypad4;
-        internal static bool InfiniteStamina = true;
     }
 }

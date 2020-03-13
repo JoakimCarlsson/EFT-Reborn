@@ -5,7 +5,14 @@ using UnityEngine;
 
 namespace EscapeFromTarkovCheat.Data
 {
-
+    public enum LootItemLabelState
+    {
+        Common,
+        Special,
+        GameRare,
+        GameSuperRare,
+        All
+    }
     public class GameLootItem
     {
         public LootItem LootItem { get; }

@@ -17,18 +17,51 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
         private static readonly float CacheLootItemsInterval = 4f;
         private float _nextLootItemCacheTime;
 
-        //private static readonly Color SpecialColor = new Color(1f, 0.2f, 0.09f);
+        private static readonly Color SpecialColor = new Color(1f, 0.2f, 0.09f);
         private static readonly Color QuestColor = Color.yellow;
         private static readonly Color CommonColor = Color.white;
         private static readonly Color RareColor = new Color(0.38f, 0.43f, 1f);
         private static readonly Color SuperRareColor = new Color(1f, 0.29f, 0.36f);
 
         private List<GameLootItem> _gameLootItems = new List<GameLootItem>();
-        private Stopwatch _stopwatch = new Stopwatch();
+        public static List<string> SpecialLootItems;
+        public LootItemLabelState LootItemLabelState { get; private set; }
+
+        public void Start()
+        {
+            SpecialLootItems = new List<string>
+            {
+                "LEDX",
+                "Red",
+                "Paracord",
+                "Keycard",
+                "Virtex",
+                "Defibrillator",
+                "0.2BTC",
+                "Prokill",
+                "Flash drive",
+                "Violet",
+                "Blue",
+                "RB - PSP2",
+                "RB - MP22",
+                "RB - GN",
+                "RR",
+                "T - 7",
+                "Green",
+                "San.301",
+                "Tetriz",
+            };
+        }
+
         public void FixedUpdate()
         {
             if (!Settings.DrawLootItems)
                 return;
+
+            if (((int)LootItemLabelState) == (Enum.GetNames(typeof(LootItemLabelState)).Length - 1))
+                LootItemLabelState = LootItemLabelState.Common;
+            else if (Input.GetKeyDown(Settings.ItemCategory))
+                LootItemLabelState++;
 
             if (Time.time >= _nextLootItemCacheTime)
             {
@@ -59,23 +92,48 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
         {
             if (Settings.DrawLootItems)
             {
+                GUI.Label(new Rect(20, 20, 200, 60), LootItemLabelState.ToString());
+
                 foreach (var gameLootItem in _gameLootItems)
                 {
                     if (!GameUtils.IsLootItemValid(gameLootItem.LootItem) || !gameLootItem.IsOnScreen || gameLootItem.Distance > Settings.DrawLootItemsDistance)
                         continue;
 
-                    string lootItemName = $"{gameLootItem.LootItem.Item.ShortName.Localized()} [{gameLootItem.FormattedDistance}]";
+                    bool isSpecialLootItem = IsSpecialLootItem(gameLootItem.LootItem);
 
-                    if (gameLootItem.LootItem.Item.Template.Rarity == ELootRarity.Common)
-                        Render.DrawString(new Vector2(gameLootItem.ScreenPosition.x - 50f, gameLootItem.ScreenPosition.y), lootItemName, CommonColor);
-                    if (gameLootItem.LootItem.Item.Template.Rarity == ELootRarity.Rare)
-                        Render.DrawString(new Vector2(gameLootItem.ScreenPosition.x - 50f, gameLootItem.ScreenPosition.y), lootItemName, RareColor);
-                    if (gameLootItem.LootItem.Item.Template.Rarity == ELootRarity.Superrare)
-                        Render.DrawString(new Vector2(gameLootItem.ScreenPosition.x - 50f, gameLootItem.ScreenPosition.y), lootItemName, SuperRareColor);
-                    if (gameLootItem.LootItem.Item.Template.QuestItem)
-                        Render.DrawString(new Vector2(gameLootItem.ScreenPosition.x - 50f, gameLootItem.ScreenPosition.y), lootItemName, QuestColor);
+                    if (LootItemLabelState == LootItemLabelState.Special && !isSpecialLootItem)
+                        continue;
+                    if (LootItemLabelState == LootItemLabelState.GameRare && gameLootItem.LootItem.Item.Template.Rarity == ELootRarity.Rare)
+                        continue;
+                    if (LootItemLabelState == LootItemLabelState.GameSuperRare && gameLootItem.LootItem.Item.Template.Rarity == ELootRarity.Superrare)
+                        continue;
+
+                    string lootItemName = $"{gameLootItem.LootItem.Item.ShortName.Localized()} [{gameLootItem.FormattedDistance}]";
+                    Color lootItemColor = CommonColor;
+
+                    if (isSpecialLootItem)
+                        lootItemColor = SpecialColor;
+                    else if (gameLootItem.LootItem.Item.QuestItem)
+                        lootItemColor = QuestColor;
+                    else if (gameLootItem.LootItem.Item.Template.Rarity == ELootRarity.Rare)
+                        lootItemColor = RareColor;
+                    else if (gameLootItem.LootItem.Item.Template.Rarity == ELootRarity.Superrare)
+                        lootItemColor = SuperRareColor;
+
+                    Render.DrawString(new Vector2(gameLootItem.ScreenPosition.x - 50f, gameLootItem.ScreenPosition.y), lootItemName, lootItemColor);
                 }
             }
+        }
+
+        public bool IsSpecialLootItem(LootItem lootItem)
+        {
+            if ((lootItem == null) || (lootItem.Item == null))
+                return false;
+
+            string formattedLootItemName = lootItem.Item.Name.Localized();
+            string formattedLootItemShortName = lootItem.Item.ShortName.Localized();
+
+            return SpecialLootItems.Contains(formattedLootItemName) || SpecialLootItems.Contains(formattedLootItemShortName);
         }
     }
 }

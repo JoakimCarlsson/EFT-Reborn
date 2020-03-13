@@ -66,8 +66,8 @@ namespace EscapeFromTarkovCheat.Feauters
 
         public static float Fov(Vector3 position)
         {
-            Vector3 myPos = Camera.main.transform.position;
-            Vector3 forward = Camera.main.transform.forward;
+            Vector3 myPos = Main.MainCamera.transform.position;
+            Vector3 forward = Main.MainCamera.transform.forward;
             Vector3 normalized = (position - myPos).normalized;
             return Mathf.Acos(Mathf.Clamp(Vector3.Dot(forward, normalized), -1f, 1f)) * 57.29578f;
         }
