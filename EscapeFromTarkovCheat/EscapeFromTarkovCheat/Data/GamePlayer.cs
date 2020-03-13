@@ -53,12 +53,25 @@ namespace EscapeFromTarkovCheat.Data
 
             IsOnScreen = GameUtils.IsScreenPointVisible(screenPosition);
             Distance = Vector3.Distance(Main.MainCamera.transform.position, Player.Transform.position);
+            IsVisible = IsVisibles();
 
             if ((Player.Profile != null) && (Player.Profile.Info != null))
                 IsAI = (Player.Profile.Info.RegistrationDate <= 0);
 
         }
 
+        private bool IsVisibles()
+        {
+            if (!IsOnScreen)
+                return false;
+            //This is realy bad and needs to be improved
+            if (Physics.Linecast(Camera.main.transform.position, GameUtils.GetBonePosByID(Player, 133), out var hit))
+            {
+                if (hit.transform.gameObject == Player.gameObject)
+                    return true;
+            }
+            return false;
+        }
     }
 
 }

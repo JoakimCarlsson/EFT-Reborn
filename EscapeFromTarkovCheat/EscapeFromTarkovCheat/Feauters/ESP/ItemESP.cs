@@ -25,7 +25,7 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
 
         private List<GameLootItem> _gameLootItems = new List<GameLootItem>();
         private Stopwatch _stopwatch = new Stopwatch();
-        public void Update()
+        public void FixedUpdate()
         {
             if (!Settings.DrawLootItems)
                 return;

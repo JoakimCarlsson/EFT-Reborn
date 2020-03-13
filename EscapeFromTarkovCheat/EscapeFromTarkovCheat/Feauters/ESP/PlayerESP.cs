@@ -80,7 +80,7 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
 
                 if (Settings.DrawPlayerLine)
                 {
-                    Render.DrawLine(new Vector2(Screen.width / 2, Screen.height), new Vector2(gamePlayer.ScreenPosition.x, gamePlayer.ScreenPosition.y), 1.5f, /*GameUtils.IsVisible(destination)*/false ? Color.green : Color.red);
+                    Render.DrawLine(new Vector2(Screen.width / 2, Screen.height), new Vector2(gamePlayer.ScreenPosition.x, gamePlayer.ScreenPosition.y), 1.5f, gamePlayer.IsVisible ? Color.green : Color.red);
                 }
             }
         }

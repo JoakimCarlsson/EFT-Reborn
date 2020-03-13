@@ -11,15 +11,15 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
 {
     public class ExfiltrationPointsESP : MonoBehaviour
     {
-        private List<GameExfiltrationPoint> _gameExfiltrationPoints= new List<GameExfiltrationPoint>();
+        private List<GameExfiltrationPoint> _gameExfiltrationPoints = new List<GameExfiltrationPoint>();
         private static readonly float CacheExfiltrationPointInterval = 5f;
         private float _nextLootItemCacheTime;
 
         private static readonly Color ExfiltrationPointColour = Color.green;
 
-        public void Update()
+        public void FixedUpdate()
         {
-            if (!Settings.DrawExfiltrationPoints) 
+            if (!Settings.DrawExfiltrationPoints)
                 return;
 
             if (Time.time >= _nextLootItemCacheTime)

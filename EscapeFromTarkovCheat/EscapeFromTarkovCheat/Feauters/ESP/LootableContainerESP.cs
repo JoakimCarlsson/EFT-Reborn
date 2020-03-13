@@ -13,7 +13,7 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
 {
     public class LootableContainerESP : MonoBehaviour
     {
-        private static readonly float CacheLootItemsInterval = 100;
+        private static readonly float CacheLootItemsInterval = 4;
         private float _nextLootContainerCacheTime;
         private List<GameLootContainer> _gameLootContainers;
         private static readonly Color LootableContainerColor = new Color(1f, 0.2f, 0.09f);
@@ -23,7 +23,7 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
             _gameLootContainers = new List<GameLootContainer>();
         }
 
-        public void Update()
+        public void FixedUpdate()
         {
             if (!Settings.DrawLootableContainers)
                 return;

@@ -24,7 +24,6 @@ namespace EscapeFromTarkovCheat
         public void Awake()
         {
             GameObject hookObject = new GameObject();
-
             hookObject.AddComponent<Menu.UI.Menu>();
             hookObject.AddComponent<PlayerESP>();
             hookObject.AddComponent<ItemESP>();
@@ -34,7 +33,7 @@ namespace EscapeFromTarkovCheat
             DontDestroyOnLoad(hookObject);
         }
 
-        public void Update()
+        public void FixedUpdate()
         {
             if (Settings.DrawPlayers)
             {
@@ -54,7 +53,6 @@ namespace EscapeFromTarkovCheat
                                 LocalPlayer = player;
                                 continue;
                             }
-
                             if (!GameUtils.IsPlayerAlive(player) || (Vector3.Distance(MainCamera.transform.position, player.Transform.position) > Settings.DrawPlayersDistance))
                                 continue;
 
