@@ -17,13 +17,13 @@ namespace EscapeFromTarkovCheat
         public static Player LocalPlayer;
         public static GameWorld GameWorld;
         public static Camera MainCamera;
-
+        public static GameObject hookObject;
         private float _nextPlayerCacheTime;
         private static readonly float _cachePlayersInterval = 4f;
 
         public void Awake()
-        {
-            GameObject hookObject = new GameObject();
+        { 
+            hookObject = new GameObject();
             hookObject.AddComponent<Menu.UI.Menu>();
             hookObject.AddComponent<PlayerESP>();
             hookObject.AddComponent<ItemESP>();

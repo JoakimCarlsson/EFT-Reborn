@@ -34,5 +34,6 @@ namespace EscapeFromTarkovCheat.Utils
         internal static bool AimbotDrawFOV = true;
 
         internal static KeyCode UnlockDoors = KeyCode.Keypad4;
+        internal static bool InfiniteStamina = true;
     }
 }

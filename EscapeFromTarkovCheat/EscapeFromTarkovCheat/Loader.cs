@@ -18,6 +18,7 @@ namespace EscapeFromTarkovCheat
 
         public static void Unload()
         {
+            Object.Destroy(Main.hookObject);
             Object.Destroy(HookObject);
         }
     }

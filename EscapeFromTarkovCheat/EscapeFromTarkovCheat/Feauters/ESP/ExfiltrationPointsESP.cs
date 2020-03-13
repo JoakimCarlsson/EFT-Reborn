@@ -58,6 +58,5 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
                 }
             }
         }
-
     }
 }
