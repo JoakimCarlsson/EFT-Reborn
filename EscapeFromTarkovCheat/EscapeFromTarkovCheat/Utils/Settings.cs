@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EFT.Visual;
-using EscapeFromTarkovCheat.Feauters;
 using UnityEngine;
 
 namespace EFT.HideOut

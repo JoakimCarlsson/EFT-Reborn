@@ -22,7 +22,6 @@ namespace EFT.HideOut
 
         public void Awake()
         {
-
             hookObject = new GameObject();
             hookObject.AddComponent<Menu>();
             hookObject.AddComponent<PlayerESP>();

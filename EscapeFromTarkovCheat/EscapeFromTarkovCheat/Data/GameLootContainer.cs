@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using EFT.Interactive;
 using UnityEngine;
 
-namespace EEFT.HideOut
+namespace EFT.HideOut
 {
     class GameLootContainer
     {

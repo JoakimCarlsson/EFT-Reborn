@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using EEFT.HideOut;
 using EFT;
 using EFT.Interactive;
 using JsonType;
