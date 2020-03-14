@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using EFT;
 using EFT.Interactive;
 using JsonType;
@@ -16,43 +17,56 @@ namespace EFT.HideOut
 
         public void FixedUpdate()
         {
-            if (!Settings.DrawExfiltrationPoints)
-                return;
-
-            if (Time.time >= _nextLootItemCacheTime)
+            try
             {
-                if ((Main.GameWorld != null) && (Main.GameWorld.ExfiltrationController.ExfiltrationPoints != null))
+                if (!Settings.DrawExfiltrationPoints)
+                    return;
+
+                if (Time.time >= _nextLootItemCacheTime)
                 {
-                    _gameExfiltrationPoints.Clear();
-                    foreach (var exfiltrationPoint in Main.GameWorld.ExfiltrationController.ExfiltrationPoints)
+                    if ((Main.GameWorld != null) && (Main.GameWorld.ExfiltrationController.ExfiltrationPoints != null))
                     {
-                        if (!GameUtils.IsExfiltrationPointValid(exfiltrationPoint))
-                            continue;
+                        _gameExfiltrationPoints.Clear();
+                        foreach (var exfiltrationPoint in Main.GameWorld.ExfiltrationController.ExfiltrationPoints)
+                        {
+                            if (!GameUtils.IsExfiltrationPointValid(exfiltrationPoint))
+                                continue;
 
-                        _gameExfiltrationPoints.Add(new GameExfiltrationPoint(exfiltrationPoint));
+                            _gameExfiltrationPoints.Add(new GameExfiltrationPoint(exfiltrationPoint));
+                        }
+
+                        _nextLootItemCacheTime = (Time.time + CacheExfiltrationPointInterval);
                     }
-
-                    _nextLootItemCacheTime = (Time.time + CacheExfiltrationPointInterval);
                 }
-            }
 
-            foreach (GameExfiltrationPoint gameExfiltrationPoint in _gameExfiltrationPoints)
-                gameExfiltrationPoint.RecalculateDynamics();
+                foreach (GameExfiltrationPoint gameExfiltrationPoint in _gameExfiltrationPoints)
+                    gameExfiltrationPoint.RecalculateDynamics();
+            }
+            catch
+            {
+                
+            }
 
         }
         private void OnGUI()
         {
-            if (Settings.DrawExfiltrationPoints)
+            try
             {
-                foreach (var exfiltrationPoint in _gameExfiltrationPoints)
+                if (Settings.DrawExfiltrationPoints)
                 {
-                    if (!GameUtils.IsExfiltrationPointValid(exfiltrationPoint.ExfiltrationPoint) || !exfiltrationPoint.IsOnScreen)
-                        continue;
+                    foreach (var exfiltrationPoint in _gameExfiltrationPoints)
+                    {
+                        if (!GameUtils.IsExfiltrationPointValid(exfiltrationPoint.ExfiltrationPoint) || !exfiltrationPoint.IsOnScreen)
+                            continue;
 
-                    string exfiltrationPointText = $"{exfiltrationPoint.ExfiltrationPoint.Settings.Name} [{exfiltrationPoint.FormattedDistance}]";
+                        string exfiltrationPointText = $"{exfiltrationPoint.ExfiltrationPoint.Settings.Name} [{exfiltrationPoint.FormattedDistance}]";
 
-                    Render.DrawString(new Vector2(exfiltrationPoint.ScreenPosition.x - 50f, exfiltrationPoint.ScreenPosition.y), exfiltrationPointText, ExfiltrationPointColour);
+                        Render.DrawString(new Vector2(exfiltrationPoint.ScreenPosition.x - 50f, exfiltrationPoint.ScreenPosition.y), exfiltrationPointText, ExfiltrationPointColour);
+                    }
                 }
+            }
+            catch
+            {
             }
         }
     }

@@ -34,87 +34,114 @@ namespace EFT.HideOut
 
         public void FixedUpdate()
         {
-            if (Time.time >= _nextCameraCacheTime)
+            try
             {
-                GameWorld = Singleton<GameWorld>.Instance;
-                MainCamera = Camera.main;
+                if (Time.time >= _nextCameraCacheTime)
+                {
+                    GameWorld = Singleton<GameWorld>.Instance;
+                    MainCamera = Camera.main;
 
-                _nextCameraCacheTime = (Time.time + _cacheCameraInterval);
+                    _nextCameraCacheTime = (Time.time + _cacheCameraInterval);
+                }
+
+                UpdatePlayers();
+
+                DoorUnlock();
+
+                NoVisor();
             }
-
-            UpdatePlayers();
-
-            DoorUnlock();
-
-            NoVisor();
+            catch
+            {
+            }
         }
 
         private void UpdatePlayers()
         {
-            if (Settings.DrawPlayers)
+            try
             {
-                if (Time.time >= _nextPlayerCacheTime)
+                if (Settings.DrawPlayers)
                 {
-                    if ((GameWorld != null) && (GameWorld.RegisteredPlayers != null))
+                    if (Time.time >= _nextPlayerCacheTime)
                     {
-                        GamePlayers.Clear();
-
-                        foreach (Player player in FindObjectsOfType<Player>())
+                        if ((GameWorld != null) && (GameWorld.RegisteredPlayers != null))
                         {
-                            if (player.IsYourPlayer())
+                            GamePlayers.Clear();
+
+                            foreach (Player player in FindObjectsOfType<Player>())
                             {
-                                LocalPlayer = player;
-                                continue;
+                                if (player.IsYourPlayer())
+                                {
+                                    LocalPlayer = player;
+                                    continue;
+                                }
+
+                                if ((Vector3.Distance(MainCamera.transform.position, player.Transform.position) >
+                                     Settings.DrawPlayersDistance))
+                                    continue;
+
+                                GamePlayers.Add(new GamePlayer(player));
                             }
 
-                            if ((Vector3.Distance(MainCamera.transform.position, player.Transform.position) >
-                                 Settings.DrawPlayersDistance))
-                                continue;
-
-                            GamePlayers.Add(new GamePlayer(player));
+                            _nextPlayerCacheTime = (Time.time + _cachePlayersInterval);
                         }
-
-                        _nextPlayerCacheTime = (Time.time + _cachePlayersInterval);
                     }
-                }
 
-                foreach (GamePlayer gamePlayer in GamePlayers)
-                    gamePlayer.RecalculateDynamics();
+                    foreach (GamePlayer gamePlayer in GamePlayers)
+                        gamePlayer.RecalculateDynamics();
+                }
             }
+            catch 
+            {
+                
+            }
+
         }
 
         private static void NoVisor()
         {
-            if (LocalPlayer == null || MainCamera == null)
-                return;
+            try
+            {
+                if (LocalPlayer == null || MainCamera == null)
+                    return;
 
-            if (Settings.NoVisor)
-            {
-                MainCamera.GetComponent<VisorEffect>().Intensity = 0f;
-                MainCamera.GetComponent<VisorEffect>().enabled = true;
+                if (Settings.NoVisor)
+                {
+                    MainCamera.GetComponent<VisorEffect>().Intensity = 0f;
+                    MainCamera.GetComponent<VisorEffect>().enabled = true;
+                }
+                else
+                {
+                    MainCamera.GetComponent<VisorEffect>().Intensity = 1f;
+                    MainCamera.GetComponent<VisorEffect>().enabled = true;
+                }
             }
-            else
+            catch
             {
-                MainCamera.GetComponent<VisorEffect>().Intensity = 1f;
-                MainCamera.GetComponent<VisorEffect>().enabled = true;
+                
             }
         }
 
         private static void DoorUnlock()
         {
-            if (LocalPlayer == null || MainCamera == null)
-                return;
-
-            if (Input.GetKeyDown(Settings.UnlockDoors))
+            try
             {
-                foreach (var door in FindObjectsOfType<Door>())
-                {
-                    if (door.DoorState == EDoorState.Open ||
-                        Vector3.Distance(door.transform.position, LocalPlayer.Position) > 20f)
-                        continue;
+                if (LocalPlayer == null || MainCamera == null)
+                    return;
 
-                    door.DoorState = EDoorState.Shut;
+                if (Input.GetKeyDown(Settings.UnlockDoors))
+                {
+                    foreach (var door in FindObjectsOfType<Door>())
+                    {
+                        if (door.DoorState == EDoorState.Open ||
+                            Vector3.Distance(door.transform.position, LocalPlayer.Position) > 20f)
+                            continue;
+
+                        door.DoorState = EDoorState.Shut;
+                    }
                 }
+            }
+            catch
+            {
             }
         }
     }

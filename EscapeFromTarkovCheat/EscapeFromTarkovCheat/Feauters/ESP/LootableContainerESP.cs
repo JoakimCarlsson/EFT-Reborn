@@ -22,44 +22,57 @@ namespace EFT.HideOut
 
         public void FixedUpdate()
         {
-            if (!Settings.DrawLootableContainers)
-                return;
-            
-            if (Time.time >= _nextLootContainerCacheTime)
+            try
             {
-                if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null))
+                if (!Settings.DrawLootableContainers)
+                    return;
+            
+                if (Time.time >= _nextLootContainerCacheTime)
                 {
-                    _gameLootContainers.Clear();
-
-                    foreach (LootableContainer lootableContainer in FindObjectsOfType<LootableContainer>())
+                    if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null))
                     {
-                        if (!GameUtils.IsLootableContainerValid(lootableContainer) || (Vector3.Distance(Main.MainCamera.transform.position, lootableContainer.transform.position) > Settings.DrawLootableContainersDistance))
-                            continue;
-                        _gameLootContainers.Add(new GameLootContainer(lootableContainer));
-                    }
-                    _nextLootContainerCacheTime = (Time.time + CacheLootItemsInterval);
-                }
-            }
+                        _gameLootContainers.Clear();
 
-            foreach (GameLootContainer gameLootContainer in _gameLootContainers)
-                gameLootContainer.RecalculateDynamics();
+                        foreach (LootableContainer lootableContainer in FindObjectsOfType<LootableContainer>())
+                        {
+                            if (!GameUtils.IsLootableContainerValid(lootableContainer) || (Vector3.Distance(Main.MainCamera.transform.position, lootableContainer.transform.position) > Settings.DrawLootableContainersDistance))
+                                continue;
+                            _gameLootContainers.Add(new GameLootContainer(lootableContainer));
+                        }
+                        _nextLootContainerCacheTime = (Time.time + CacheLootItemsInterval);
+                    }
+                }
+
+                foreach (GameLootContainer gameLootContainer in _gameLootContainers)
+                    gameLootContainer.RecalculateDynamics();
+            }
+            catch 
+            {
+            }
         }
 
         public void OnGUI()
         {
-            if (!Settings.DrawLootableContainers)
-                return;
-
-            foreach (var gameLootContainer in _gameLootContainers)
+            try
             {
-                if (!GameUtils.IsLootableContainerValid(gameLootContainer.LootableContainer) || !gameLootContainer.IsOnScreen || gameLootContainer.Distance > Settings.DrawLootableContainersDistance)
-                    continue;
+                if (!Settings.DrawLootableContainers)
+                    return;
 
-                //EFT.InventoryLogic.Item rootItem = gameLootContainer.LootableContainer.ItemOwner.RootItem;
-                //rootItem.Template.Name.Localized();
+                foreach (var gameLootContainer in _gameLootContainers)
+                {
+                    if (!GameUtils.IsLootableContainerValid(gameLootContainer.LootableContainer) || !gameLootContainer.IsOnScreen || gameLootContainer.Distance > Settings.DrawLootableContainersDistance)
+                        continue;
 
-                string lootItemName = $"{gameLootContainer.LootableContainer.name} [{gameLootContainer.FormattedDistance}]";
-                Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x - 50f, gameLootContainer.ScreenPosition.y), lootItemName, LootableContainerColor);
+                    //EFT.InventoryLogic.Item rootItem = gameLootContainer.LootableContainer.ItemOwner.RootItem;
+                    //rootItem.Template.Name.Localized();
+
+                    string lootItemName = $"{gameLootContainer.LootableContainer.name} [{gameLootContainer.FormattedDistance}]";
+                    Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x - 50f, gameLootContainer.ScreenPosition.y), lootItemName, LootableContainerColor);
+                }
+            }
+            catch
+            {
+                
             }
         }
     }

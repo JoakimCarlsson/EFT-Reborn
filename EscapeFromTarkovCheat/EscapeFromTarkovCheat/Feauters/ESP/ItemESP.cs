@@ -52,89 +52,105 @@ namespace EFT.HideOut
 
         public void FixedUpdate()
         {
-            if (!Settings.DrawLootItems)
-                return;
-
-            if (((int)LootItemRarity) == (Enum.GetNames(typeof(LootItemRarity)).Length - 1))
-                LootItemRarity = LootItemRarity.Common;
-            else if (Input.GetKeyDown(Settings.ItemCategory))
-                LootItemRarity++;
-
-            if (Time.time >= _nextLootItemCacheTime)
+            try
             {
-                if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null))
+                if (!Settings.DrawLootItems)
+                    return;
+
+                if (((int)LootItemRarity) == (Enum.GetNames(typeof(LootItemRarity)).Length - 1))
+                    LootItemRarity = LootItemRarity.Common;
+                else if (Input.GetKeyDown(Settings.ItemCategory))
+                    LootItemRarity++;
+
+                if (Time.time >= _nextLootItemCacheTime)
                 {
-                    _gameLootItems.Clear();
-
-                    for (int i = 0; i < Main.GameWorld.LootItems.Count; i++)
+                    if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null))
                     {
-                        LootItem lootItem = Main.GameWorld.LootItems.GetByIndex(i);
+                        _gameLootItems.Clear();
 
-                        if (!GameUtils.IsLootItemValid(lootItem) || (Vector3.Distance(Main.MainCamera.transform.position, lootItem.transform.position) > Settings.DrawLootItemsDistance))
-                            continue;
+                        for (int i = 0; i < Main.GameWorld.LootItems.Count; i++)
+                        {
+                            LootItem lootItem = Main.GameWorld.LootItems.GetByIndex(i);
 
-                        _gameLootItems.Add(new GameLootItem(lootItem));
+                            if (!GameUtils.IsLootItemValid(lootItem) || (Vector3.Distance(Main.MainCamera.transform.position, lootItem.transform.position) > Settings.DrawLootItemsDistance))
+                                continue;
+
+                            _gameLootItems.Add(new GameLootItem(lootItem));
+                        }
+
+                        _nextLootItemCacheTime = (Time.time + CacheLootItemsInterval);
                     }
-
-                    _nextLootItemCacheTime = (Time.time + CacheLootItemsInterval);
                 }
-            }
 
-            foreach (GameLootItem gameLootItem in _gameLootItems)
-                gameLootItem.RecalculateDynamics();
+                foreach (GameLootItem gameLootItem in _gameLootItems)
+                    gameLootItem.RecalculateDynamics();
+            }
+            catch
+            {
+            }
 
         }
 
         private void OnGUI()
         {
-            if (Settings.DrawLootItems)
+            try
             {
-
-
-                foreach (var item in _gameLootItems)
+                if (Settings.DrawLootItems)
                 {
-                    if (!GameUtils.IsLootItemValid(item.LootItem) || !item.IsOnScreen || item.Distance > Settings.DrawLootItemsDistance)
-                        continue;
+                    foreach (var item in _gameLootItems)
+                    {
+                        if (!GameUtils.IsLootItemValid(item.LootItem) || !item.IsOnScreen || item.Distance > Settings.DrawLootItemsDistance)
+                            continue;
 
-                    bool isSpecialLootItem = IsSpecialLootItem(item.LootItem);
+                        bool isSpecialLootItem = IsSpecialLootItem(item.LootItem);
 
-                    Color lootItemColor = CommonColor;
+                        Color lootItemColor = CommonColor;
 
-                    if (isSpecialLootItem)
-                        lootItemColor = SpecialColor;
-                    else if (item.LootItem.Item.QuestItem)
-                        lootItemColor = QuestColor;
-                    else if (item.LootItem.Item.Template.Rarity == ELootRarity.Rare)
-                        lootItemColor = RareColor;
-                    else if (item.LootItem.Item.Template.Rarity == ELootRarity.Superrare)
-                        lootItemColor = SuperRareColor;
+                        if (isSpecialLootItem)
+                            lootItemColor = SpecialColor;
+                        else if (item.LootItem.Item.QuestItem)
+                            lootItemColor = QuestColor;
+                        else if (item.LootItem.Item.Template.Rarity == ELootRarity.Rare)
+                            lootItemColor = RareColor;
+                        else if (item.LootItem.Item.Template.Rarity == ELootRarity.Superrare)
+                            lootItemColor = SuperRareColor;
 
-                    string lootItemName = $"{item.LootItem.Item.ShortName.Localized()} [{item.FormattedDistance}]";
+                        string lootItemName = $"{item.LootItem.Item.ShortName.Localized()} [{item.FormattedDistance}]";
 
-                    if (LootItemRarity == LootItemRarity.Special && !isSpecialLootItem)
-                        continue;
-                    if (LootItemRarity == LootItemRarity.GameRare && item.LootItem.Item.Template.Rarity != ELootRarity.Rare)
-                        continue;
-                    if (LootItemRarity == LootItemRarity.GameSuperRare && item.LootItem.Item.Template.Rarity != ELootRarity.Superrare)
-                        continue;
-                    if (LootItemRarity == LootItemRarity.Common && item.LootItem.Item.Template.Rarity != ELootRarity.Common)
-                        continue;
+                        if (LootItemRarity == LootItemRarity.Special && !isSpecialLootItem)
+                            continue;
+                        if (LootItemRarity == LootItemRarity.GameRare && item.LootItem.Item.Template.Rarity != ELootRarity.Rare)
+                            continue;
+                        if (LootItemRarity == LootItemRarity.GameSuperRare && item.LootItem.Item.Template.Rarity != ELootRarity.Superrare)
+                            continue;
+                        if (LootItemRarity == LootItemRarity.Common && item.LootItem.Item.Template.Rarity != ELootRarity.Common)
+                            continue;
 
-                    GUI.Label(new Rect(20, 40, 200, 60), LootItemRarity.ToString());
-                    Render.DrawString(new Vector2(item.ScreenPosition.x - 50f, item.ScreenPosition.y), lootItemName, lootItemColor);
+                        GUI.Label(new Rect(20, 40, 200, 60), LootItemRarity.ToString());
+                        Render.DrawString(new Vector2(item.ScreenPosition.x - 50f, item.ScreenPosition.y), lootItemName, lootItemColor);
+                    }
                 }
+            }
+            catch
+            {
             }
         }
 
         public bool IsSpecialLootItem(LootItem lootItem)
         {
-            if ((lootItem == null) || (lootItem.Item == null))
-                return false;
+            try
+            {
+                if ((lootItem == null) || (lootItem.Item == null))
+                    return false;
 
-            string formattedLootItemName = lootItem.Item.Name.Localized();
-            string formattedLootItemShortName = lootItem.Item.ShortName.Localized();
+                string formattedLootItemName = lootItem.Item.Name.Localized();
+                string formattedLootItemShortName = lootItem.Item.ShortName.Localized();
 
-            return SpecialLootItems.Contains(formattedLootItemName) || SpecialLootItems.Contains(formattedLootItemShortName);
+                return SpecialLootItems.Contains(formattedLootItemName) || SpecialLootItems.Contains(formattedLootItemShortName);
+            }
+            catch 
+            {
+            }
         }
     }
 }
