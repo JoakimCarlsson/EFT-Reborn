@@ -50,7 +50,7 @@ namespace EscapeFromTarkovCheat.Feauters
 
         private GamePlayer GetTarget()
         {
-            _targetList = Main.GamePlayers.Where(p => !p.Player.IsYourPlayer() /*&& p.IsVisible*/);
+            _targetList = Main.GamePlayers.Where(p => !p.Player.IsYourPlayer() && GameUtils.IsPlayerAlive(p.Player));
             _targetList = _targetList.OrderBy(p => p.Distance);
 
             foreach (var gamePlayer in _targetList)
@@ -78,6 +78,11 @@ namespace EscapeFromTarkovCheat.Feauters
                 return;
 
             Main.LocalPlayer.ProceduralWeaponAnimation.Shootingg.Intensity = 0f;
+            Main.LocalPlayer.ProceduralWeaponAnimation.AimSwayMax = new Vector3(0f, 0f, 0f);
+            Main.LocalPlayer.ProceduralWeaponAnimation.AimSwayMin = new Vector3(0f, 0f, 0f);
+            Main.LocalPlayer.ProceduralWeaponAnimation.AimSwayMaxThreshold = 0f;
+            Main.LocalPlayer.ProceduralWeaponAnimation.AimSwayStartsThreshold = 0f;
+            Main.LocalPlayer.ProceduralWeaponAnimation.AimingDisplacementStr = 0f;
         }
     }
 }

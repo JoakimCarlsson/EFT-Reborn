@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Comfort.Common;
 using EFT;
 using EFT.Interactive;
 using EscapeFromTarkovCheat.Data;
@@ -92,7 +91,7 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
         {
             if (Settings.DrawLootItems)
             {
-                GUI.Label(new Rect(20, 20, 200, 60), LootItemRarity.ToString());
+                GUI.Label(new Rect(20, 40, 200, 60), LootItemRarity.ToString());
 
                 foreach (var item in _gameLootItems)
                 {

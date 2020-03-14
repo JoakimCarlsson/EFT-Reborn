@@ -16,10 +16,11 @@ namespace Menu.UI
         private bool _playerEspVisualVisible;
         private bool _miscVisualVisible;
         private bool _aimbotVisualVisible;
+        private GUIStyle guiStyle = new GUIStyle();
 
         private void Start()
         {
-            AllocConsoleHandler.Open();
+            //AllocConsoleHandler.Open();
             _mainWindow = new Rect(20f, 60f, 250f, 150f);
             _playerVisualWindow = new Rect(20f, 220f, 250f, 150f);
             _miscVisualWindow = new Rect(20f, 260f, 250f, 150f);
@@ -30,13 +31,12 @@ namespace Menu.UI
         {
             if (Input.GetKeyDown(KeyCode.Insert))
                 _visible = !_visible;
-
-            if (Input.GetKeyDown(KeyCode.Delete))
-                Loader.Unload();
         }
 
         private void OnGUI()
         {
+            GUI.Label(new Rect(20, 20, 200, 60), "Omnitrix 2.0");
+
             if (!_visible)
                 return;
 
@@ -52,6 +52,7 @@ namespace Menu.UI
 
         private void RenderUi(int id)
         {
+            GUI.color = new Color(28,36,33);
             switch (id)
             {
                 case 0:
@@ -92,7 +93,6 @@ namespace Menu.UI
                     Settings.Aimbot = GUILayout.Toggle(Settings.Aimbot, "Aimbot");
                     GUILayout.Label($"Aimbot Smooth {(int)Settings.AimbotSmooth} m");
                     Settings.AimbotSmooth = GUILayout.HorizontalSlider(Settings.AimbotSmooth, 0f, 100);
-                    Settings.AimbotDrawFOV = GUILayout.Toggle(Settings.AimbotDrawFOV, "Draw Fov");
                     GUILayout.Label($"Aimbot FOV {(int)Settings.AimbotFOV} m");
                     Settings.AimbotFOV = GUILayout.HorizontalSlider(Settings.AimbotFOV, 0f, 180);
                     Settings.NoRecoil = GUILayout.Toggle(Settings.NoRecoil, "No Recoil");

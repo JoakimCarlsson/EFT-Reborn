@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Comfort.Common;
 using EFT;
 using EFT.Interactive;
 using EscapeFromTarkovCheat.Data;

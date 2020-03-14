@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Comfort.Common;
 using EFT;
 using EFT.Interactive;
 using EscapeFromTarkovCheat.Data;
@@ -13,7 +12,7 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
 {
     public class LootableContainerESP : MonoBehaviour
     {
-        private static readonly float CacheLootItemsInterval = 4;
+        private static readonly float CacheLootItemsInterval = 10;
         private float _nextLootContainerCacheTime;
         private List<GameLootContainer> _gameLootContainers;
         private static readonly Color LootableContainerColor = new Color(1f, 0.2f, 0.09f);
@@ -38,7 +37,6 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
                     {
                         if (!GameUtils.IsLootableContainerValid(lootableContainer) || (Vector3.Distance(Main.MainCamera.transform.position, lootableContainer.transform.position) > Settings.DrawLootableContainersDistance))
                             continue;
-
                         _gameLootContainers.Add(new GameLootContainer(lootableContainer));
                     }
                     _nextLootContainerCacheTime = (Time.time + CacheLootItemsInterval);

@@ -5,18 +5,23 @@ using UnityEngine;
 
 namespace EscapeFromTarkovCheat
 {
-    public class Loader
+    public class Loader : MonoBehaviour
     {
-        public static GameObject HookObject;
+        public GameObject HookObject;
 
-        public static void Load()
+        public void Start()
+        {
+            Load();
+        }
+
+        public void Load()
         {
             HookObject = new GameObject();
             HookObject.AddComponent<Main>();
             Object.DontDestroyOnLoad(HookObject);
         }
 
-        public static void Unload()
+        public void Unload()
         {
             Object.Destroy(Main.hookObject);
             Object.Destroy(HookObject);

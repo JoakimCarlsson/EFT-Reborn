@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Comfort.Common;
 using EFT;
 using EFT.HealthSystem;
 using EFT.Interactive;
@@ -16,6 +15,7 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
     public class PlayerESP : MonoBehaviour
     {
         private static readonly Color _playerColor = Color.green;
+        private static readonly Color _deadPlayerColor = Color.gray;
         private static readonly Color _botColor = Color.yellow;
         private static readonly Color _healthColor = Color.green;
         private static readonly Color _bossColor = Color.red;
@@ -36,12 +36,12 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
                 float boxHeight = (Math.Abs(gamePlayer.HeadScreenPosition.y - gamePlayer.ScreenPosition.y) + 10f);
                 float boxWidth = (boxHeight * 0.65f);
 
-                if (Settings.DrawPlayerBox)
+                if (Settings.DrawPlayerBox && GameUtils.IsPlayerAlive(gamePlayer.Player))
                 {
                     Render.DrawBox((gamePlayer.ScreenPosition.x - (boxWidth / 2f)), boxPositionY, boxWidth, boxHeight, playerColor);
                 }
 
-                if (Settings.DrawPlayerHealth)
+                if (Settings.DrawPlayerHealth && GameUtils.IsPlayerAlive(gamePlayer.Player)) 
                 {
                     if (gamePlayer.Player.HealthController.IsAlive)
                     {
@@ -73,12 +73,17 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
                         playerText = $"{gamePlayer.Player.Profile.Info.Nickname} [{gamePlayer.FormattedDistance}]";
                         playerColor = _playerColor;
                     }
+                    if (!GameUtils.IsPlayerAlive(gamePlayer.Player))
+                    {
+                        playerText = $"*DEAD* [{gamePlayer.FormattedDistance}]";
+                        playerColor = _deadPlayerColor;
+                    }
 
                     var playerTextVector = GUI.skin.GetStyle(playerText).CalcSize(new GUIContent(playerText));
                     Render.DrawString(new Vector2(gamePlayer.ScreenPosition.x - (playerTextVector.x / 2f), (gamePlayer.HeadScreenPosition.y - 20f)), playerText, playerColor);
                 }
 
-                if (Settings.DrawPlayerLine)
+                if (Settings.DrawPlayerLine && GameUtils.IsPlayerAlive(gamePlayer.Player))
                 {
                     Render.DrawLine(new Vector2(Screen.width / 2, Screen.height), new Vector2(gamePlayer.ScreenPosition.x, gamePlayer.ScreenPosition.y), 1.5f, gamePlayer.IsVisible ? Color.green : Color.red);
                 }

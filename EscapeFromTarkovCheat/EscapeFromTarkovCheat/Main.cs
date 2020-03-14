@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Comfort.Common;
 using EFT;
 using EFT.Interactive;
@@ -19,10 +20,12 @@ namespace EscapeFromTarkovCheat
         public static Camera MainCamera;
         public static GameObject hookObject;
         private float _nextPlayerCacheTime;
-        private static readonly float _cachePlayersInterval = 4f;
+        private float _nextCameraCacheTime;
+        private static readonly float _cachePlayersInterval = 5f;
+        private static readonly float _cacheCameraInterval = 10f;
 
         public void Awake()
-        { 
+        {
             hookObject = new GameObject();
             hookObject.AddComponent<Menu.UI.Menu>();
             hookObject.AddComponent<PlayerESP>();
@@ -35,25 +38,30 @@ namespace EscapeFromTarkovCheat
 
         public void FixedUpdate()
         {
+            if (Time.time >= _nextCameraCacheTime)
+            {
+                GameWorld = Singleton<GameWorld>.Instance;
+                MainCamera = Camera.main;
+
+                _nextCameraCacheTime = (Time.time + _cacheCameraInterval);
+            }
+
             if (Settings.DrawPlayers)
             {
                 if (Time.time >= _nextPlayerCacheTime)
                 {
-                    GameWorld = Singleton<GameWorld>.Instance;
-                    MainCamera = Camera.main;
-
                     if ((GameWorld != null) && (GameWorld.RegisteredPlayers != null))
                     {
                         GamePlayers.Clear();
 
-                        foreach (Player player in GameWorld.RegisteredPlayers)
+                        foreach (Player player in FindObjectsOfType<Player>())
                         {
                             if (player.IsYourPlayer())
                             {
                                 LocalPlayer = player;
                                 continue;
                             }
-                            if (!GameUtils.IsPlayerAlive(player) || (Vector3.Distance(MainCamera.transform.position, player.Transform.position) > Settings.DrawPlayersDistance))
+                            if ( (Vector3.Distance(MainCamera.transform.position, player.Transform.position) > Settings.DrawPlayersDistance))
                                 continue;
 
                             GamePlayers.Add(new GamePlayer(player));
@@ -66,7 +74,6 @@ namespace EscapeFromTarkovCheat
                 foreach (GamePlayer gamePlayer in GamePlayers)
                     gamePlayer.RecalculateDynamics();
             }
-
 
             if (Input.GetKeyDown(Settings.UnlockDoors))
             {
