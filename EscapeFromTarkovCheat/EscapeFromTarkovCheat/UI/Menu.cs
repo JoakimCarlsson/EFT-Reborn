@@ -17,6 +17,9 @@ namespace Menu.UI
         private bool _miscVisualVisible;
         private bool _aimbotVisualVisible;
 
+        private string watermark =
+            "<COLOR=#FF0000>O</color><COLOR=#FF4600>m</color><COLOR=#FF8C00>n</color><COLOR=#FFD200>i</color><COLOR=#FFff00></color><COLOR=#B9ff00>t</color><COLOR=#73ff00>r</color><COLOR=#2Dff00></color><COLOR=#00ff00>i</color><COLOR=#00ff46></color><COLOR=#00ff8C>x</color><COLOR=#00ffD2> </color><COLOR=#00ffff>2</color><COLOR=#00D2ff>.</color><COLOR=#008Cff>0</color>";
+
         private void Start()
         {
 #if DEBUG
@@ -37,12 +40,11 @@ namespace Menu.UI
 
         private void OnGUI()
         {
-            GUI.Label(new Rect(20, 20, 200, 60), "Omnitrix 2.0");
-
+            GUI.Label(new Rect(20, 20, 1000, 500), watermark);
             if (!_visible)
                 return;
 
-            _mainWindow = GUILayout.Window(0, _mainWindow, RenderUi, "Menu");
+            _mainWindow = GUILayout.Window(0, _mainWindow, RenderUi, watermark);
 
             if (_playerEspVisualVisible)
                 _playerVisualWindow = GUILayout.Window(1, _playerVisualWindow, RenderUi, "Player Visual");
@@ -96,6 +98,7 @@ namespace Menu.UI
                     GUILayout.Label($"Aimbot FOV {(int)Settings.AimbotFOV} m");
                     Settings.AimbotFOV = GUILayout.HorizontalSlider(Settings.AimbotFOV, 0f, 180);
                     Settings.NoRecoil = GUILayout.Toggle(Settings.NoRecoil, "No Recoil");
+                    Settings.MaxSkills = GUILayout.Toggle(Settings.MaxSkills, "Max Skills");
                     break;
             }
             GUI.DragWindow();

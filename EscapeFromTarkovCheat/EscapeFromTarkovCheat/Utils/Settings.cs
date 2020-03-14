@@ -27,11 +27,12 @@ namespace EscapeFromTarkovCheat.Utils
         internal static float DrawLootableContainersDistance = 10f;
         internal static float DrawPlayersDistance = 200f;
 
-
         internal static bool Aimbot = true;
         internal static KeyCode AimbotKey = KeyCode.LeftControl;
         internal static float AimbotFOV = 10f;
         internal static bool NoRecoil = true;
         internal static KeyCode UnlockDoors = KeyCode.Keypad4;
+        
+        internal static bool MaxSkills = false;
     }
 }

@@ -86,6 +86,7 @@ namespace EscapeFromTarkovCheat
                     door.DoorState = EDoorState.Shut;
                 }
             }
+
         }
     }
 }

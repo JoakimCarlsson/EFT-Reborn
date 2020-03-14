@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using EFT;
+using EFT.Animations;
 using EscapeFromTarkovCheat.Data;
 using EscapeFromTarkovCheat.Utils;
 using UnityEngine;
@@ -44,7 +45,6 @@ namespace EscapeFromTarkovCheat.Feauters
            
             if (eulerAngles.x > 180f)
                 eulerAngles.x -= 360f;
-
             Main.LocalPlayer.MovementContext.Rotation = new Vector2(eulerAngles.y, eulerAngles.x);
         }
 
@@ -78,11 +78,6 @@ namespace EscapeFromTarkovCheat.Feauters
                 return;
 
             Main.LocalPlayer.ProceduralWeaponAnimation.Shootingg.Intensity = 0f;
-            Main.LocalPlayer.ProceduralWeaponAnimation.AimSwayMax = new Vector3(0f, 0f, 0f);
-            Main.LocalPlayer.ProceduralWeaponAnimation.AimSwayMin = new Vector3(0f, 0f, 0f);
-            Main.LocalPlayer.ProceduralWeaponAnimation.AimSwayMaxThreshold = 0f;
-            Main.LocalPlayer.ProceduralWeaponAnimation.AimSwayStartsThreshold = 0f;
-            Main.LocalPlayer.ProceduralWeaponAnimation.AimingDisplacementStr = 0f;
         }
     }
 }
