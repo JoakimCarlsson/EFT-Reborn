@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using EscapeFromTarkovCheat;
-using EscapeFromTarkovCheat.Utils;
 using UnityEngine;
 
-namespace Menu.UI
+namespace EFT.HideOut
 {
     public class Menu : MonoBehaviour
     {

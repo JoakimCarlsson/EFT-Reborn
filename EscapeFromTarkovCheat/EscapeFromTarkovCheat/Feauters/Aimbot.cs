@@ -4,11 +4,9 @@ using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using EFT;
 using EFT.Animations;
-using EscapeFromTarkovCheat.Data;
-using EscapeFromTarkovCheat.Utils;
 using UnityEngine;
 
-namespace EscapeFromTarkovCheat.Feauters
+namespace EFT.HideOut
 {
     class Aimbot : MonoBehaviour
     {

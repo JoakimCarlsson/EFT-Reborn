@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using EEFT.HideOut;
 using EFT;
 using EFT.Interactive;
-using EscapeFromTarkovCheat.Data;
-using EscapeFromTarkovCheat.Utils;
 using JsonType;
 using UnityEngine;
 
-namespace EscapeFromTarkovCheat.Feauters.ESP
+namespace EFT.HideOut
 {
     public class LootableContainerESP : MonoBehaviour
     {

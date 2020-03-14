@@ -4,11 +4,9 @@ using System.Diagnostics;
 using EFT;
 using EFT.HealthSystem;
 using EFT.Interactive;
-using EscapeFromTarkovCheat.Data;
-using EscapeFromTarkovCheat.Utils;
 using UnityEngine;
 
-namespace EscapeFromTarkovCheat.Feauters.ESP
+namespace EFT.HideOut
 {
 
 

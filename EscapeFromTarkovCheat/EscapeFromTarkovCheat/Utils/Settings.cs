@@ -7,7 +7,7 @@ using EFT.Visual;
 using EscapeFromTarkovCheat.Feauters;
 using UnityEngine;
 
-namespace EscapeFromTarkovCheat.Utils
+namespace EFT.HideOut
 {
     class Settings
     {

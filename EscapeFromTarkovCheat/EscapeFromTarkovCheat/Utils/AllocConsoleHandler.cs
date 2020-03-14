@@ -6,7 +6,7 @@ using UnityEngine;
 
 //Credits myshmeh
 //https://github.com/myshmeh/AllocConsole-for-Unity
-namespace EscapeFromTarkovCheat.Utils
+namespace EFT.HideOut
 {
     public static class AllocConsoleHandler
     {

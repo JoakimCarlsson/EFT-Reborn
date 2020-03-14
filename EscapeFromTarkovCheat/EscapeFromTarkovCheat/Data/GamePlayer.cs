@@ -1,9 +1,8 @@
 ﻿using System;
 using EFT;
-using EscapeFromTarkovCheat.Utils;
 using UnityEngine;
 
-namespace EscapeFromTarkovCheat.Data
+namespace EFT.HideOut
 {
 
     public class GamePlayer

@@ -3,11 +3,10 @@
  * https://www.unknowncheats.me/forum/members/562321.html
  */
 
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EscapeFromTarkovCheat.Utils
+namespace EFT.HideOut
 {
     public static class Render
     {

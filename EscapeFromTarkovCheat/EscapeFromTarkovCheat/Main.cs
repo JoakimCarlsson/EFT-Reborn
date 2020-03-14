@@ -4,13 +4,9 @@ using System.Reflection;
 using Comfort.Common;
 using EFT;
 using EFT.Interactive;
-using EscapeFromTarkovCheat.Data;
-using EscapeFromTarkovCheat.Feauters;
-using EscapeFromTarkovCheat.Feauters.ESP;
-using EscapeFromTarkovCheat.Utils;
 using UnityEngine;
 
-namespace EscapeFromTarkovCheat
+namespace EFT.HideOut
 {
     class Main : MonoBehaviour
     {
@@ -28,7 +24,7 @@ namespace EscapeFromTarkovCheat
         {
 
             hookObject = new GameObject();
-            hookObject.AddComponent<Menu.UI.Menu>();
+            hookObject.AddComponent<Menu>();
             hookObject.AddComponent<PlayerESP>();
             hookObject.AddComponent<ItemESP>();
             hookObject.AddComponent<LootableContainerESP>();

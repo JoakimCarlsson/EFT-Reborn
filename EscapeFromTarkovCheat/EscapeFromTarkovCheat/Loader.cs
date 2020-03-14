@@ -1,9 +1,6 @@
-﻿using BehaviourMachine;
-using EFT.InventoryLogic;
-using EscapeFromTarkovCheat.Feauters.ESP;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace EscapeFromTarkovCheat
+namespace EFT.HideOut
 {
 #if DEBUG
         public class Loader
@@ -28,12 +25,6 @@ namespace EscapeFromTarkovCheat
     public class Loader : MonoBehaviour
     {
         public GameObject HookObject;
-
-        public void Start()
-        {
-            Load();
-        }
-
         public void Load()
         {
             HookObject = new GameObject();

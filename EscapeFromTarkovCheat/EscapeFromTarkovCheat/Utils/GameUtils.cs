@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Diz.Skinning;
-using EFT;
 using EFT.Interactive;
 using UnityEngine;
 
-namespace EscapeFromTarkovCheat.Utils
+namespace EFT.HideOut
 {
 
     public static class GameUtils

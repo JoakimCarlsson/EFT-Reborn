@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EFT.Interactive;
-using EscapeFromTarkovCheat.Utils;
 using UnityEngine;
 
-namespace EscapeFromTarkovCheat.Data
+namespace EFT.HideOut
 {
     class GameExfiltrationPoint
     {
