@@ -33,5 +33,6 @@ namespace EFT.HideOut
         internal static KeyCode UnlockDoors = KeyCode.Keypad4;
         
         internal static bool MaxSkills = false;
+        internal static bool NoVisor = false;
     }
 }

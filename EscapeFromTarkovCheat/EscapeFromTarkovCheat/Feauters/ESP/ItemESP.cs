@@ -89,7 +89,7 @@ namespace EFT.HideOut
         {
             if (Settings.DrawLootItems)
             {
-                GUI.Label(new Rect(20, 40, 200, 60), LootItemRarity.ToString());
+
 
                 foreach (var item in _gameLootItems)
                 {
@@ -120,6 +120,7 @@ namespace EFT.HideOut
                     if (LootItemRarity == LootItemRarity.Common && item.LootItem.Item.Template.Rarity != ELootRarity.Common)
                         continue;
 
+                    GUI.Label(new Rect(20, 40, 200, 60), LootItemRarity.ToString());
                     Render.DrawString(new Vector2(item.ScreenPosition.x - 50f, item.ScreenPosition.y), lootItemName, lootItemColor);
                 }
             }

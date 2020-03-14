@@ -39,7 +39,8 @@ namespace EFT.HideOut
 
         public static void DrawLabel(Vector2 position, string label, Color color)
         {
-
+            Color = color;
+            GUI.Label(new Rect(position.x, position.y, 200f, 20f), label);
         }
 
         public static void DrawLine(Vector2 from, Vector2 to, float thickness, Color color)

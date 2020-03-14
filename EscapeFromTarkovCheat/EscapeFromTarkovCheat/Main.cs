@@ -42,6 +42,15 @@ namespace EFT.HideOut
                 _nextCameraCacheTime = (Time.time + _cacheCameraInterval);
             }
 
+            UpdatePlayers();
+
+            DoorUnlock();
+
+            NoVisor();
+        }
+
+        private void UpdatePlayers()
+        {
             if (Settings.DrawPlayers)
             {
                 if (Time.time >= _nextPlayerCacheTime)
@@ -57,7 +66,9 @@ namespace EFT.HideOut
                                 LocalPlayer = player;
                                 continue;
                             }
-                            if ((Vector3.Distance(MainCamera.transform.position, player.Transform.position) > Settings.DrawPlayersDistance))
+
+                            if ((Vector3.Distance(MainCamera.transform.position, player.Transform.position) >
+                                 Settings.DrawPlayersDistance))
                                 continue;
 
                             GamePlayers.Add(new GamePlayer(player));
@@ -70,18 +81,41 @@ namespace EFT.HideOut
                 foreach (GamePlayer gamePlayer in GamePlayers)
                     gamePlayer.RecalculateDynamics();
             }
+        }
+
+        private static void NoVisor()
+        {
+            if (LocalPlayer == null || MainCamera == null)
+                return;
+
+            if (Settings.NoVisor)
+            {
+                MainCamera.GetComponent<VisorEffect>().Intensity = 0f;
+                MainCamera.GetComponent<VisorEffect>().enabled = true;
+            }
+            else
+            {
+                MainCamera.GetComponent<VisorEffect>().Intensity = 1f;
+                MainCamera.GetComponent<VisorEffect>().enabled = true;
+            }
+        }
+
+        private static void DoorUnlock()
+        {
+            if (LocalPlayer == null || MainCamera == null)
+                return;
 
             if (Input.GetKeyDown(Settings.UnlockDoors))
             {
                 foreach (var door in FindObjectsOfType<Door>())
                 {
-                    if (door.DoorState == EDoorState.Open || Vector3.Distance(door.transform.position, LocalPlayer.Position) > 20f)
+                    if (door.DoorState == EDoorState.Open ||
+                        Vector3.Distance(door.transform.position, LocalPlayer.Position) > 20f)
                         continue;
 
                     door.DoorState = EDoorState.Shut;
                 }
             }
-
         }
     }
 }
