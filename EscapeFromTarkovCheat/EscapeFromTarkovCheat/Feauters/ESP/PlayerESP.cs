@@ -56,7 +56,7 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
 
                 if (Settings.DrawPlayerName)
                 {
-                    string playerText = "";
+                    string playerText;
 
                     if (gamePlayer.Player.Profile.Info.Settings.IsBoss())
                     {
@@ -80,7 +80,11 @@ namespace EscapeFromTarkovCheat.Feauters.ESP
                     }
 
                     var playerTextVector = GUI.skin.GetStyle(playerText).CalcSize(new GUIContent(playerText));
-                    Render.DrawString(new Vector2(gamePlayer.ScreenPosition.x - (playerTextVector.x / 2f), (gamePlayer.HeadScreenPosition.y - 20f)), playerText, playerColor);
+                    Vector3 boundingVector = Camera.main.WorldToScreenPoint(gamePlayer.Player.Transform.position);
+                    var playerHeadVector = Main.MainCamera.WorldToScreenPoint(gamePlayer.Player.PlayerBones.Head.position);
+                    float boxVectorY = playerHeadVector.y + 10f;
+
+                    Render.DrawLabel(new Rect(boundingVector.x - playerTextVector.x / 2f, Screen.height - boxVectorY - 20f, 300f, 50f), playerText, playerColor);
                 }
 
                 if (Settings.DrawPlayerLine && GameUtils.IsPlayerAlive(gamePlayer.Player))

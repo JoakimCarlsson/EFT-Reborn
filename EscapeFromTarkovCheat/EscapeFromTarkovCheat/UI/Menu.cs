@@ -16,7 +16,6 @@ namespace Menu.UI
         private bool _playerEspVisualVisible;
         private bool _miscVisualVisible;
         private bool _aimbotVisualVisible;
-        private GUIStyle guiStyle = new GUIStyle();
 
         private void Start()
         {
@@ -94,8 +93,6 @@ namespace Menu.UI
 
                 case 3:
                     Settings.Aimbot = GUILayout.Toggle(Settings.Aimbot, "Aimbot");
-                    GUILayout.Label($"Aimbot Smooth {(int)Settings.AimbotSmooth} m");
-                    Settings.AimbotSmooth = GUILayout.HorizontalSlider(Settings.AimbotSmooth, 0f, 100);
                     GUILayout.Label($"Aimbot FOV {(int)Settings.AimbotFOV} m");
                     Settings.AimbotFOV = GUILayout.HorizontalSlider(Settings.AimbotFOV, 0f, 180);
                     Settings.NoRecoil = GUILayout.Toggle(Settings.NoRecoil, "No Recoil");

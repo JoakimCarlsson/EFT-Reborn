@@ -3,6 +3,7 @@
  * https://www.unknowncheats.me/forum/members/562321.html
  */
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,6 +36,11 @@ namespace EscapeFromTarkovCheat.Utils
         {
             get { return GUI.color; }
             set { GUI.color = value; }
+        }
+
+        public static void DrawLabel(Vector2 position, string label, Color color)
+        {
+
         }
 
         public static void DrawLine(Vector2 from, Vector2 to, float thickness, Color color)
@@ -91,7 +97,7 @@ namespace EscapeFromTarkovCheat.Utils
         }
         public static void DrawDot(Vector2 position)
         {
-            DrawBox(position - Vector2.one, Vector2.one * 2f, 1f);
+
         }
 
         public static void DrawString(Vector2 position, string label, Color color, bool centered = true)
@@ -99,6 +105,13 @@ namespace EscapeFromTarkovCheat.Utils
             Color = color;
             DrawString(position, label, centered);
         }
+
+        internal static void DrawLabel(Rect rect, string label, Color color)
+        {
+            Color = color;
+            GUI.Label(rect, label);
+        }
+
         public static void DrawString(Vector2 position, string label, bool centered = true)
         {
             var content = new GUIContent(label);
