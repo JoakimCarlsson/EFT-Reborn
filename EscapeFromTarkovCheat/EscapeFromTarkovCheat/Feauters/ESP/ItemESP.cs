@@ -64,7 +64,7 @@ namespace EFT.HideOut
 
                 if (Time.time >= _nextLootItemCacheTime)
                 {
-                    if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null))
+                    if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null) && Main.LocalPlayer != null)
                     {
                         _gameLootItems.Clear();
 
@@ -138,8 +138,6 @@ namespace EFT.HideOut
 
         public bool IsSpecialLootItem(LootItem lootItem)
         {
-            try
-            {
                 if ((lootItem == null) || (lootItem.Item == null))
                     return false;
 
@@ -147,10 +145,7 @@ namespace EFT.HideOut
                 string formattedLootItemShortName = lootItem.Item.ShortName.Localized();
 
                 return SpecialLootItems.Contains(formattedLootItemName) || SpecialLootItems.Contains(formattedLootItemShortName);
-            }
-            catch 
-            {
-            }
+
         }
     }
 }

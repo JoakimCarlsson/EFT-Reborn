@@ -10,7 +10,7 @@ namespace EFT.HideOut
 {
     public class LootableContainerESP : MonoBehaviour
     {
-        private static readonly float CacheLootItemsInterval = 10;
+        private static readonly float CacheLootItemsInterval = 1.5f;
         private float _nextLootContainerCacheTime;
         private List<GameLootContainer> _gameLootContainers;
         private static readonly Color LootableContainerColor = new Color(1f, 0.2f, 0.09f);
@@ -29,7 +29,7 @@ namespace EFT.HideOut
             
                 if (Time.time >= _nextLootContainerCacheTime)
                 {
-                    if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null))
+                    if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null) && Main.LocalPlayer != null)
                     {
                         _gameLootContainers.Clear();
 
