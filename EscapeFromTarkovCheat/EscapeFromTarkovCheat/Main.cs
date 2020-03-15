@@ -63,7 +63,7 @@ namespace EFT.HideOut
                 {
                     if (Time.time >= _nextPlayerCacheTime)
                     {
-                        if ((GameWorld != null) && (GameWorld.RegisteredPlayers != null) && Main.LocalPlayer != null)
+                        if ((GameWorld != null) && (GameWorld.RegisteredPlayers != null))
                         {
                             GamePlayers.Clear();
 
