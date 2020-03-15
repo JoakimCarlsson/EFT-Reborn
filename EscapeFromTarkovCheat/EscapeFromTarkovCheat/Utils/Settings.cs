@@ -32,7 +32,9 @@ namespace EFT.HideOut
         internal static bool NoRecoil = true;
         internal static KeyCode UnlockDoors = KeyCode.Keypad4;
         
-        internal static bool MaxSkills = false;
-        internal static bool NoVisor = false;
+        internal static bool MaxSkills = true;
+        internal static bool NoVisor = true;
+        internal static bool NoSway = true;
+        internal static bool SuperBullet = true;
     }
 }

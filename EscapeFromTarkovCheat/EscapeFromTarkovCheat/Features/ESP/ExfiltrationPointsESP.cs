@@ -10,7 +10,7 @@ namespace EFT.HideOut
     public class ExfiltrationPointsESP : MonoBehaviour
     {
         private List<GameExfiltrationPoint> _gameExfiltrationPoints = new List<GameExfiltrationPoint>();
-        private static readonly float CacheExfiltrationPointInterval = 5f;
+        private static readonly float CacheExfiltrationPointInterval = 1.5f;
         private float _nextLootItemCacheTime;
 
         private static readonly Color ExfiltrationPointColour = Color.green;
@@ -44,12 +44,13 @@ namespace EFT.HideOut
             }
             catch
             {
-                
             }
 
         }
+
         private void OnGUI()
         {
+
             try
             {
                 if (Settings.DrawExfiltrationPoints)

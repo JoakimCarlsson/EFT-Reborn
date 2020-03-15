@@ -4,6 +4,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using EFT;
 using EFT.Animations;
+using JsonType;
 using UnityEngine;
 
 namespace EFT.HideOut
@@ -14,19 +15,48 @@ namespace EFT.HideOut
         private GamePlayer _target;
         public void Update()
         {
-            if ((Main.GameWorld != null))
+            try
             {
-                if (Settings.NoRecoil)
-                    NoRecoil();
-
-                if (Settings.Aimbot && Input.GetKey(Settings.AimbotKey))
-                    Aim();
-
-                if (Input.GetKeyUp(Settings.AimbotKey))
+                if (Main.GameWorld != null && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
                 {
-                    _target = null;
+                    NoRecoil();
+                    NoSway();
+                    SuperBullet();
+
+                    if (Settings.Aimbot && Input.GetKey(Settings.AimbotKey))
+                        Aim();
+
+                    if (Input.GetKeyUp(Settings.AimbotKey))
+                        _target = null;
                 }
             }
+            catch
+            {
+                
+            }
+        }
+
+        private static void SuperBullet()
+        {
+            if (Settings.SuperBullet && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
+            {
+                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationChance = 1000;
+                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationPower = 1000;
+            }
+            else
+            {
+                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationChance = 1;
+                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationPower = 50;
+            }
+        }
+
+        private static void NoSway()
+        {
+            if (Settings.NoSway)
+            {
+                Main.LocalPlayer.ProceduralWeaponAnimation.Breath.Intensity = 0;
+            }
+
         }
 
         private void Aim()
@@ -39,8 +69,8 @@ namespace EFT.HideOut
 
         private void AimAtTarget(GamePlayer target)
         {
-            Vector3 eulerAngles = Quaternion.LookRotation((GameUtils.GetBonePosByID(target.Player, 133) - Main.MainCamera.transform.position).normalized).eulerAngles;
-           
+            Vector3 eulerAngles = Quaternion.LookRotation((GameUtils.GetBonePosByID(target.Player, 132) - Main.MainCamera.transform.position).normalized).eulerAngles;
+
             if (eulerAngles.x > 180f)
                 eulerAngles.x -= 360f;
             Main.LocalPlayer.MovementContext.Rotation = new Vector2(eulerAngles.y, eulerAngles.x);
@@ -72,10 +102,11 @@ namespace EFT.HideOut
 
         private void NoRecoil()
         {
-            if (Main.LocalPlayer == null)
+            if (Main.LocalPlayer == null && !Settings.NoRecoil)
                 return;
 
             Main.LocalPlayer.ProceduralWeaponAnimation.Shootingg.Intensity = 0f;
+
         }
     }
 }

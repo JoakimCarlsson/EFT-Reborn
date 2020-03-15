@@ -95,7 +95,11 @@ namespace EFT.HideOut
                     Settings.Aimbot = GUILayout.Toggle(Settings.Aimbot, "Aimbot");
                     GUILayout.Label($"Aimbot FOV {(int)Settings.AimbotFOV} m");
                     Settings.AimbotFOV = GUILayout.HorizontalSlider(Settings.AimbotFOV, 0f, 180);
+
+                    //Move into another window.
                     Settings.NoRecoil = GUILayout.Toggle(Settings.NoRecoil, "No Recoil");
+                    Settings.SuperBullet = GUILayout.Toggle(Settings.SuperBullet, "Super Bullet");
+                    Settings.NoSway = GUILayout.Toggle(Settings.NoSway, "No Sway");
                     Settings.MaxSkills = GUILayout.Toggle(Settings.MaxSkills, "Max Skills");
                     Settings.NoVisor = GUILayout.Toggle(Settings.NoVisor, "No Visor");
                     break;

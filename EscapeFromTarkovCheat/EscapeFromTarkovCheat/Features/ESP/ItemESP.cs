@@ -11,7 +11,7 @@ namespace EFT.HideOut
 {
     public class ItemESP : MonoBehaviour
     {
-        private static readonly float CacheLootItemsInterval = 4f;
+        private static readonly float CacheLootItemsInterval = 1.5f;
         private float _nextLootItemCacheTime;
 
         private static readonly Color SpecialColor = new Color(1f, 0.2f, 0.09f);
@@ -89,6 +89,7 @@ namespace EFT.HideOut
             {
             }
 
+
         }
 
         private void OnGUI()
@@ -133,6 +134,7 @@ namespace EFT.HideOut
             }
             catch
             {
+                
             }
         }
 

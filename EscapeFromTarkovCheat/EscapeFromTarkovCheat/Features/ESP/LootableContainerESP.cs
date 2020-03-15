@@ -46,8 +46,9 @@ namespace EFT.HideOut
                 foreach (GameLootContainer gameLootContainer in _gameLootContainers)
                     gameLootContainer.RecalculateDynamics();
             }
-            catch 
+            catch
             {
+
             }
         }
 

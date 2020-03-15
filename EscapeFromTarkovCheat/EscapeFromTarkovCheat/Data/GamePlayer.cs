@@ -64,7 +64,7 @@ namespace EFT.HideOut
             if (!IsOnScreen)
                 return false;
             //This is realy bad and needs to be improved
-            if (Physics.Linecast(Camera.main.transform.position, GameUtils.GetBonePosByID(Player, 133), out var hit))
+            if (Physics.Linecast(Main.MainCamera.transform.position, GameUtils.GetBonePosByID(Player, 133), out var hit))
             {
                 if (hit.transform.gameObject == Player.gameObject)
                     return true;
