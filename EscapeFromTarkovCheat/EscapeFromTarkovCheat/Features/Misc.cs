@@ -21,6 +21,32 @@ namespace EFT.HideOut
                 DoorUnlock();
                 NoVisor();
                 MaxStats();
+                Teleport();
+                SpeedHack();
+                FullBright();
+            }
+        }
+
+        private void Teleport()
+        {
+            if (Settings.Teleport)
+            {
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    Main.LocalPlayer.Transform.position += Main.LocalPlayer.Transform.forward * 1;
+                }
+            }
+        }
+
+        private void SpeedHack()
+        {
+            if (Settings.SpeedHack)
+            {
+                Time.timeScale = Settings.SpeedValue;
+            }
+            else
+            {
+                Time.timeScale = 1f;
             }
         }
 
