@@ -29,7 +29,7 @@ namespace EFT.HideOut
             
                 if (Time.time >= _nextLootContainerCacheTime)
                 {
-                    if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null) && Main.LocalPlayer != null)
+                    if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null) && GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
                     {
                         _gameLootContainers.Clear();
 

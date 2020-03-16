@@ -55,6 +55,7 @@
     <Compile Include="Data\GameLootContainer.cs" />
     <Compile Include="Data\GameLootItem.cs" />
     <Compile Include="Data\GamePlayer.cs" />
+    <Compile Include="Data\GameScene.cs" />
     <Compile Include="Features\Aimbot.cs" />
     <Compile Include="Features\Misc.cs" />
     <Compile Include="Main.cs" />

@@ -5,6 +5,7 @@ using Comfort.Common;
 using EFT;
 using EFT.Interactive;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace EFT.HideOut
 {
@@ -31,12 +32,14 @@ namespace EFT.HideOut
             HookObject.AddComponent<Aimbot>();
             HookObject.AddComponent<Misc>();
             DontDestroyOnLoad(HookObject);
+            GameScene.CurrentGameScene = new Scene();
         }
 
         public void FixedUpdate()
         {
             try
             {
+                GameScene.GetScene();
                 if (Time.time >= _nextCameraCacheTime)
                 {
                     GameWorld = Singleton<GameWorld>.Instance;
@@ -46,8 +49,6 @@ namespace EFT.HideOut
                 }
 
                 UpdatePlayers();
-
-
             }
             catch
             {

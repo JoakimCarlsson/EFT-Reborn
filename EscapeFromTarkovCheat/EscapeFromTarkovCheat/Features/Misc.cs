@@ -13,12 +13,15 @@ namespace EFT.HideOut
     {
         public void Update()
         {
-            NoRecoil();
-            NoSway();
-            SuperBullet();
-            DoorUnlock();
-            NoVisor();
-            MaxStats();
+            if (GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
+            {
+                NoRecoil();
+                NoSway();
+                SuperBullet();
+                DoorUnlock();
+                NoVisor();
+                MaxStats();
+            }
         }
 
         private static void SuperBullet()
