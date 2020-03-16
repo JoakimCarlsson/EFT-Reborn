@@ -24,31 +24,31 @@ namespace EFT.HideOut
             {
                 if (Settings.DrawPlayers && GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null)
                 {
-                    foreach (GamePlayer gamePlayer in Main.GamePlayers)
+                    foreach (GamePlayer player in Main.GamePlayers)
                     {
-                        if (!gamePlayer.IsOnScreen || gamePlayer.Distance > Settings.DrawPlayersDistance || gamePlayer.Player == Main.LocalPlayer)
+                        if (!player.IsOnScreen || player.Distance > Settings.DrawPlayersDistance || player.Player == Main.LocalPlayer)
                             continue;
 
-                        Color playerColor = ((gamePlayer.IsAI) ? _botColor : _playerColor);
+                        Color playerColor = ((player.IsAI) ? _botColor : _playerColor);
 
-                        float boxPositionY = (gamePlayer.HeadScreenPosition.y - 10f);
-                        float boxHeight = (Math.Abs(gamePlayer.HeadScreenPosition.y - gamePlayer.ScreenPosition.y) + 10f);
+                        float boxPositionY = (player.HeadScreenPosition.y - 10f);
+                        float boxHeight = (Math.Abs(player.HeadScreenPosition.y - player.ScreenPosition.y) + 10f);
                         float boxWidth = (boxHeight * 0.65f);
 
-                        if (Settings.DrawPlayerBox && GameUtils.IsPlayerAlive(gamePlayer.Player))
+                        if (Settings.DrawPlayerBox && GameUtils.IsPlayerAlive(player.Player))
                         {
-                            Render.DrawBox((gamePlayer.ScreenPosition.x - (boxWidth / 2f)), boxPositionY, boxWidth, boxHeight, playerColor);
+                            Render.DrawBox((player.ScreenPosition.x - (boxWidth / 2f)), boxPositionY, boxWidth, boxHeight, playerColor);
                         }
 
-                        if (Settings.DrawPlayerHealth && GameUtils.IsPlayerAlive(gamePlayer.Player))
+                        if (Settings.DrawPlayerHealth && GameUtils.IsPlayerAlive(player.Player))
                         {
-                            if (gamePlayer.Player.HealthController.IsAlive)
+                            if (player.Player.HealthController.IsAlive)
                             {
-                                float currentPlayerHealth = gamePlayer.Player.HealthController.GetBodyPartHealth(EBodyPart.Common).Current;
-                                float maximumPlayerHealth = gamePlayer.Player.HealthController.GetBodyPartHealth(EBodyPart.Common).Maximum;
+                                float currentPlayerHealth = player.Player.HealthController.GetBodyPartHealth(EBodyPart.Common).Current;
+                                float maximumPlayerHealth = player.Player.HealthController.GetBodyPartHealth(EBodyPart.Common).Maximum;
 
                                 float healthBarHeight = GameUtils.Map(currentPlayerHealth, 0f, maximumPlayerHealth, 0f, boxHeight);
-                                Render.DrawLine(new Vector2((gamePlayer.ScreenPosition.x - (boxWidth / 2f) - 3f), (boxPositionY + boxHeight - healthBarHeight)), new Vector2((gamePlayer.ScreenPosition.x - (boxWidth / 2f) - 3f), (boxPositionY + boxHeight)), 3f, _healthColor);
+                                Render.DrawLine(new Vector2((player.ScreenPosition.x - (boxWidth / 2f) - 3f), (boxPositionY + boxHeight - healthBarHeight)), new Vector2((player.ScreenPosition.x - (boxWidth / 2f) - 3f), (boxPositionY + boxHeight)), 3f, _healthColor);
                             }
                         }
 
@@ -60,38 +60,38 @@ namespace EFT.HideOut
                             //weapon = gamePlayer.Player.Weapon.Template.ShortName.Contains("Item") ? gamePlayer.Player.Weapon.Template.Name : gamePlayer.Player.Weapon.Template.ShortName;
                             //Console.WriteLine(weapon);
 
-                            if (gamePlayer.Player.Profile.Info.Settings.IsBoss())
+                            if (player.Player.Profile.Info.Settings.IsBoss())
                             {
-                                playerText = $"Boss [{gamePlayer.FormattedDistance}]";
+                                playerText = $"Boss [{player.FormattedDistance}]";
                                 playerColor = _bossColor;
                             }
-                            else if (gamePlayer.IsAI)
+                            else if (player.IsAI)
                             {
-                                playerText = $"Bot [{gamePlayer.FormattedDistance}]";
+                                playerText = $"Bot [{player.FormattedDistance}]";
                                 playerColor = _botColor;
                             }
                             else
                             {
-                                playerText = $"{gamePlayer.Player.Profile.Info.Nickname} [{gamePlayer.FormattedDistance}]";
+                                playerText = $"{player.Player.Profile.Info.Nickname} [{player.FormattedDistance}]";
                                 playerColor = _playerColor;
                             }
-                            if (!GameUtils.IsPlayerAlive(gamePlayer.Player))
+                            if (!GameUtils.IsPlayerAlive(player.Player))
                             {
-                                playerText = $"*DEAD* [{gamePlayer.FormattedDistance}]";
+                                playerText = $"*DEAD* [{player.FormattedDistance}]";
                                 playerColor = _deadPlayerColor;
                             }
 
                             var playerTextVector = GUI.skin.GetStyle(playerText).CalcSize(new GUIContent(playerText));
-                            Vector3 boundingVector = Camera.main.WorldToScreenPoint(gamePlayer.Player.Transform.position);
-                            var playerHeadVector = Main.MainCamera.WorldToScreenPoint(gamePlayer.Player.PlayerBones.Head.position);
+                            Vector3 boundingVector = Camera.main.WorldToScreenPoint(player.Player.Transform.position);
+                            var playerHeadVector = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.Head.position);
                             float boxVectorY = playerHeadVector.y + 10f;
 
                             Render.DrawLabel(new Rect(boundingVector.x - playerTextVector.x / 2f, Screen.height - boxVectorY - 20f, 300f, 50f), playerText, playerColor);
                         }
 
-                        if (Settings.DrawPlayerLine && GameUtils.IsPlayerAlive(gamePlayer.Player))
+                        if (Settings.DrawPlayerLine && GameUtils.IsPlayerAlive(player.Player))
                         {
-                            Render.DrawLine(new Vector2(Screen.width / 2, Screen.height), new Vector2(gamePlayer.ScreenPosition.x, gamePlayer.ScreenPosition.y), 1.5f, gamePlayer.IsVisible ? Color.green : Color.red);
+                            Render.DrawLine(new Vector2(Screen.width / 2, Screen.height), new Vector2(player.ScreenPosition.x, player.ScreenPosition.y), 1.5f, Aimbot.IsVisible(GameUtils.GetBonePosByID(player.Player, 132)) ? Color.green : Color.red);
                         }
                     }
                 }

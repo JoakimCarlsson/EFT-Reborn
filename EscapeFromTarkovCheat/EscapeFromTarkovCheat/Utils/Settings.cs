@@ -21,6 +21,7 @@ namespace EFT.HideOut
         internal static bool DrawPlayerHealth = false;
         internal static bool DrawPlayerBox = true;
         internal static bool DrawPlayerLine = true;
+        internal static bool DrawPlayerSkeleton = false;
 
         internal static float DrawLootItemsDistance = 300f;
         internal static float DrawLootableContainersDistance = 10f;
@@ -31,12 +32,15 @@ namespace EFT.HideOut
         internal static float AimbotFOV = 10f;
         internal static bool NoRecoil = true;
         internal static KeyCode UnlockDoors = KeyCode.Keypad4;
-        
+
+        internal static bool DrawWeaponInfo = true;
         internal static bool MaxSkills = true;
         internal static bool NoVisor = true;
         internal static bool NoSway = true;
         internal static bool SuperBullet = true;
         internal static bool SpeedHack = true;
         internal static float SpeedValue = 2f;
+        internal static bool ChangeFOV = false;
+        internal static int FOVValue = 75;
     }
 }

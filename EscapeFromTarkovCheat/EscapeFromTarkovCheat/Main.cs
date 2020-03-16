@@ -44,7 +44,6 @@ namespace EFT.HideOut
                 {
                     GameWorld = Singleton<GameWorld>.Instance;
                     MainCamera = Camera.main;
-
                     _nextCameraCacheTime = (Time.time + _cacheCameraInterval);
                 }
 
@@ -78,7 +77,6 @@ namespace EFT.HideOut
                                 if ((Vector3.Distance(MainCamera.transform.position, player.Transform.position) >
                                      Settings.DrawPlayersDistance))
                                     continue;
-
                                 GamePlayers.Add(new GamePlayer(player));
                             }
 

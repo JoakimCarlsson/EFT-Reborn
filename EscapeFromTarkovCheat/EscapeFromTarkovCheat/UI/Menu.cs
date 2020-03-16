@@ -110,8 +110,11 @@ namespace EFT.HideOut
                     Settings.NoSway = GUILayout.Toggle(Settings.NoSway, "No Sway");
                     Settings.MaxSkills = GUILayout.Toggle(Settings.MaxSkills, "Max Skills");
                     Settings.NoVisor = GUILayout.Toggle(Settings.NoVisor, "No Visor");
+                    Settings.DrawWeaponInfo = GUILayout.Toggle(Settings.DrawWeaponInfo, "Draw Weapon Info");
                     Settings.SpeedHack = GUILayout.Toggle(Settings.SpeedHack, $"Speedhack {Settings.SpeedValue}");
                     Settings.SpeedValue = GUILayout.HorizontalSlider(Settings.SpeedValue, 1f, 3);
+                    Settings.ChangeFOV = GUILayout.Toggle(Settings.ChangeFOV, $"FOV {Settings.FOVValue}");
+                    Settings.FOVValue = (int)GUILayout.HorizontalSlider(Settings.FOVValue, 60, 120);
                     break;
             }
             GUI.DragWindow();

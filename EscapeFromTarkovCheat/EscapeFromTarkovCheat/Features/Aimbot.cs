@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using BehaviourMachine;
 using EFT;
 using EFT.Animations;
 using JsonType;
@@ -76,17 +77,37 @@ namespace EFT.HideOut
         }
 
         private static RaycastHit raycastHit;
-        private static int mask = 1 << 12 | 1 << 16 | 1 << 18; // added some mast feel free to add more :)
+        private static LayerMask layerMask = 1 << 12 | 1 << 16 | 1 << 18;
         public static Vector3 BarrelRaycast()
         {
             try
             {
                 if (Main.LocalPlayer != null && Main.LocalPlayer.Fireport == null)
                     return Vector3.zero;
-                Physics.Linecast(Main.LocalPlayer.Fireport.position, Main.LocalPlayer.Fireport.position - Main.LocalPlayer.Fireport.up * 1000f, out raycastHit, mask);
+                Physics.Linecast(Main.LocalPlayer.Fireport.position, Main.LocalPlayer.Fireport.position - Main.LocalPlayer.Fireport.up * 1000f, out raycastHit, layerMask);
+                Console.WriteLine(raycastHit.transform.name);
                 return raycastHit.point;
             }
             catch { return Vector3.zero; }
+        }
+
+        public static bool IsVisible(Vector3 Position)
+        {
+            return Physics.Linecast(GetShootPos(), Position, out var raycastHit, layerMask) && raycastHit.transform.name.Contains("Human");
+        }
+
+        public static Vector3 GetShootPos()
+        {
+            if (Main.LocalPlayer == null)
+            {
+                return Vector3.zero;
+            }
+            Player.FirearmController firearmController = Main.LocalPlayer.HandsController as Player.FirearmController;
+            if (firearmController == null)
+            {
+                return Vector3.zero;
+            }
+            return firearmController.Fireport.position + Camera.main.transform.forward * 1f;
         }
     }
 }
