@@ -23,7 +23,7 @@ namespace EFT.HideOut
                     DoorUnlock();
                     NoVisor();
                     MaxStats();
-                    Teleport();
+                    //Teleport();
                     SpeedHack();
                 }
             }
@@ -32,16 +32,16 @@ namespace EFT.HideOut
             }
         }
 
-        private void Teleport()
-        {
-            if (Settings.Teleport)
-            {
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    Main.LocalPlayer.Transform.position += Main.LocalPlayer.Transform.forward * 1;
-                }
-            }
-        }
+        //private void Teleport()
+        //{
+        //    if (Settings.Teleport)
+        //    {
+        //        if (Input.GetKeyDown(KeyCode.UpArrow))
+        //        {
+        //            Main.LocalPlayer.Transform.position += Main.LocalPlayer.Transform.forward * 1;
+        //        }
+        //    }
+        //}
 
         private void SpeedHack()
         {

@@ -110,7 +110,6 @@ namespace EFT.HideOut
                     Settings.NoSway = GUILayout.Toggle(Settings.NoSway, "No Sway");
                     Settings.MaxSkills = GUILayout.Toggle(Settings.MaxSkills, "Max Skills");
                     Settings.NoVisor = GUILayout.Toggle(Settings.NoVisor, "No Visor");
-                    Settings.Teleport = GUILayout.Toggle(Settings.Teleport, "Teleport");
                     Settings.SpeedHack = GUILayout.Toggle(Settings.SpeedHack, $"Speedhack {Settings.SpeedValue}");
                     Settings.SpeedValue = GUILayout.HorizontalSlider(Settings.SpeedValue, 1f, 3);
                     break;

@@ -36,7 +36,6 @@ namespace EFT.HideOut
         internal static bool NoVisor = true;
         internal static bool NoSway = true;
         internal static bool SuperBullet = true;
-        internal static bool Teleport = true;
         internal static bool SpeedHack = true;
         internal static float SpeedValue = 2f;
     }
