@@ -22,7 +22,7 @@ namespace EFT.HideOut
         {
             try
             {
-                if (Settings.DrawPlayers && GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
+                if (Settings.DrawPlayers && GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null)
                 {
                     foreach (GamePlayer gamePlayer in Main.GamePlayers)
                     {

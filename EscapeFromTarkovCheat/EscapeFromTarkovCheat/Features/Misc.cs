@@ -13,17 +13,22 @@ namespace EFT.HideOut
     {
         public void Update()
         {
-            if (GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
+            try
             {
-                NoRecoil();
-                NoSway();
-                SuperBullet();
-                DoorUnlock();
-                NoVisor();
-                MaxStats();
-                Teleport();
-                SpeedHack();
-                FullBright();
+                if (GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
+                {
+                    NoRecoil();
+                    NoSway();
+                    SuperBullet();
+                    DoorUnlock();
+                    NoVisor();
+                    MaxStats();
+                    Teleport();
+                    SpeedHack();
+                }
+            }
+            catch
+            {
             }
         }
 
@@ -139,5 +144,6 @@ namespace EFT.HideOut
             {
             }
         }
+
     }
 }

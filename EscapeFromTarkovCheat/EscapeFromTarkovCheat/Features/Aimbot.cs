@@ -75,6 +75,18 @@ namespace EFT.HideOut
             return Mathf.Acos(Mathf.Clamp(Vector3.Dot(forward, normalized), -1f, 1f)) * 57.29578f;
         }
 
-
+        private static RaycastHit raycastHit;
+        private static int mask = 1 << 12 | 1 << 16 | 1 << 18; // added some mast feel free to add more :)
+        public static Vector3 BarrelRaycast()
+        {
+            try
+            {
+                if (Main.LocalPlayer != null && Main.LocalPlayer.Fireport == null)
+                    return Vector3.zero;
+                Physics.Linecast(Main.LocalPlayer.Fireport.position, Main.LocalPlayer.Fireport.position - Main.LocalPlayer.Fireport.up * 1000f, out raycastHit, mask);
+                return raycastHit.point;
+            }
+            catch { return Vector3.zero; }
+        }
     }
 }

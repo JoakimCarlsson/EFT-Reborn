@@ -59,7 +59,7 @@ namespace EFT.HideOut
         {
             try
             {
-                if (Settings.DrawPlayers)
+                if (Settings.DrawPlayers && GameScene.IsLoaded() && GameScene.InMatch())
                 {
                     if (Time.time >= _nextPlayerCacheTime)
                     {
