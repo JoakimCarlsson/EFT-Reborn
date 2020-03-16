@@ -16,7 +16,7 @@ namespace EFT.HideOut
 
         public static void Unload()
         {
-            Object.Destroy(Main.hookObject);
+            Object.Destroy(Main.HookObject);
             Object.Destroy(HookObject);
         }
     }
@@ -34,7 +34,7 @@ namespace EFT.HideOut
 
         public void Unload()
         {
-            Object.Destroy(Main.hookObject);
+            Object.Destroy(Main.HookObject);
             Object.Destroy(HookObject);
         }
     }

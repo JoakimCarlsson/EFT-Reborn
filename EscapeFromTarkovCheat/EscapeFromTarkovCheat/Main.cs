@@ -14,7 +14,7 @@ namespace EFT.HideOut
         public static Player LocalPlayer;
         public static GameWorld GameWorld;
         public static Camera MainCamera;
-        public static GameObject hookObject;
+        public static GameObject HookObject;
         private float _nextPlayerCacheTime;
         private float _nextCameraCacheTime;
         private static readonly float _cachePlayersInterval = 5f;
@@ -22,14 +22,15 @@ namespace EFT.HideOut
 
         public void Awake()
         {
-            hookObject = new GameObject();
-            hookObject.AddComponent<Menu>();
-            hookObject.AddComponent<PlayerESP>();
-            hookObject.AddComponent<ItemESP>();
-            hookObject.AddComponent<LootableContainerESP>();
-            hookObject.AddComponent<ExfiltrationPointsESP>();
-            hookObject.AddComponent<Aimbot>();
-            DontDestroyOnLoad(hookObject);
+            HookObject = new GameObject();
+            HookObject.AddComponent<Menu>();
+            HookObject.AddComponent<PlayerESP>();
+            HookObject.AddComponent<ItemESP>();
+            HookObject.AddComponent<LootableContainerESP>();
+            HookObject.AddComponent<ExfiltrationPointsESP>();
+            HookObject.AddComponent<Aimbot>();
+            HookObject.AddComponent<Misc>();
+            DontDestroyOnLoad(HookObject);
         }
 
         public void FixedUpdate()
@@ -46,9 +47,7 @@ namespace EFT.HideOut
 
                 UpdatePlayers();
 
-                DoorUnlock();
 
-                NoVisor();
             }
             catch
             {
@@ -95,54 +94,6 @@ namespace EFT.HideOut
                 
             }
 
-        }
-
-        private static void NoVisor()
-        {
-            try
-            {
-                if (LocalPlayer == null || MainCamera == null)
-                    return;
-
-                if (Settings.NoVisor)
-                {
-                    MainCamera.GetComponent<VisorEffect>().Intensity = 0f;
-                    MainCamera.GetComponent<VisorEffect>().enabled = true;
-                }
-                else
-                {
-                    MainCamera.GetComponent<VisorEffect>().Intensity = 1f;
-                    MainCamera.GetComponent<VisorEffect>().enabled = true;
-                }
-            }
-            catch
-            {
-                
-            }
-        }
-
-        private static void DoorUnlock()
-        {
-            try
-            {
-                if (LocalPlayer == null || MainCamera == null)
-                    return;
-
-                if (Input.GetKeyDown(Settings.UnlockDoors))
-                {
-                    foreach (var door in FindObjectsOfType<Door>())
-                    {
-                        if (door.DoorState == EDoorState.Open ||
-                            Vector3.Distance(door.transform.position, LocalPlayer.Position) > 20f)
-                            continue;
-
-                        door.DoorState = EDoorState.Shut;
-                    }
-                }
-            }
-            catch
-            {
-            }
         }
     }
 }

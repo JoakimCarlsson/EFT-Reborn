@@ -10,10 +10,14 @@ namespace EFT.HideOut
         private Rect _playerVisualWindow;
         private Rect _miscVisualWindow;
         private Rect _aimbotVisualWindow;
+        private Rect _miscFeatureslVisualWindow;
+
         private bool _visible = true;
+
         private bool _playerEspVisualVisible;
         private bool _miscVisualVisible;
         private bool _aimbotVisualVisible;
+        private bool _miscFeatureslVisible;
 
         private string watermark =
             "<COLOR=#FF0000>O</color><COLOR=#FF4600>m</color><COLOR=#FF8C00>n</color><COLOR=#FFD200>i</color><COLOR=#FFff00></color><COLOR=#B9ff00>t</color><COLOR=#73ff00>r</color><COLOR=#2Dff00></color><COLOR=#00ff00>i</color><COLOR=#00ff46></color><COLOR=#00ff8C>x</color><COLOR=#00ffD2> </color><COLOR=#00ffff>2</color><COLOR=#00D2ff>.</color><COLOR=#008Cff>0</color>";
@@ -23,11 +27,11 @@ namespace EFT.HideOut
 #if DEBUG
             AllocConsoleHandler.Open();
 #endif
-            //AllocConsoleHandler.Open();
             _mainWindow = new Rect(20f, 60f, 250f, 150f);
             _playerVisualWindow = new Rect(20f, 220f, 250f, 150f);
             _miscVisualWindow = new Rect(20f, 260f, 250f, 150f);
             _aimbotVisualWindow = new Rect(20f, 260f, 250f, 150f);
+            _miscFeatureslVisualWindow = new Rect(20f, 260f, 250f, 150f);
         }
 
         private void Update()
@@ -50,6 +54,8 @@ namespace EFT.HideOut
                 _miscVisualWindow = GUILayout.Window(2, _miscVisualWindow, RenderUi, "Misc Visual");
             if (_aimbotVisualVisible)
                 _aimbotVisualWindow = GUILayout.Window(3, _aimbotVisualWindow, RenderUi, "Aimbot");
+            if (_miscFeatureslVisible)
+                _miscFeatureslVisualWindow = GUILayout.Window(4, _miscFeatureslVisualWindow, RenderUi, "Misc");
         }
 
         private void RenderUi(int id)
@@ -67,6 +73,8 @@ namespace EFT.HideOut
                         _miscVisualVisible = !_miscVisualVisible;
                     if (GUILayout.Button("Aimbot"))
                         _aimbotVisualVisible = !_aimbotVisualVisible;
+                    if (GUILayout.Button("Misc"))
+                        _miscFeatureslVisible = !_miscFeatureslVisible;
                     break;
 
                 case 1:
@@ -95,8 +103,8 @@ namespace EFT.HideOut
                     Settings.Aimbot = GUILayout.Toggle(Settings.Aimbot, "Aimbot");
                     GUILayout.Label($"Aimbot FOV {(int)Settings.AimbotFOV} m");
                     Settings.AimbotFOV = GUILayout.HorizontalSlider(Settings.AimbotFOV, 0f, 180);
-
-                    //Move into another window.
+                    break;
+                case 4:
                     Settings.NoRecoil = GUILayout.Toggle(Settings.NoRecoil, "No Recoil");
                     Settings.SuperBullet = GUILayout.Toggle(Settings.SuperBullet, "Super Bullet");
                     Settings.NoSway = GUILayout.Toggle(Settings.NoSway, "No Sway");

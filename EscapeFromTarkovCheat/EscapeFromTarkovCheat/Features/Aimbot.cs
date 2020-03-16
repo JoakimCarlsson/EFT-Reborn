@@ -19,10 +19,6 @@ namespace EFT.HideOut
             {
                 if (Main.GameWorld != null && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
                 {
-                    NoRecoil();
-                    NoSway();
-                    SuperBullet();
-
                     if (Settings.Aimbot && Input.GetKey(Settings.AimbotKey))
                         Aim();
 
@@ -36,28 +32,7 @@ namespace EFT.HideOut
             }
         }
 
-        private static void SuperBullet()
-        {
-            if (Settings.SuperBullet && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
-            {
-                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationChance = 1000;
-                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationPower = 1000;
-            }
-            else
-            {
-                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationChance = 1;
-                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationPower = 50;
-            }
-        }
 
-        private static void NoSway()
-        {
-            if (Settings.NoSway)
-            {
-                Main.LocalPlayer.ProceduralWeaponAnimation.Breath.Intensity = 0;
-            }
-
-        }
 
         private void Aim()
         {
@@ -100,13 +75,6 @@ namespace EFT.HideOut
             return Mathf.Acos(Mathf.Clamp(Vector3.Dot(forward, normalized), -1f, 1f)) * 57.29578f;
         }
 
-        private void NoRecoil()
-        {
-            if (Main.LocalPlayer == null && !Settings.NoRecoil)
-                return;
 
-            Main.LocalPlayer.ProceduralWeaponAnimation.Shootingg.Intensity = 0f;
-
-        }
     }
 }

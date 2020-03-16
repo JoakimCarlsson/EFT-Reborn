@@ -57,6 +57,9 @@ namespace EFT.HideOut
                     if (Settings.DrawPlayerName)
                     {
                         string playerText;
+                        //string weapon;
+                        //weapon = gamePlayer.Player.Weapon.Template.ShortName.Contains("Item") ? gamePlayer.Player.Weapon.Template.Name : gamePlayer.Player.Weapon.Template.ShortName;
+                        //Console.WriteLine(weapon);
 
                         if (gamePlayer.Player.Profile.Info.Settings.IsBoss())
                         {
