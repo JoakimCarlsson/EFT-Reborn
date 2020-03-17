@@ -54,6 +54,7 @@ namespace EFT.HideOut
             if (Settings.FireRate)
             {
                 Main.LocalPlayer.GetComponent<Player.FirearmController>().Item.Template.bFirerate = Settings.FireRateValue;
+                var weapon = Main.LocalPlayer.Weapon;
             }
         }
 

@@ -14,7 +14,7 @@ namespace EFT.HideOut
         private static readonly float CacheLootItemsInterval = 1.5f;
         private float _nextLootContainerCacheTime;
         private List<GameLootContainer> _gameLootContainers;
-        private static readonly Color LootableContainerColor = new Color(1f, 0.2f, 0.09f);
+        private static Color LootableContainerColor = new Color(1f, 0.2f, 0.09f);
 
         public void Start()
         {
@@ -27,7 +27,7 @@ namespace EFT.HideOut
             {
                 if (!Settings.DrawLootableContainers)
                     return;
-            
+
                 if (Time.time >= _nextLootContainerCacheTime)
                 {
                     if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null) && GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null)
@@ -59,29 +59,41 @@ namespace EFT.HideOut
             {
                 if (!Settings.DrawLootableContainers)
                     return;
-
+                int x = -20;
                 foreach (var gameLootContainer in _gameLootContainers)
                 {
                     if (!GameUtils.IsLootableContainerValid(gameLootContainer.LootableContainer) || !gameLootContainer.IsOnScreen || gameLootContainer.Distance > Settings.DrawLootableContainersDistance)
                         continue;
 
-                    EFT.InventoryLogic.Item rootItem = gameLootContainer.LootableContainer.ItemOwner.RootItem;
+                    EFT.InventoryLogic.Item item = gameLootContainer.LootableContainer.ItemOwner.RootItem;
 
-                    if (rootItem.GetAllItems().Count() == 1)
+                    if (item.GetAllItems().Count() == 1)
                         continue;
 
-                    //foreach (var allItem in rootItem.GetAllItems())
-                    //{
-                    //    Console.WriteLine(allItem.Name.Localized());
-                    //}
+                    string lootItemName = string.Empty;
 
-                    string lootItemName = $"{rootItem.Name.Localized()} [{gameLootContainer.FormattedDistance}]";
-                    Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x - 50f, gameLootContainer.ScreenPosition.y), lootItemName, LootableContainerColor);
+                    foreach (var allItem in item.GetAllItems())
+                    {
+                        if (item.GetAllItems().First() == allItem)
+                        {
+                            lootItemName = $"{allItem.Name.Localized()} [{gameLootContainer.FormattedDistance}]";
+                            LootableContainerColor = new Color(1f, 0.2f, 0.09f);
+                        }
+                        else
+                        {
+                            lootItemName = allItem.Name.Localized();
+                            LootableContainerColor = Color.white;
+                        }
+
+                        Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, LootableContainerColor);
+                        x -= 20;
+                    }
+
                 }
             }
             catch
             {
-                
+
             }
         }
     }

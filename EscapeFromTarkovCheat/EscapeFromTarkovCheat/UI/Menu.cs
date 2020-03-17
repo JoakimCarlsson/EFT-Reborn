@@ -70,8 +70,6 @@ namespace EFT.HideOut
             {
                 case 0:
                     GUILayout.Label("Insert For Menu");
-                    GUILayout.Label("Delete For Unload Menu");
-
                     if (GUILayout.Button("Player Visual"))
                         _playerEspVisualVisible = !_playerEspVisualVisible;
                     if (GUILayout.Button("Misc Visual"))
