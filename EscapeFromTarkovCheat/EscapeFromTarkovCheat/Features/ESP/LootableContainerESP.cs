@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using EFT;
 using EFT.Interactive;
@@ -64,10 +65,17 @@ namespace EFT.HideOut
                     if (!GameUtils.IsLootableContainerValid(gameLootContainer.LootableContainer) || !gameLootContainer.IsOnScreen || gameLootContainer.Distance > Settings.DrawLootableContainersDistance)
                         continue;
 
-                    //EFT.InventoryLogic.Item rootItem = gameLootContainer.LootableContainer.ItemOwner.RootItem;
-                    //rootItem.Template.Name.Localized();
+                    EFT.InventoryLogic.Item rootItem = gameLootContainer.LootableContainer.ItemOwner.RootItem;
 
-                    string lootItemName = $"{gameLootContainer.LootableContainer.name} [{gameLootContainer.FormattedDistance}]";
+                    if (rootItem.GetAllItems().Count() == 1)
+                        continue;
+
+                    //foreach (var allItem in rootItem.GetAllItems())
+                    //{
+                    //    Console.WriteLine(allItem.Name.Localized());
+                    //}
+
+                    string lootItemName = $"{rootItem.Name.Localized()} [{gameLootContainer.FormattedDistance}]";
                     Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x - 50f, gameLootContainer.ScreenPosition.y), lootItemName, LootableContainerColor);
                 }
             }

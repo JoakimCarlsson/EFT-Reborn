@@ -20,7 +20,7 @@ namespace EFT.HideOut
             {
                 if (GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
                 {
-                    ChangeFOV();
+                    SuperWeapon();
                     NoRecoil();
                     NoSway();
                     SuperBullet();
@@ -36,9 +36,30 @@ namespace EFT.HideOut
             {
             }
         }
+
+        private void SuperWeapon()
+        {
+            if (Main.LocalPlayer == null || !(Main.LocalPlayer.HandsController.Item is Weapon))
+                return;
+
+            if (Settings.FastReload)
+                Main.LocalPlayer.GetComponent<Player.FirearmController>().Item.Template.isFastReload = true;
+
+            if (Settings.AlwaysAutomatic)
+            {
+                Main.LocalPlayer.Weapon.GetItemComponent<FireModeComponent>().FireMode = Weapon.EFireMode.fullauto;
+                Main.LocalPlayer.GetComponent<Player.FirearmController>().Item.Template.BoltAction = false;
+            }
+
+            if (Settings.FireRate)
+            {
+                Main.LocalPlayer.GetComponent<Player.FirearmController>().Item.Template.bFirerate = Settings.FireRateValue;
+            }
+        }
+
         public void OnGUI()
         {
-            var textStyle = new GUIStyle(GUI.skin.label) {fontSize = 32 };
+            var textStyle = new GUIStyle(GUI.skin.label) { fontSize = 25 };
             GUI.Label(new Rect(512, Screen.height - 48, 512, 48), _hud, textStyle);
         }
         private void PrepareHud()
@@ -52,17 +73,8 @@ namespace EFT.HideOut
             if (mag != null)
             {
                 _hud = $"{mag.Count}+{weapon.ChamberAmmoCount}/{mag.MaxCount} [{weapon.SelectedFireMode.ToString()}]";
-            }
-        }
 
-        private static void ChangeFOV()
-        {
-            if (Settings.ChangeFOV)
-            {
-                GClass436.SetFov(Settings.FOVValue, 1f);
-                GClass436.ApplyFoV(Settings.FOVValue, 100, 120);
             }
-
         }
 
         //private void Teleport()
@@ -151,7 +163,7 @@ namespace EFT.HideOut
         {
             try
             {
-                if (Main.LocalPlayer == null || Main.MainCamera == null)
+                if (Main.LocalPlayer == null || Main.MainCamera == null || !Settings.DoorUnlocker)
                     return;
 
                 if (Input.GetKeyDown(Settings.UnlockDoors))
@@ -175,19 +187,7 @@ namespace EFT.HideOut
         {
             if (Settings.MaxSkills && Main.LocalPlayer != null && Main.MainCamera != null)
             {
-                Main.LocalPlayer.Skills.Metabolism.Buff = 10000;
-                Main.LocalPlayer.Physical.Sprinting.RestoreRate = 10000.0f;
-                Main.LocalPlayer.Physical.Sprinting.DrainRate = 0.0f;
-                Main.LocalPlayer.Skills.StrengthBuffSprintSpeedInc.Value = 10000f;
-                Main.LocalPlayer.Skills.StrengthBuffLiftWeightInc.Value = -100f;
-                Main.LocalPlayer.Skills.StrengthBuffMeleeCrits.Value = true;
-                Main.LocalPlayer.Skills.StrengthBuffMeleePowerInc.Value = 100f;
-                Main.LocalPlayer.Skills.StrengthBuffThrowDistanceInc.Value = 1f;
-                Main.LocalPlayer.Skills.AttentionLootSpeed.Value = 5000f;
-                Main.LocalPlayer.Skills.MagDrillsLoadSpeed.Value = 500f;
-                Main.LocalPlayer.Skills.MagDrillsUnloadSpeed.Value = 500f;
-                Main.LocalPlayer.Skills.SearchBuffSpeed.Value = 500f;
-                Main.LocalPlayer.Skills.AttentionLootSpeed.Value = 500f;
+
             }
         }
     }

@@ -11,6 +11,7 @@ namespace EFT.HideOut
         private Rect _miscVisualWindow;
         private Rect _aimbotVisualWindow;
         private Rect _miscFeatureslVisualWindow;
+        private Rect _weaponVisualWindow;
 
         private bool _visible = true;
 
@@ -18,9 +19,10 @@ namespace EFT.HideOut
         private bool _miscVisualVisible;
         private bool _aimbotVisualVisible;
         private bool _miscFeatureslVisible;
+        private bool _weaponFeatureslVisible;
 
         private string watermark =
-            "<COLOR=#FF0000>O</color><COLOR=#FF4600>m</color><COLOR=#FF8C00>n</color><COLOR=#FFD200>i</color><COLOR=#FFff00></color><COLOR=#B9ff00>t</color><COLOR=#73ff00>r</color><COLOR=#2Dff00></color><COLOR=#00ff00>i</color><COLOR=#00ff46></color><COLOR=#00ff8C>x</color><COLOR=#00ffD2> </color><COLOR=#00ffff>2</color><COLOR=#00D2ff>.</color><COLOR=#008Cff>0</color>";
+            "<COLOR=#FF0000>F</color><COLOR=#FF4600>U</color><COLOR=#FF8C00>C</color><COLOR=#FFD200>K</color><COLOR=#FFff00></color><COLOR=#B9ff00></color><COLOR=#73ff00></color><COLOR=#2Dff00></color> <COLOR=#00ff00>O</color><COLOR=#00ff46></color><COLOR=#00ff8C>x</color><COLOR=#00ffD2></color><COLOR=#00ffff>F</color><COLOR=#00D2ff>F</color><COLOR=#008Cff> :-)</color>";
 
         private void Start()
         {
@@ -32,6 +34,7 @@ namespace EFT.HideOut
             _miscVisualWindow = new Rect(20f, 260f, 250f, 150f);
             _aimbotVisualWindow = new Rect(20f, 260f, 250f, 150f);
             _miscFeatureslVisualWindow = new Rect(20f, 260f, 250f, 150f);
+            _weaponVisualWindow = new Rect(20f, 260f, 250f, 150f);
         }
 
         private void Update()
@@ -56,6 +59,8 @@ namespace EFT.HideOut
                 _aimbotVisualWindow = GUILayout.Window(3, _aimbotVisualWindow, RenderUi, "Aimbot");
             if (_miscFeatureslVisible)
                 _miscFeatureslVisualWindow = GUILayout.Window(4, _miscFeatureslVisualWindow, RenderUi, "Misc");
+            if (_weaponFeatureslVisible)
+                _weaponVisualWindow = GUILayout.Window(5, _weaponVisualWindow, RenderUi, "Weapon");
         }
 
         private void RenderUi(int id)
@@ -75,6 +80,8 @@ namespace EFT.HideOut
                         _aimbotVisualVisible = !_aimbotVisualVisible;
                     if (GUILayout.Button("Misc"))
                         _miscFeatureslVisible = !_miscFeatureslVisible;
+                    if (GUILayout.Button("Weapon Shit"))
+                        _weaponFeatureslVisible = !_weaponFeatureslVisible;
                     break;
 
                 case 1:
@@ -105,16 +112,21 @@ namespace EFT.HideOut
                     Settings.AimbotFOV = GUILayout.HorizontalSlider(Settings.AimbotFOV, 0f, 180);
                     break;
                 case 4:
+                    Settings.MaxSkills = GUILayout.Toggle(Settings.MaxSkills, "Max Skills");
+                    Settings.DoorUnlocker = GUILayout.Toggle(Settings.DoorUnlocker, "Door Unlocker. Press numpad 4 for unlock.");
+                    Settings.NoVisor = GUILayout.Toggle(Settings.NoVisor, "No Visor");
+                    Settings.SpeedHack = GUILayout.Toggle(Settings.SpeedHack, $"Speedhack {Settings.SpeedValue}");
+                    Settings.SpeedValue = GUILayout.HorizontalSlider(Settings.SpeedValue, 1f, 3);
+                    break;
+                case 5:
+                    Settings.FastReload = GUILayout.Toggle(Settings.FastReload, "Fast Reload");
+                    Settings.AlwaysAutomatic = GUILayout.Toggle(Settings.AlwaysAutomatic, "Always Automatic");
+                    Settings.FireRate = GUILayout.Toggle(Settings.FireRate, $"Change Fire Rate {Settings.FireRateValue}");
+                    Settings.FireRateValue = (int)GUILayout.HorizontalSlider(Settings.FireRateValue, 1000, 3000);
+                    Settings.DrawWeaponInfo = GUILayout.Toggle(Settings.DrawWeaponInfo, "Draw Weapon Info");
                     Settings.NoRecoil = GUILayout.Toggle(Settings.NoRecoil, "No Recoil");
                     Settings.SuperBullet = GUILayout.Toggle(Settings.SuperBullet, "Super Bullet");
                     Settings.NoSway = GUILayout.Toggle(Settings.NoSway, "No Sway");
-                    Settings.MaxSkills = GUILayout.Toggle(Settings.MaxSkills, "Max Skills");
-                    Settings.NoVisor = GUILayout.Toggle(Settings.NoVisor, "No Visor");
-                    Settings.DrawWeaponInfo = GUILayout.Toggle(Settings.DrawWeaponInfo, "Draw Weapon Info");
-                    Settings.SpeedHack = GUILayout.Toggle(Settings.SpeedHack, $"Speedhack {Settings.SpeedValue}");
-                    Settings.SpeedValue = GUILayout.HorizontalSlider(Settings.SpeedValue, 1f, 3);
-                    Settings.ChangeFOV = GUILayout.Toggle(Settings.ChangeFOV, $"FOV {Settings.FOVValue}");
-                    Settings.FOVValue = (int)GUILayout.HorizontalSlider(Settings.FOVValue, 60, 120);
                     break;
             }
             GUI.DragWindow();
