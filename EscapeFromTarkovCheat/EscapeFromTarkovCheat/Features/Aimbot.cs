@@ -45,7 +45,6 @@ namespace EFT.HideOut
 
         private void AimAtTarget(GamePlayer target)
         {
-            //target.Player.PlayerBones.Head.Original.transform.position
             Vector3 eulerAngles = Quaternion.LookRotation((GameUtils.GetBonePosByID(target.Player, 132) - Main.MainCamera.transform.position).normalized).eulerAngles;
 
             if (eulerAngles.x > 180f)

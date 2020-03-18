@@ -26,10 +26,10 @@ namespace EFT.HideOut
                 {
                     foreach (GamePlayer player in Main.GamePlayers)
                     {
-                        if (/*!player.IsOnScreen || */player.Distance > Settings.DrawPlayersDistance || player.Player == Main.LocalPlayer)
+                        if (!player.IsOnScreen || player.Distance > Settings.DrawPlayersDistance || player.Player == Main.LocalPlayer)
                             continue;
 
-                        if (Main.MainCamera.WorldToScreenPoint(Main.LocalPlayer.Transform.position).z > 0.01)
+                        if (true)
                         {
                             Color playerColor = ((player.IsAI) ? _botColor : _playerColor);
 

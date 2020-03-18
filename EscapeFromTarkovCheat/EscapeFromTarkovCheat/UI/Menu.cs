@@ -21,7 +21,7 @@ namespace EFT.HideOut
         private bool _miscFeatureslVisible;
         private bool _weaponFeatureslVisible;
 
-        private string watermark = "<COLOR=#FF0000>F</color><COLOR=#FF4600>U</color><COLOR=#FF8C00>C</color><COLOR=#FFD200>K</color><COLOR=#FFff00></color><COLOR=#B9ff00></color><COLOR=#73ff00></color><COLOR=#2Dff00></color> <COLOR=#00ff00>O</color><COLOR=#00ff46></color><COLOR=#00ff8C></color><COLOR=#00ffD2></color><COLOR=#00ffff>F</color><COLOR=#00D2ff>F</color><COLOR=#008Cff> :-)</color>";
+        private string watermark = "Reborn";
 
         private void Start()
         {

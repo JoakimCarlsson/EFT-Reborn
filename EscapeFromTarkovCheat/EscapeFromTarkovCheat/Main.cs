@@ -46,8 +46,16 @@ namespace EFT.HideOut
                     GameWorld = Singleton<GameWorld>.Instance;
                     MainCamera = Camera.main;
                     _nextCameraCacheTime = (Time.time + _cacheCameraInterval);
-                }
 
+                    foreach (var player in FindObjectsOfType<Player>())
+                    {
+                        if (player.IsYourPlayer())
+                        {
+                            LocalPlayer = player;
+                            break;
+                        }
+                    }
+                }
                 UpdatePlayers();
             }
             catch
@@ -59,7 +67,7 @@ namespace EFT.HideOut
         {
             try
             {
-                if (Settings.DrawPlayers && GameScene.IsLoaded() && GameScene.InMatch() && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive)
+                if (Settings.DrawPlayers && GameScene.IsLoaded() && GameScene.InMatch() && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive && LocalPlayer != null)
                 {
                     if (Time.time >= _nextPlayerCacheTime)
                     {
@@ -69,12 +77,6 @@ namespace EFT.HideOut
 
                             foreach (Player player in FindObjectsOfType<Player>())
                             {
-                                if (player.IsYourPlayer())
-                                {
-                                    LocalPlayer = player;
-                                    continue;
-                                }
-
                                 if ((Vector3.Distance(MainCamera.transform.position, player.Transform.position) >
                                      Settings.DrawPlayersDistance))
                                     continue;
