@@ -99,7 +99,6 @@ namespace EFT.HideOut
 
                             if (Settings.DrawPlayerSkeleton && GameUtils.IsPlayerAlive(player.Player) && player.Distance < 100f)
                             {
-
                                 var rightPalm = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.RightPalm.position);
                                 var leftPalm = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.LeftPalm.position);
                                 var leftShoulder = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.LeftShoulder.position);
