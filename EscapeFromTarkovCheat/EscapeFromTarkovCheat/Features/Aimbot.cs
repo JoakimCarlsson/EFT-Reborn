@@ -55,7 +55,7 @@ namespace EFT.HideOut
         private GamePlayer GetTarget()
         {
             _targetList = Main.GamePlayers.Where(p => !p.Player.IsYourPlayer() && GameUtils.IsPlayerAlive(p.Player));
-            _targetList = _targetList.OrderBy(p => p.Fov);
+            _targetList = _targetList.OrderBy(p => p.Distance).ThenBy(p => p.Fov);
 
             foreach (var gamePlayer in _targetList)
             {
@@ -66,22 +66,7 @@ namespace EFT.HideOut
             return null;
         }
 
-
-
-        private static RaycastHit raycastHit;
         private static LayerMask layerMask = 1 << 12 | 1 << 16 | 1 << 18;
-        public static Vector3 BarrelRaycast()
-        {
-            try
-            {
-                if (Main.LocalPlayer != null && Main.LocalPlayer.Fireport == null)
-                    return Vector3.zero;
-                Physics.Linecast(Main.LocalPlayer.Fireport.position, Main.LocalPlayer.Fireport.position - Main.LocalPlayer.Fireport.up * 1000f, out raycastHit, layerMask);
-                Console.WriteLine(raycastHit.transform.name);
-                return raycastHit.point;
-            }
-            catch { return Vector3.zero; }
-        }
 
         public static bool IsVisible(Vector3 Position)
         {
@@ -99,7 +84,7 @@ namespace EFT.HideOut
             {
                 return Vector3.zero;
             }
-            return firearmController.Fireport.position + Camera.main.transform.forward * 1f;
+            return firearmController.Fireport.position + Main.MainCamera.transform.forward * 1f;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace EFT.HideOut
         private bool _miscFeatureslVisible;
         private bool _weaponFeatureslVisible;
 
-        private string watermark = "Reborn";
+        private string watermark = "Reborn Elite";
 
         private void Start()
         {
@@ -112,6 +112,7 @@ namespace EFT.HideOut
                     Settings.MaxSkills = GUILayout.Toggle(Settings.MaxSkills, "Max Skills");
                     Settings.DoorUnlocker = GUILayout.Toggle(Settings.DoorUnlocker, "Door Unlocker. Press numpad 4 for unlock.");
                     Settings.NoVisor = GUILayout.Toggle(Settings.NoVisor, "No Visor");
+                    Settings.ThermalVison = GUILayout.Toggle(Settings.ThermalVison, "Thermal Vison");
                     Settings.SpeedHack = GUILayout.Toggle(Settings.SpeedHack, $"Speedhack {Settings.SpeedValue}");
                     Settings.SpeedValue = GUILayout.HorizontalSlider(Settings.SpeedValue, 1f, 3);
                     break;

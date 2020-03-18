@@ -27,9 +27,9 @@ namespace EFT.HideOut
                     DoorUnlock();
                     NoVisor();
                     MaxStats();
-                    //Teleport();
                     SpeedHack();
                     PrepareHud();
+                    ThermalVison();
                 }
             }
             catch
@@ -77,17 +77,6 @@ namespace EFT.HideOut
 
             }
         }
-
-        //private void Teleport()
-        //{
-            //if (Settings.Teleport)
-            //{
-            //if (Input.GetKeyDown(KeyCode.UpArrow))
-            //{
-            //    Main.LocalPlayer.Teleport(Main.LocalPlayer.Transform.position += Main.LocalPlayer.Transform.forward * 1, true);
-            //}
-            //}
-        //}
 
         private void SpeedHack()
         {
@@ -158,6 +147,23 @@ namespace EFT.HideOut
             catch
             {
 
+            }
+        }
+
+        private static void ThermalVison()
+        {
+            if (Main.LocalPlayer == null || Main.MainCamera == null)
+                return;
+
+            if (Settings.ThermalVison)
+            {
+                Main.MainCamera.GetComponent<ThermalVision>().On = true;
+                Main.MainCamera.GetComponent<ThermalVision>().enabled = true;
+            }
+            else
+            {
+                Main.MainCamera.GetComponent<ThermalVision>().On = false;
+                Main.MainCamera.GetComponent<ThermalVision>().enabled = true;
             }
         }
 
