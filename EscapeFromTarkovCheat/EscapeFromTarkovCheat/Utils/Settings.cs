@@ -21,7 +21,6 @@ namespace EFT.HideOut
         internal static bool DrawPlayerHealth = false;
         internal static bool DrawPlayerBox = true;
         internal static bool DrawPlayerLine = true;
-        internal static bool DrawPlayerSkeleton = false;
 
         //misc visuals
         internal static bool DrawLootItems = false;
@@ -34,7 +33,6 @@ namespace EFT.HideOut
         //aimboot
         internal static bool Aimbot = true;
         internal static float AimbotFOV = 10f;
-        internal static bool NoRecoil = true;
 
 
         //misc
@@ -45,6 +43,7 @@ namespace EFT.HideOut
         internal static float SpeedValue = 2f;
 
         //Weapon
+        internal static bool NoRecoil = true;
         internal static bool DrawWeaponInfo = true;
         internal static bool NoSway = true;
         internal static bool SuperBullet = true;

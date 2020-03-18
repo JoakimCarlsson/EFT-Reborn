@@ -3,44 +3,18 @@
  * https://www.unknowncheats.me/forum/members/562321.html
  */
 
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace EFT.HideOut
 {
     public static class Render
     {
-        public static Material DrawMaterial = new Material(Shader.Find("Hidden/Internal-Colored"));
-
         public static GUIStyle StringStyle { get; set; } = new GUIStyle(GUI.skin.label);
-        private class RingArray
-        {
-            public Vector2[] Positions { get; private set; }
-
-            public RingArray(int numSegments)
-            {
-                Positions = new Vector2[numSegments];
-                var stepSize = 360f / numSegments;
-                for (int i = 0; i < numSegments; i++)
-                {
-                    var rad = Mathf.Deg2Rad * stepSize * i;
-                    Positions[i] = new Vector2(Mathf.Sin(rad), Mathf.Cos(rad));
-                }
-            }
-        }
-
-        private static Dictionary<int, RingArray> ringDict = new Dictionary<int, RingArray>();
 
         public static Color Color
         {
-            get { return GUI.color; }
-            set { GUI.color = value; }
-        }
-
-        public static void DrawLabel(Vector2 position, string label, Color color)
-        {
-            Color = color;
-            GUI.Label(new Rect(position.x, position.y, 200f, 20f), label);
+            get => GUI.color;
+            set => GUI.color = value;
         }
 
         public static void DrawLine(Vector2 from, Vector2 to, float thickness, Color color)
@@ -90,16 +64,6 @@ namespace EFT.HideOut
             GUI.DrawTexture(new Rect(position.x, position.y - size.y / 2f, thickness, size.y), Texture2D.whiteTexture);
         }
 
-        public static void DrawDot(Vector2 position, Color color)
-        {
-            Color = color;
-            DrawDot(position);
-        }
-        public static void DrawDot(Vector2 position)
-        {
-
-        }
-
         public static void DrawString(Vector2 position, string label, Color color, bool centered = true)
         {
             Color = color;
@@ -119,42 +83,5 @@ namespace EFT.HideOut
             var upperLeft = centered ? position - size / 2f : position;
             GUI.Label(new Rect(upperLeft, size), content);
         }
-
-        public static void DrawCircle(Vector2 position, float radius, int numSides, bool centered = true, float thickness = 1f)
-        {
-            DrawCircle(position, radius, numSides, Color.white, centered, thickness);
-        }
-        public static void DrawCircle(Vector2 position, float radius, int numSides, Color color, bool centered = true, float thickness = 1f)
-        {
-            RingArray arr;
-            if (ringDict.ContainsKey(numSides))
-                arr = ringDict[numSides];
-            else
-                arr = ringDict[numSides] = new RingArray(numSides);
-
-
-            var center = centered ? position : position + Vector2.one * radius;
-
-            for (int i = 0; i < numSides - 1; i++)
-                DrawLine(center + arr.Positions[i] * radius, center + arr.Positions[i + 1] * radius, thickness, color);
-
-            DrawLine(center + arr.Positions[0] * radius, center + arr.Positions[arr.Positions.Length - 1] * radius, thickness, color);
-        }
-
-        public static void DrawSnapline(Vector3 worldpos, Color color)
-        {
-            Vector3 pos = Main.MainCamera.WorldToScreenPoint(worldpos);
-            pos.y = Screen.height - pos.y;
-            GL.PushMatrix();
-            GL.Begin(1);
-            DrawMaterial.SetPass(0);
-            GL.Color(color);
-            GL.Vertex3(Screen.width / 2, Screen.height, 0f);
-            GL.Vertex3(pos.x, pos.y, 0f);
-            GL.End();
-            GL.PopMatrix();
-        }
-
-
     }
 }

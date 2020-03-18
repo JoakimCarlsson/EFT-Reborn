@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using EFT;
 using EFT.Interactive;
+using EFT.UI;
 using JsonType;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ namespace EFT.HideOut
 
                 if (Time.time >= _nextLootContainerCacheTime)
                 {
-                    if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null) && GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null)
+                    if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null) && GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive)
                     {
                         _gameLootContainers.Clear();
 

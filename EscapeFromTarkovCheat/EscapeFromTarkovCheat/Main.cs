@@ -4,6 +4,7 @@ using System.Reflection;
 using Comfort.Common;
 using EFT;
 using EFT.Interactive;
+using EFT.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -40,7 +41,7 @@ namespace EFT.HideOut
             try
             {
                 GameScene.GetScene();
-                if (Time.time >= _nextCameraCacheTime)
+                if (Time.time >= _nextCameraCacheTime && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive)
                 {
                     GameWorld = Singleton<GameWorld>.Instance;
                     MainCamera = Camera.main;
@@ -58,7 +59,7 @@ namespace EFT.HideOut
         {
             try
             {
-                if (Settings.DrawPlayers && GameScene.IsLoaded() && GameScene.InMatch())
+                if (Settings.DrawPlayers && GameScene.IsLoaded() && GameScene.InMatch() && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive)
                 {
                     if (Time.time >= _nextPlayerCacheTime)
                     {

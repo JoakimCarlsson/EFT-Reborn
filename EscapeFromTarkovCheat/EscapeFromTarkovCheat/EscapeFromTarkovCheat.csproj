@@ -67,7 +67,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Menu.cs" />
     <Compile Include="Utils\AllocConsoleHandler.cs" />
-    <Compile Include="Utils\ESPColours.cs" />
     <Compile Include="Utils\GameUtils.cs" />
     <Compile Include="Utils\Outline.cs" />
     <Compile Include="Utils\OutlineEffect.cs" />
@@ -98,12 +97,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Desktop\12.4\game\EscapeFromTarkov_Data\Managed\Comfort.Unity.dll</HintPath>
     </Reference>
-    <Reference Include="PlayerEnums">
+    <Reference Include="PlayerEnums, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Desktop\12.4\game\EscapeFromTarkov_Data\Managed\PlayerEnums.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Desktop\12.4\game\EscapeFromTarkov_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClothModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Desktop\12.4\game\EscapeFromTarkov_Data\Managed\UnityEngine.ClothModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -80,13 +80,13 @@ namespace EFT.HideOut
 
         //private void Teleport()
         //{
-        //    if (Settings.Teleport)
-        //    {
-        //        if (Input.GetKeyDown(KeyCode.UpArrow))
-        //        {
-        //            Main.LocalPlayer.Transform.position += Main.LocalPlayer.Transform.forward * 1;
-        //        }
-        //    }
+            //if (Settings.Teleport)
+            //{
+            //if (Input.GetKeyDown(KeyCode.UpArrow))
+            //{
+            //    Main.LocalPlayer.Teleport(Main.LocalPlayer.Transform.position += Main.LocalPlayer.Transform.forward * 1, true);
+            //}
+            //}
         //}
 
         private void SpeedHack()
@@ -105,6 +105,7 @@ namespace EFT.HideOut
         {
             if (Settings.SuperBullet && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
             {
+                Main.LocalPlayer.GetComponent<Player.FirearmController>().Item.Template.Velocity = 100000f;
                 Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationChance = 1000;
                 Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationPower = 1000;
                 Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.InitialSpeed = 10000f;
@@ -188,7 +189,11 @@ namespace EFT.HideOut
         {
             if (Settings.MaxSkills && Main.LocalPlayer != null && Main.MainCamera != null)
             {
-
+                Main.LocalPlayer.Physical.StaminaRestoreRate = 10000f;
+                Main.LocalPlayer.Physical.Stamina.Current = 100f;
+                Main.LocalPlayer.Physical.HandsRestoreRate = 1000f;
+                Main.LocalPlayer.Physical.HandsStamina.Current = 1000f;
+                Main.LocalPlayer.Physical.CapacityBuff = 1000f;
             }
         }
     }

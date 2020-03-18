@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using EFT;
 using EFT.Interactive;
+using EFT.UI;
 using JsonType;
 using UnityEngine;
 
@@ -59,12 +60,12 @@ namespace EFT.HideOut
 
                 if (((int)LootItemRarity) == (Enum.GetNames(typeof(LootItemRarity)).Length - 1))
                     LootItemRarity = LootItemRarity.Common;
-                else if (Input.GetKeyDown(Settings.ItemCategory))
+                else if (Input.GetKeyUp(Settings.ItemCategory))
                     LootItemRarity++;
 
                 if (Time.time >= _nextLootItemCacheTime)
                 {
-                    if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null) && GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null)
+                    if ((Main.GameWorld != null) && (Main.GameWorld.LootItems != null) && GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive)
                     {
                         _gameLootItems.Clear();
 
@@ -127,7 +128,8 @@ namespace EFT.HideOut
                             continue;
                         if (LootItemRarity == LootItemRarity.Common && item.LootItem.Item.Template.Rarity != ELootRarity.Common)
                             continue;
-
+                        if (LootItemRarity == LootItemRarity.Common && item.LootItem.Item.Template.Rarity != ELootRarity.Common)
+                            continue;
                         Render.DrawString(new Vector2(item.ScreenPosition.x - 50f, item.ScreenPosition.y), lootItemName, lootItemColor);
                     }
                 }

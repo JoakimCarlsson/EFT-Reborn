@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EFT;
 using EFT.Interactive;
+using EFT.UI;
 using JsonType;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ namespace EFT.HideOut
 
                 if (Time.time >= _nextLootItemCacheTime)
                 {
-                    if ((GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && (Main.GameWorld.ExfiltrationController.ExfiltrationPoints != null)))
+                    if ((GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && (Main.GameWorld.ExfiltrationController.ExfiltrationPoints != null)) && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive)
                     {
                         _gameExfiltrationPoints.Clear();
                         foreach (var exfiltrationPoint in Main.GameWorld.ExfiltrationController.ExfiltrationPoints)
