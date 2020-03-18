@@ -20,41 +20,16 @@ namespace EFT.HideOut
             {
                 if (GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
                 {
-                    SuperWeapon();
                     NoRecoil();
-                    NoSway();
-                    SuperBullet();
                     DoorUnlock();
                     NoVisor();
                     MaxStats();
-                    SpeedHack();
                     PrepareHud();
                     ThermalVison();
                 }
             }
             catch
             {
-            }
-        }
-
-        private void SuperWeapon()
-        {
-            if (Main.LocalPlayer == null || !(Main.LocalPlayer.HandsController.Item is Weapon))
-                return;
-
-            if (Settings.FastReload)
-                Main.LocalPlayer.GetComponent<Player.FirearmController>().Item.Template.isFastReload = true;
-
-            if (Settings.AlwaysAutomatic)
-            {
-                Main.LocalPlayer.Weapon.GetItemComponent<FireModeComponent>().FireMode = Weapon.EFireMode.fullauto;
-                Main.LocalPlayer.GetComponent<Player.FirearmController>().Item.Template.BoltAction = false;
-            }
-
-            if (Settings.FireRate)
-            {
-                Main.LocalPlayer.GetComponent<Player.FirearmController>().Item.Template.bFirerate = Settings.FireRateValue;
-                var weapon = Main.LocalPlayer.Weapon;
             }
         }
 
@@ -75,46 +50,6 @@ namespace EFT.HideOut
             {
                 _hud = $"{mag.Count}+{weapon.ChamberAmmoCount}/{mag.MaxCount} [{weapon.SelectedFireMode.ToString()}]";
 
-            }
-        }
-
-        private void SpeedHack()
-        {
-            if (Settings.SpeedHack)
-            {
-                Time.timeScale = Settings.SpeedValue;
-            }
-            else
-            {
-                Time.timeScale = 1f;
-            }
-        }
-
-        private static void SuperBullet()
-        {
-            if (Settings.SuperBullet && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
-            {
-                Main.LocalPlayer.GetComponent<Player.FirearmController>().Item.Template.Velocity = 100000f;
-                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationChance = 1000;
-                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationPower = 1000;
-                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.InitialSpeed = 10000f;
-            }
-            else
-            {
-                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationChance = 1;
-                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationPower = 50;
-            }
-        }
-
-        private static void NoSway()
-        {
-            if (Settings.NoSway)
-            {
-                Main.LocalPlayer.ProceduralWeaponAnimation.Breath.Intensity = 0;
-                Main.LocalPlayer.ProceduralWeaponAnimation.WalkEffectorEnabled = false;
-                Main.LocalPlayer.ProceduralWeaponAnimation.Walk.Intensity = 0;
-                Main.LocalPlayer.ProceduralWeaponAnimation.MotionReact.Intensity = 0;
-                Main.LocalPlayer.ProceduralWeaponAnimation.ForceReact.Intensity = 0;
             }
         }
 

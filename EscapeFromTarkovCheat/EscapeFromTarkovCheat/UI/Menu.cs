@@ -11,7 +11,6 @@ namespace EFT.HideOut
         private Rect _miscVisualWindow;
         private Rect _aimbotVisualWindow;
         private Rect _miscFeatureslVisualWindow;
-        private Rect _weaponVisualWindow;
 
         private bool _visible = true;
 
@@ -33,7 +32,6 @@ namespace EFT.HideOut
             _miscVisualWindow = new Rect(20f, 260f, 250f, 150f);
             _aimbotVisualWindow = new Rect(20f, 260f, 250f, 150f);
             _miscFeatureslVisualWindow = new Rect(20f, 260f, 250f, 150f);
-            _weaponVisualWindow = new Rect(20f, 260f, 250f, 150f);
         }
 
         private void Update()
@@ -58,8 +56,6 @@ namespace EFT.HideOut
                 _aimbotVisualWindow = GUILayout.Window(3, _aimbotVisualWindow, RenderUi, "Aimbot");
             if (_miscFeatureslVisible)
                 _miscFeatureslVisualWindow = GUILayout.Window(4, _miscFeatureslVisualWindow, RenderUi, "Misc");
-            if (_weaponFeatureslVisible)
-                _weaponVisualWindow = GUILayout.Window(5, _weaponVisualWindow, RenderUi, "Weapon");
         }
 
         private void RenderUi(int id)
@@ -77,7 +73,7 @@ namespace EFT.HideOut
                         _aimbotVisualVisible = !_aimbotVisualVisible;
                     if (GUILayout.Button("Misc"))
                         _miscFeatureslVisible = !_miscFeatureslVisible;
-                    if (GUILayout.Button("Weapon Shit"))
+                    if (GUILayout.Button("Weapon"))
                         _weaponFeatureslVisible = !_weaponFeatureslVisible;
                     break;
 
@@ -113,18 +109,8 @@ namespace EFT.HideOut
                     Settings.DoorUnlocker = GUILayout.Toggle(Settings.DoorUnlocker, "Door Unlocker. Press numpad 4 for unlock.");
                     Settings.NoVisor = GUILayout.Toggle(Settings.NoVisor, "No Visor");
                     Settings.ThermalVison = GUILayout.Toggle(Settings.ThermalVison, "Thermal Vison");
-                    Settings.SpeedHack = GUILayout.Toggle(Settings.SpeedHack, $"Speedhack {Settings.SpeedValue}");
-                    Settings.SpeedValue = GUILayout.HorizontalSlider(Settings.SpeedValue, 1f, 3);
-                    break;
-                case 5:
-                    Settings.FastReload = GUILayout.Toggle(Settings.FastReload, "Fast Reload");
-                    Settings.AlwaysAutomatic = GUILayout.Toggle(Settings.AlwaysAutomatic, "Always Automatic");
-                    Settings.FireRate = GUILayout.Toggle(Settings.FireRate, $"Change Fire Rate {Settings.FireRateValue}");
-                    Settings.FireRateValue = (int)GUILayout.HorizontalSlider(Settings.FireRateValue, 1000, 3000);
                     Settings.DrawWeaponInfo = GUILayout.Toggle(Settings.DrawWeaponInfo, "Draw Weapon Info");
                     Settings.NoRecoil = GUILayout.Toggle(Settings.NoRecoil, "No Recoil");
-                    Settings.SuperBullet = GUILayout.Toggle(Settings.SuperBullet, "Super Bullet");
-                    Settings.NoSway = GUILayout.Toggle(Settings.NoSway, "No Sway");
                     break;
             }
             GUI.DragWindow();

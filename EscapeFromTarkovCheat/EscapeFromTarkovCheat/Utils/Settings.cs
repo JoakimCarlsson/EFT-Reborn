@@ -40,17 +40,9 @@ namespace EFT.HideOut
         internal static bool MaxSkills = true;
         internal static bool NoVisor = true;
         internal static bool ThermalVison = false;
-        internal static bool SpeedHack = true;
-        internal static float SpeedValue = 2f;
 
         //Weapon
         internal static bool NoRecoil = true;
         internal static bool DrawWeaponInfo = true;
-        internal static bool NoSway = true;
-        internal static bool SuperBullet = false;
-        internal static bool FastReload = false;
-        internal static bool AlwaysAutomatic = false;
-        internal static bool FireRate = false;
-        internal static int FireRateValue = 1000;
     }
 }
