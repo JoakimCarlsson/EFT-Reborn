@@ -55,26 +55,18 @@ namespace EFT.HideOut
         private GamePlayer GetTarget()
         {
             _targetList = Main.GamePlayers.Where(p => !p.Player.IsYourPlayer() && GameUtils.IsPlayerAlive(p.Player));
-            _targetList = _targetList.OrderBy(p => p.Distance);
+            _targetList = _targetList.OrderBy(p => p.Fov);
 
             foreach (var gamePlayer in _targetList)
             {
-                float fov = Fov(GameUtils.GetBonePosByID(gamePlayer.Player, 133));
-
-                if (fov <= Settings.AimbotFOV)
+                if (gamePlayer.Fov <= Settings.AimbotFOV)
                     return gamePlayer;
             }
 
             return null;
         }
 
-        public static float Fov(Vector3 position)
-        {
-            Vector3 myPos = Main.MainCamera.transform.position;
-            Vector3 forward = Main.MainCamera.transform.forward;
-            Vector3 normalized = (position - myPos).normalized;
-            return Mathf.Acos(Mathf.Clamp(Vector3.Dot(forward, normalized), -1f, 1f)) * 57.29578f;
-        }
+
 
         private static RaycastHit raycastHit;
         private static LayerMask layerMask = 1 << 12 | 1 << 16 | 1 << 18;

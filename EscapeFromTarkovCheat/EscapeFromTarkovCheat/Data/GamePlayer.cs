@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using EFT;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace EFT.HideOut
         public bool IsOnScreen { get; private set; }
 
         public bool IsVisible { get; private set; }
-
+        public float Fov { get; set; }
         public float Distance { get; private set; }
 
         public bool IsAI { get; private set; }
@@ -32,12 +33,13 @@ namespace EFT.HideOut
             if (player == null)
                 throw new ArgumentNullException(nameof(player));
 
-            this.Player = player;
+            Player = player;
             screenPosition = default;
             headScreenPosition = default;
             IsOnScreen = false;
             Distance = 0f;
             IsAI = true;
+            Fov = 0f;
         }
 
         public void RecalculateDynamics()
@@ -53,6 +55,7 @@ namespace EFT.HideOut
             IsOnScreen = GameUtils.IsScreenPointVisible(screenPosition);
             Distance = Vector3.Distance(Main.MainCamera.transform.position, Player.Transform.position);
             IsVisible = IsVisibles();
+            Fov = GetFov();
 
             if ((Player.Profile != null) && (Player.Profile.Info != null))
                 IsAI = (Player.Profile.Info.RegistrationDate <= 0);
@@ -70,6 +73,14 @@ namespace EFT.HideOut
                     return true;
             }
             return false;
+        }
+
+        public float GetFov()
+        {
+            Vector3 myPos = Main.MainCamera.transform.position;
+            Vector3 forward = Main.MainCamera.transform.forward;
+            Vector3 normalized = (Player.Transform.position - myPos).normalized;
+            return Mathf.Acos(Mathf.Clamp(Vector3.Dot(forward, normalized), -1f, 1f)) * 57.29578f;
         }
     }
 
