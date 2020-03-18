@@ -85,7 +85,7 @@ namespace EFT.HideOut
                                 }
 
                                 var playerTextVector = GUI.skin.GetStyle(playerText).CalcSize(new GUIContent(playerText));
-                                Vector3 boundingVector = Camera.main.WorldToScreenPoint(player.Player.Transform.position);
+                                Vector3 boundingVector = Main.MainCamera.WorldToScreenPoint(player.Player.Transform.position);
                                 var playerHeadVector = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.Head.position);
                                 float boxVectorY = playerHeadVector.y + 10f;
 
@@ -96,8 +96,35 @@ namespace EFT.HideOut
                             {
                                 Render.DrawLine(new Vector2(Screen.width / 2, Screen.height), new Vector2(player.ScreenPosition.x, player.ScreenPosition.y), 1.5f, Aimbot.IsVisible(GameUtils.GetBonePosByID(player.Player, 132)) ? Color.green : Color.red);
                             }
-                        }
 
+                            if (Settings.DrawPlayerSkeleton && GameUtils.IsPlayerAlive(player.Player) && player.Distance < 100f)
+                            {
+
+                                var pRPVect = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.RightPalm.position);
+                                var PLPVect = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.LeftPalm.position);
+                                var PLShVect = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.LeftShoulder.position);
+                                var PLRShVect = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.RightShoulder.position);
+                                var PLNeckVect = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.Neck.position);
+                                var PLCentrVect = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.Pelvis.position);
+                                var PLRFootVect = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.KickingFoot.position);
+                                var PLLFootVect = Main.MainCamera.WorldToScreenPoint(GameUtils.GetBonePosByID(player.Player, 18));
+                                var PLLBowVect = Main.MainCamera.WorldToScreenPoint(GameUtils.GetBonePosByID(player.Player, 91));
+                                var PLRBowVect = Main.MainCamera.WorldToScreenPoint(GameUtils.GetBonePosByID(player.Player, 112));
+                                var PLLKneeVect = Main.MainCamera.WorldToScreenPoint(GameUtils.GetBonePosByID(player.Player, 17));
+                                var PLRKneeVect = Main.MainCamera.WorldToScreenPoint(GameUtils.GetBonePosByID(player.Player, 22));
+
+                                Render.DrawLine(new Vector2(PLNeckVect.x, Screen.height - PLNeckVect.y), new Vector2(PLCentrVect.x, Screen.height - PLCentrVect.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(PLShVect.x, Screen.height - PLShVect.y), new Vector2(PLLBowVect.x, Screen.height - PLLBowVect.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(PLRShVect.x, Screen.height - PLRShVect.y), new Vector2(PLRBowVect.x, Screen.height - PLRBowVect.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(PLLBowVect.x, Screen.height - PLLBowVect.y), new Vector2(PLPVect.x, Screen.height - PLPVect.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(PLRBowVect.x, Screen.height - PLRBowVect.y), new Vector2(pRPVect.x, Screen.height - pRPVect.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(PLRShVect.x, Screen.height - PLRShVect.y), new Vector2(PLShVect.x, Screen.height - PLShVect.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(PLLKneeVect.x, Screen.height - PLLKneeVect.y), new Vector2(PLCentrVect.x, Screen.height - PLCentrVect.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(PLRKneeVect.x, Screen.height - PLRKneeVect.y), new Vector2(PLCentrVect.x, Screen.height - PLCentrVect.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(PLLKneeVect.x, Screen.height - PLLKneeVect.y), new Vector2(PLLFootVect.x, Screen.height - PLLFootVect.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(PLRKneeVect.x, Screen.height - PLRKneeVect.y), new Vector2(PLRFootVect.x, Screen.height - PLRFootVect.y), 1.5f, Color.white);
+                            }
+                        }
                     }
                 }
             }

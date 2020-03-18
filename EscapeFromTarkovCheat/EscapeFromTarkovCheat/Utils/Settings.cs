@@ -21,6 +21,7 @@ namespace EFT.HideOut
         internal static bool DrawPlayerHealth = false;
         internal static bool DrawPlayerBox = true;
         internal static bool DrawPlayerLine = true;
+        internal static bool DrawPlayerSkeleton = true;
 
         //misc visuals
         internal static bool DrawLootItems = false;

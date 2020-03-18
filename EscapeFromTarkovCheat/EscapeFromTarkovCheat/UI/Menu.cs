@@ -18,9 +18,8 @@ namespace EFT.HideOut
         private bool _miscVisualVisible;
         private bool _aimbotVisualVisible;
         private bool _miscFeatureslVisible;
-        private bool _weaponFeatureslVisible;
 
-        private string watermark = "Reborn";
+        private string _watermark = "Reborn";
 
         private void Start()
         {
@@ -42,11 +41,11 @@ namespace EFT.HideOut
 
         private void OnGUI()
         {
-            GUI.Label(new Rect(20, 20, 1000, 500), watermark);
+            GUI.Label(new Rect(20, 20, 1000, 500), _watermark);
             if (!_visible)
                 return;
 
-            _mainWindow = GUILayout.Window(0, _mainWindow, RenderUi, watermark);
+            _mainWindow = GUILayout.Window(0, _mainWindow, RenderUi, _watermark);
 
             if (_playerEspVisualVisible)
                 _playerVisualWindow = GUILayout.Window(1, _playerVisualWindow, RenderUi, "Player Visual");
@@ -81,6 +80,7 @@ namespace EFT.HideOut
                     Settings.DrawPlayerName = GUILayout.Toggle(Settings.DrawPlayerName, "Draw Player Name");
                     Settings.DrawPlayerLine = GUILayout.Toggle(Settings.DrawPlayerLine, "Draw Player Line");
                     Settings.DrawPlayerHealth = GUILayout.Toggle(Settings.DrawPlayerHealth, "Draw Player Health");
+                    Settings.DrawPlayerSkeleton = GUILayout.Toggle(Settings.DrawPlayerSkeleton, "Draw Player Skeleton");
                     GUILayout.Label($"Player Distance {(int)Settings.DrawPlayersDistance} m");
                     Settings.DrawPlayersDistance = GUILayout.HorizontalSlider(Settings.DrawPlayersDistance,0f, 2000f);
                     break;
