@@ -46,7 +46,6 @@ namespace EFT.HideOut
         private void AimAtTarget(GamePlayer target)
         {
             Vector3 eulerAngles = Quaternion.LookRotation((GameUtils.GetBonePosByID(target.Player, 132) - Main.MainCamera.transform.position).normalized).eulerAngles;
-
             if (eulerAngles.x > 180f)
                 eulerAngles.x -= 360f;
             Main.LocalPlayer.MovementContext.Rotation = new Vector2(eulerAngles.y, eulerAngles.x);
@@ -56,7 +55,6 @@ namespace EFT.HideOut
         {
             _targetList = Main.GamePlayers.Where(p => !p.Player.IsYourPlayer() && GameUtils.IsPlayerAlive(p.Player));
             _targetList = _targetList.OrderBy(p => p.Fov).ThenBy(p => p.Distance);
-
             foreach (var gamePlayer in _targetList)
             {
                 if (gamePlayer.Fov <= Settings.AimbotFOV)

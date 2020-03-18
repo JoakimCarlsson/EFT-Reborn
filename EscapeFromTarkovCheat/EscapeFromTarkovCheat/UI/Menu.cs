@@ -73,8 +73,6 @@ namespace EFT.HideOut
                         _aimbotVisualVisible = !_aimbotVisualVisible;
                     if (GUILayout.Button("Misc"))
                         _miscFeatureslVisible = !_miscFeatureslVisible;
-                    if (GUILayout.Button("Weapon"))
-                        _weaponFeatureslVisible = !_weaponFeatureslVisible;
                     break;
 
                 case 1:
