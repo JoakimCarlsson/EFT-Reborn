@@ -107,7 +107,6 @@ namespace EFT.HideOut
                         bool isSpecialLootItem = IsSpecialLootItem(item.LootItem);
 
                         Color lootItemColor = CommonColor;
-                        GUI.Label(new Rect(20, 40, 200, 60), LootItemRarity.ToString());
 
                         if (isSpecialLootItem)
                             lootItemColor = SpecialColor;
@@ -132,6 +131,8 @@ namespace EFT.HideOut
                             continue;
                         Render.DrawString(new Vector2(item.ScreenPosition.x - 50f, item.ScreenPosition.y), lootItemName, lootItemColor);
                     }
+
+                    GUI.Label(new Rect(20, 40, 200, 60), LootItemRarity.ToString());
                 }
             }
             catch

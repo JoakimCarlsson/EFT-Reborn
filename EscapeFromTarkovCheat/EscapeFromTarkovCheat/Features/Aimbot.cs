@@ -55,7 +55,7 @@ namespace EFT.HideOut
         private GamePlayer GetTarget()
         {
             _targetList = Main.GamePlayers.Where(p => !p.Player.IsYourPlayer() && GameUtils.IsPlayerAlive(p.Player));
-            _targetList = _targetList.OrderBy(p => p.Distance).ThenBy(p => p.Fov);
+            _targetList = _targetList.OrderBy(p => p.Fov).ThenBy(p => p.Distance);
 
             foreach (var gamePlayer in _targetList)
             {
