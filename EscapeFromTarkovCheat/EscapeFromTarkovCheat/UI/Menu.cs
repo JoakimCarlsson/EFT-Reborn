@@ -21,7 +21,7 @@ namespace EFT.HideOut
         private bool _miscFeatureslVisible;
         private bool _weaponFeatureslVisible;
 
-        private string watermark = "Reborn Elite";
+        private string watermark = "Reborn";
 
         private void Start()
         {

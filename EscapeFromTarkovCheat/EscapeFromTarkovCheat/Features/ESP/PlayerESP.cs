@@ -4,6 +4,7 @@ using System.Diagnostics;
 using EFT;
 using EFT.HealthSystem;
 using EFT.Interactive;
+using EFT.UI;
 using UnityEngine;
 
 namespace EFT.HideOut
@@ -22,7 +23,7 @@ namespace EFT.HideOut
         {
             try
             {
-                if (Settings.DrawPlayers && GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null)
+                if (Settings.DrawPlayers && GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive && Main.MainCamera != null)
                 {
                     foreach (GamePlayer player in Main.GamePlayers)
                     {
