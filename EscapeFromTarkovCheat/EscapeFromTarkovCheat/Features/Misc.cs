@@ -7,6 +7,7 @@ using BSG.CameraEffects;
 using EFT.HideOut;
 using EFT.Interactive;
 using EFT.InventoryLogic;
+using EFT.UI;
 using UnityEngine;
 
 namespace EFT.HideOut
@@ -18,7 +19,7 @@ namespace EFT.HideOut
         {
             try
             {
-                if (GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
+                if (GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive && Main.MainCamera != null)
                 {
                     SuperWeapon();
                     NoRecoil();
@@ -58,7 +59,7 @@ namespace EFT.HideOut
         //{
         //    if (Input.GetKeyDown(KeyCode.UpArrow))
         //    {
-        //       Main.LocalPlayer.Transform.position += Main.MainCamera.transform.forward * 0.5f;
+        //        Main.LocalPlayer.Transform.position += Main.MainCamera.transform.forward * 0.5f;
         //    }
         //}
 
