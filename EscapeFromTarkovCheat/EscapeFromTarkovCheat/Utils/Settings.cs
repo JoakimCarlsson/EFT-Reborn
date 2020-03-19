@@ -22,19 +22,24 @@ namespace EFT.HideOut
         internal static bool DrawPlayerBox = true;
         internal static bool DrawPlayerLine = true;
         internal static bool DrawPlayerSkeleton = true;
+        internal static float DrawPlayersDistance = 200f;
+
 
         //misc visuals
         internal static bool DrawLootItems = false;
         internal static float DrawLootItemsDistance = 300f;
         internal static float DrawLootableContainersDistance = 10f;
-        internal static float DrawPlayersDistance = 200f;
-        internal static bool DrawLootableContainers = false;
+        internal static bool DrawLootableContainers = true;
         internal static bool DrawExfiltrationPoints = true;
+        internal static bool DrawEmptyContainers = false;
+        internal static bool DrawContainersContent = true;
 
-        //aimboot
+        //aimbot
         internal static bool Aimbot = true;
         internal static float AimbotFOV = 10f;
-
+        internal static int AimBotDistance = 300;
+        internal static bool DrawAimbotPoint = true;
+        internal static int AimBotBone = 133;
 
         //misc
         internal static bool DoorUnlocker = true;

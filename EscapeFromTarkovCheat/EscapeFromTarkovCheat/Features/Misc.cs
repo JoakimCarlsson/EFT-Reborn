@@ -26,17 +26,32 @@ namespace EFT.HideOut
                     MaxStats();
                     PrepareHud();
                     ThermalVison();
+                    HotKeys();
                 }
             }
             catch
             {
             }
         }
-
+        private void HotKeys()
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+                Settings.DrawPlayers = !Settings.DrawPlayers;
+            if (Input.GetKeyDown(KeyCode.F2))
+                Settings.DrawLootItems = !Settings.DrawLootItems;
+            if (Input.GetKeyDown(KeyCode.F4))
+                Settings.DrawLootableContainers = !Settings.DrawLootableContainers;
+            if (Input.GetKeyDown(KeyCode.F6))
+                Settings.DrawExfiltrationPoints = !Settings.DrawExfiltrationPoints;
+        }
         public void OnGUI()
         {
-            var textStyle = new GUIStyle(GUI.skin.label) { fontSize = 25 };
-            GUI.Label(new Rect(512, Screen.height - 48, 512, 48), _hud, textStyle);
+            if (Settings.DrawWeaponInfo)
+            {
+                var textStyle = new GUIStyle(GUI.skin.label) { fontSize = 25 };
+                GUI.Label(new Rect(512, Screen.height - 48, 512, 48), _hud, textStyle);
+            }
+
         }
         private void PrepareHud()
         {
@@ -55,10 +70,17 @@ namespace EFT.HideOut
 
         private void NoRecoil()
         {
-            if (Main.LocalPlayer == null && !Settings.NoRecoil)
+            if (Main.LocalPlayer == null)
                 return;
 
-            Main.LocalPlayer.ProceduralWeaponAnimation.Shootingg.Intensity = 0f;
+            if (Settings.NoRecoil)
+            {
+                Main.LocalPlayer.ProceduralWeaponAnimation.Shootingg.Intensity = 0f;
+            }
+            else
+            {
+                Main.LocalPlayer.ProceduralWeaponAnimation.Shootingg.Intensity = 1f;
+            }
         }
 
         private static void NoVisor()

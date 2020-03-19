@@ -68,29 +68,35 @@ namespace EFT.HideOut
 
                     EFT.InventoryLogic.Item item = gameLootContainer.LootableContainer.ItemOwner.RootItem;
 
-                    if (item.GetAllItems().Count() == 1)
-                        continue;
-
-                    string lootItemName = string.Empty;
-
-                    foreach (var allItem in item.GetAllItems())
+                    if (!Settings.DrawEmptyContainers)
                     {
-                        if (item.GetAllItems().First() == allItem)
-                        {
-                            lootItemName = $"{allItem.Name.Localized()} [{gameLootContainer.FormattedDistance}]";
-                            LootableContainerColor = new Color(1f, 0.2f, 0.09f);
-                        }
-                        else
-                        {
-                            lootItemName = allItem.Name.Localized();
-                            LootableContainerColor = Color.white;
-                        }
-
-                        Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, LootableContainerColor);
-                        x -= 20;
+                        if (item.GetAllItems().Count() == 1)
+                            continue;
                     }
 
+                    string lootItemName = item.Name.Localized();
+
+                    if (Settings.DrawContainersContent)
+                    {
+                        foreach (var allItem in item.GetAllItems())
+                        {
+                            if (item.GetAllItems().First() == allItem)
+                            {
+                                lootItemName = $"{allItem.Name.Localized()} [{gameLootContainer.FormattedDistance}]";
+                                LootableContainerColor = new Color(1f, 0.2f, 0.09f);
+                            }
+                            else
+                            {
+                                lootItemName = allItem.Name.Localized();
+                                LootableContainerColor = Color.white;
+                            }
+                            Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, LootableContainerColor);
+                            x -= 20;
+                        }
+                    }
+                    Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, LootableContainerColor);
                 }
+
             }
             catch
             {
