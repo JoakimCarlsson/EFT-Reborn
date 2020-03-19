@@ -29,6 +29,8 @@ namespace EFT.HideOut
         internal static float DrawPlayersDistance = 200f;
         internal static bool DrawLootableContainers = false;
         internal static bool DrawExfiltrationPoints = true;
+        internal static bool DrawEmptyContainers = false;
+        internal static bool DrawContainersContent = true;
 
         //aimboot
         internal static bool Aimbot = true;
