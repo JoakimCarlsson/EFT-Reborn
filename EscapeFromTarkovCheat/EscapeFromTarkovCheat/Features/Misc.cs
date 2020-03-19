@@ -60,8 +60,11 @@ namespace EFT.HideOut
 
         public void OnGUI()
         {
-            var textStyle = new GUIStyle(GUI.skin.label) { fontSize = 25 };
-            GUI.Label(new Rect(512, Screen.height - 48, 512, 48), _hud, textStyle);
+            if (Settings.DrawWeaponInfo)
+            {
+                var textStyle = new GUIStyle(GUI.skin.label) { fontSize = 25 };
+                GUI.Label(new Rect(512, Screen.height - 48, 512, 48), _hud, textStyle);
+            }
         }
         private void PrepareHud()
         {
@@ -74,7 +77,6 @@ namespace EFT.HideOut
             if (mag != null)
             {
                 _hud = $"{mag.Count}+{weapon.ChamberAmmoCount}/{mag.MaxCount} [{weapon.SelectedFireMode.ToString()}]";
-
             }
         }
 
