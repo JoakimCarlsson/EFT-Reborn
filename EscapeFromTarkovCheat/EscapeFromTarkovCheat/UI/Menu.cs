@@ -105,18 +105,19 @@ namespace EFT.HideOut
 
                 case 3:
                     Settings.Aimbot = GUILayout.Toggle(Settings.Aimbot, "Aimbot");
+                    Settings.DrawAimbotPoint = GUILayout.Toggle(Settings.DrawAimbotPoint, "Aimbot Point");
                     GUILayout.Label($"Aimbot FOV {(int)Settings.AimbotFOV} m");
                     Settings.AimbotFOV = GUILayout.HorizontalSlider(Settings.AimbotFOV, 0f, 180);
-                    GUILayout.Label($"Aimbot FOV {Settings.AimBotDistance} m");
+                    GUILayout.Label($"Aimbot Distance {Settings.AimBotDistance} m");
                     Settings.AimBotDistance = (int)GUILayout.HorizontalSlider(Settings.AimBotDistance, 0, 1000);
                     break;
 
                 case 4:
                     Settings.MaxSkills = GUILayout.Toggle(Settings.MaxSkills, "Max Skills");
-                    Settings.DoorUnlocker = GUILayout.Toggle(Settings.DoorUnlocker, "Door Unlocker. Press f1 too unlock.");
+                    Settings.DoorUnlocker = GUILayout.Toggle(Settings.DoorUnlocker, "Door Unlocker. (F8)");
                     Settings.NoVisor = GUILayout.Toggle(Settings.NoVisor, "No Visor");
                     Settings.ThermalVison = GUILayout.Toggle(Settings.ThermalVison, "Thermal Vison");
-                    Settings.SpeedHack = GUILayout.Toggle(Settings.SpeedHack, $"Speedhack {Settings.SpeedValue} F7");
+                    Settings.SpeedHack = GUILayout.Toggle(Settings.SpeedHack, $"Speedhack {Settings.SpeedValue} (F7)");
                     Settings.SpeedValue = GUILayout.HorizontalSlider(Settings.SpeedValue, 1f, 3);
                     break;
                 case 5:

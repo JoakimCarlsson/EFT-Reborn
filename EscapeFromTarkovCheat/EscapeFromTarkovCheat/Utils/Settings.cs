@@ -12,7 +12,7 @@ namespace EFT.HideOut
     {
         //Keybinds
         internal static KeyCode ItemCategory = KeyCode.F3;
-        internal static KeyCode UnlockDoors = KeyCode.F1;
+        internal static KeyCode UnlockDoors = KeyCode.F8;
         internal static KeyCode AimbotKey = KeyCode.LeftControl;
 
         //players
@@ -36,7 +36,9 @@ namespace EFT.HideOut
 
         //aimboot
         internal static bool Aimbot = true;
-        public static int AimBotDistance = 300;
+        internal static bool DrawAimbotPoint = true;
+        internal static int AimBotDistance = 300;
+        internal static int AimBotBone = 132;
         internal static float AimbotFOV = 10f;
 
         //misc

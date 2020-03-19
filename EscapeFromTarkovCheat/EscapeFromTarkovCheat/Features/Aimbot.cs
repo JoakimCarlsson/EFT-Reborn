@@ -17,7 +17,7 @@ namespace EFT.HideOut
         private Vector3 _aimTarget = Vector3.zero;
 
 
-            //public void Update()
+        //public void Update()
         //{
         //    try
         //    {
@@ -38,13 +38,35 @@ namespace EFT.HideOut
 
         public void OnGUI()
         {
-            if (Input.GetKey(Settings.AimbotKey))
+            if (Input.GetKey(Settings.AimbotKey) && _target == null)
             {
-                AimLock();
+                _target = GetTarget();
+
+                if (_target != null)
+                {
+                    Vector3 aimPos = GameUtils.GetBonePosByID(_target.Player, Settings.AimBotBone);
+
+                    float travelTime = _target.Distance / Main.LocalPlayer.Weapon.CurrentAmmoTemplate.InitialSpeed;
+                    aimPos.x += (_target.Player.Velocity.x * travelTime);
+                    aimPos.y += (_target.Player.Velocity.y * travelTime);
+
+                    _aimTarget = aimPos;
+                    Vector3 eulerAngles = Quaternion.LookRotation((aimPos - Main.MainCamera.transform.position).normalized).eulerAngles;
+
+                    if (eulerAngles.x > 180f)
+                        eulerAngles.x -= 360f;
+                    Main.LocalPlayer.MovementContext.Rotation = new Vector2(eulerAngles.y, eulerAngles.x);
+
+                }
             }
             else
             {
-                _aimTarget = Vector3.zero;
+                _target = null;
+            }
+
+            if (_aimTarget != Vector3.zero && Settings.DrawAimbotPoint)
+            {
+                Render.Circle(Main.MainCamera.WorldToScreenPoint(_aimTarget).x - 5f, Main.MainCamera.WorldToScreenPoint(_aimTarget).y - 5f, 10);
             }
         }
 
@@ -74,6 +96,9 @@ namespace EFT.HideOut
 
             foreach (var gamePlayer in _targetList)
             {
+                if (gamePlayer.Distance > Settings.AimBotDistance) //change 300 hot a value ewe store in settings.
+                    continue;
+
                 if (gamePlayer.Fov <= Settings.AimbotFOV)
                     return gamePlayer;
             }
@@ -111,43 +136,38 @@ namespace EFT.HideOut
 
             foreach (var player in targetList)
             {
-                if (player != null && player.Player != Main.LocalPlayer && GameUtils.IsPlayerAlive(player.Player) )
+                if (player != null && player.Player != Main.LocalPlayer && GameUtils.IsPlayerAlive(player.Player))
                 {
                     //if (!Main.LocalPlayer.isInYourGroup(player))
                     //{
-                        Vector3 aimPos = GameUtils.GetBonePosByID(player.Player, (int) GamePlayer.BodyPart.Head);
+                    Vector3 aimPos = GameUtils.GetBonePosByID(player.Player, (int)GamePlayer.BodyPart.Head);
 
-                        if (player.Distance > Settings.AimBotDistance) //change 300 hot a value ewe store in settings.
-                            continue;
+                    if (player.Distance > Settings.AimBotDistance) //change 300 hot a value ewe store in settings.
+                        continue;
 
-                        if (_aimTarget == Vector3.zero && player.Fov <= Settings.AimbotFOV)
-                        {
-                            float travelTime = player.Distance / Main.LocalPlayer.Weapon.CurrentAmmoTemplate.InitialSpeed;
+                    if (_aimTarget == Vector3.zero && player.Fov <= Settings.AimbotFOV)
+                    {
+                        float travelTime = player.Distance / Main.LocalPlayer.Weapon.CurrentAmmoTemplate.InitialSpeed;
 
-                            aimPos.x += (player.Player.Velocity.x * travelTime);
-                            aimPos.y += (player.Player.Velocity.y * travelTime);
+                        aimPos.x += (player.Player.Velocity.x * travelTime);
+                        aimPos.y += (player.Player.Velocity.y * travelTime);
 
-                            _aimTarget = aimPos;
-                        }
+                        _aimTarget = aimPos;
+                    }
                     //}
                 }
             }
 
             if (_aimTarget != Vector3.zero)
             {
-                AimAtTarget(_aimTarget);
+                //AimAtTarget(_aimTarget);
                 Render.Circle(Main.MainCamera.WorldToScreenPoint(_aimTarget).x - 5f, Main.MainCamera.WorldToScreenPoint(_aimTarget).y - 5f, 10);
             }
         }
 
-        private void AimAtTarget(Vector3 pos)
+        private void AimAtTarget()
         {
 
-            Vector3 eulerAngles = Quaternion.LookRotation((pos - Main.MainCamera.transform.position).normalized).eulerAngles;
-
-            if (eulerAngles.x > 180f)
-                eulerAngles.x -= 360f;
-            Main.LocalPlayer.MovementContext.Rotation = new Vector2(eulerAngles.y, eulerAngles.x);
         }
 
     }

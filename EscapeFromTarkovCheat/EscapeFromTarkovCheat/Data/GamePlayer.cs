@@ -123,7 +123,7 @@ namespace EFT.HideOut
         {
             Vector3 myPos = Main.MainCamera.transform.position;
             Vector3 forward = Main.MainCamera.transform.forward;
-            Vector3 normalized = (Player.Transform.position - myPos).normalized;
+            Vector3 normalized = (GameUtils.GetBonePosByID(Player, Settings.AimBotBone) - myPos).normalized;
             return Mathf.Acos(Mathf.Clamp(Vector3.Dot(forward, normalized), -1f, 1f)) * 57.29578f;
         }
 
