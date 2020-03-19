@@ -96,10 +96,9 @@ namespace EFT.HideOut
         {
             if (Settings.SuperBullet && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
             {
-                Main.LocalPlayer.GetComponent<Player.FirearmController>().Item.Template.Velocity = 100000f;
                 Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationChance = 1000;
                 Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.PenetrationPower = 1000;
-                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.InitialSpeed = 10000f;
+                Main.LocalPlayer.Weapon.Template.DefAmmoTemplate.InitialSpeed = 1000f;
             }
             else
             {
