@@ -30,12 +30,21 @@ namespace EFT.HideOut
                     SpeedHack();
                     PrepareHud();
                     ThermalVison();
+                    //Teleport();
                 }
             }
             catch
             {
             }
         }
+
+        //private void Teleport()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.UpArrow))
+        //    {
+        //       Main.LocalPlayer.Transform.position += Main.MainCamera.transform.forward * 0.5f;
+        //    }
+        //}
 
         private void SuperWeapon()
         {
@@ -54,7 +63,6 @@ namespace EFT.HideOut
             if (Settings.FireRate)
             {
                 Main.LocalPlayer.GetComponent<Player.FirearmController>().Item.Template.bFirerate = Settings.FireRateValue;
-                var weapon = Main.LocalPlayer.Weapon;
             }
         }
 
@@ -64,6 +72,11 @@ namespace EFT.HideOut
             {
                 var textStyle = new GUIStyle(GUI.skin.label) { fontSize = 25 };
                 GUI.Label(new Rect(512, Screen.height - 48, 512, 48), _hud, textStyle);
+            }
+
+            if (true)
+            {
+                Crosshair2d();
             }
         }
         private void PrepareHud()
@@ -202,6 +215,22 @@ namespace EFT.HideOut
                 Main.LocalPlayer.Physical.HandsStamina.Current = 1000f;
                 Main.LocalPlayer.Physical.CapacityBuff = 1000f;
             }
+        }
+        public static void Crosshair2d()
+        {
+            P(new Vector2(Screen.width / 2f - 2f, Screen.height / 2f - 1f), new Color(0f, 0f, 0f), 4f);
+            P(new Vector2(Screen.width / 2f - 1f, Screen.height / 2f - 1f), new Color(0.30f, 0.88f, 0.2196f), 2f);
+        }
+        public static Texture2D lineTex;
+        public static void P(Vector2 Position, Color color, float thickness)
+        {
+            if (lineTex == null)
+                lineTex = new Texture2D(1, 1);
+
+            float yOffset = Mathf.Ceil(thickness / 2f);
+
+            GUI.color = color;
+            GUI.DrawTexture(new Rect(Position.x, Position.y - (float)yOffset, thickness, thickness), lineTex);
         }
     }
 }

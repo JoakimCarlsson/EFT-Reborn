@@ -42,7 +42,7 @@ namespace EFT.HideOut
             {
                 AimLock();
             }
-            else if (Input.GetKeyUp(Settings.AimbotKey))
+            else
             {
                 _aimTarget = Vector3.zero;
             }
