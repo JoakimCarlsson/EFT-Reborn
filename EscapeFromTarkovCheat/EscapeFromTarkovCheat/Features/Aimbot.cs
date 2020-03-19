@@ -111,7 +111,7 @@ namespace EFT.HideOut
 
             foreach (var player in targetList)
             {
-                if (player != null && player.Player != Main.LocalPlayer && GameUtils.IsPlayerAlive(player.Player))
+                if (player != null && player.Player != Main.LocalPlayer && GameUtils.IsPlayerAlive(player.Player) )
                 {
                     //if (!Main.LocalPlayer.isInYourGroup(player))
                     //{
@@ -120,7 +120,7 @@ namespace EFT.HideOut
                         if (player.Distance > Settings.AimBotDistance) //change 300 hot a value ewe store in settings.
                             continue;
 
-                        if (aimPos != Vector3.zero && player.Fov <= Settings.AimbotFOV)
+                        if (_aimTarget == Vector3.zero && player.Fov <= Settings.AimbotFOV)
                         {
                             float travelTime = player.Distance / Main.LocalPlayer.Weapon.CurrentAmmoTemplate.InitialSpeed;
 
@@ -142,6 +142,7 @@ namespace EFT.HideOut
 
         private void AimAtTarget(Vector3 pos)
         {
+
             Vector3 eulerAngles = Quaternion.LookRotation((pos - Main.MainCamera.transform.position).normalized).eulerAngles;
 
             if (eulerAngles.x > 180f)

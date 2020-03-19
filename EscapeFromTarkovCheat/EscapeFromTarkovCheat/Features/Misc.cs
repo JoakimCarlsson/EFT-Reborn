@@ -31,11 +31,27 @@ namespace EFT.HideOut
                     PrepareHud();
                     ThermalVison();
                     //Teleport();
+                    HotKeys();
                 }
             }
             catch
             {
             }
+        }
+
+        private void HotKeys()
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+                Settings.DrawPlayers = !Settings.DrawPlayers;
+
+            if (Input.GetKeyDown(KeyCode.F2))
+                Settings.DrawLootItems = !Settings.DrawLootItems;
+            if (Input.GetKeyDown(KeyCode.F4))
+                Settings.DrawLootableContainers = !Settings.DrawLootableContainers;
+            if (Input.GetKeyDown(KeyCode.F6))
+                Settings.DrawExfiltrationPoints = !Settings.DrawExfiltrationPoints;
+            if (Input.GetKeyDown(KeyCode.F7))
+                Settings.SpeedHack = !Settings.SpeedHack;
         }
 
         //private void Teleport()

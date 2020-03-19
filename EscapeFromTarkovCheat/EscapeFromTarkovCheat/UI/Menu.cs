@@ -82,7 +82,7 @@ namespace EFT.HideOut
                     break;
 
                 case 1:
-                    Settings.DrawPlayers = GUILayout.Toggle(Settings.DrawPlayers, "Draw Players");
+                    Settings.DrawPlayers = GUILayout.Toggle(Settings.DrawPlayers, "Draw Players (F1)");
                     Settings.DrawPlayerBox = GUILayout.Toggle(Settings.DrawPlayerBox, "Draw Player Box");
                     Settings.DrawPlayerName = GUILayout.Toggle(Settings.DrawPlayerName, "Draw Player Name");
                     Settings.DrawPlayerLine = GUILayout.Toggle(Settings.DrawPlayerLine, "Draw Player Line");
@@ -92,15 +92,15 @@ namespace EFT.HideOut
                     break;
 
                 case 2:
-                    Settings.DrawLootItems = GUILayout.Toggle(Settings.DrawLootItems, "Draw Loot Items");
+                    Settings.DrawLootItems = GUILayout.Toggle(Settings.DrawLootItems, "Draw Loot Items (F2)");
                     GUILayout.Label($"Loot Item Distance {(int)Settings.DrawLootItemsDistance} m");
                     Settings.DrawLootItemsDistance = GUILayout.HorizontalSlider(Settings.DrawLootItemsDistance, 0f, 1000f);
-                    Settings.DrawLootableContainers = GUILayout.Toggle(Settings.DrawLootableContainers, "Draw Containers");
+                    Settings.DrawLootableContainers = GUILayout.Toggle(Settings.DrawLootableContainers, "Draw Containers (F4)");
                     Settings.DrawContainersContent = GUILayout.Toggle(Settings.DrawContainersContent, "Draw Containers Content");
                     Settings.DrawEmptyContainers = GUILayout.Toggle(Settings.DrawEmptyContainers, "Draw Empty Containers");
                     GUILayout.Label($"Container Distance {(int)Settings.DrawLootableContainersDistance} m");
                     Settings.DrawLootableContainersDistance = GUILayout.HorizontalSlider(Settings.DrawLootableContainersDistance, 0f, 1000f);
-                    Settings.DrawExfiltrationPoints = GUILayout.Toggle(Settings.DrawExfiltrationPoints, "Draw Exits");
+                    Settings.DrawExfiltrationPoints = GUILayout.Toggle(Settings.DrawExfiltrationPoints, "Draw Exits (F6)");
                     break;
 
                 case 3:
@@ -116,7 +116,7 @@ namespace EFT.HideOut
                     Settings.DoorUnlocker = GUILayout.Toggle(Settings.DoorUnlocker, "Door Unlocker. Press f1 too unlock.");
                     Settings.NoVisor = GUILayout.Toggle(Settings.NoVisor, "No Visor");
                     Settings.ThermalVison = GUILayout.Toggle(Settings.ThermalVison, "Thermal Vison");
-                    Settings.SpeedHack = GUILayout.Toggle(Settings.SpeedHack, $"Speedhack {Settings.SpeedValue}");
+                    Settings.SpeedHack = GUILayout.Toggle(Settings.SpeedHack, $"Speedhack {Settings.SpeedValue} F7");
                     Settings.SpeedValue = GUILayout.HorizontalSlider(Settings.SpeedValue, 1f, 3);
                     break;
                 case 5:
