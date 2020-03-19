@@ -11,8 +11,8 @@ namespace EFT.HideOut
     class Settings
     {
         //Keybinds
-        internal static KeyCode ItemCategory = KeyCode.Keypad5;
-        internal static KeyCode UnlockDoors = KeyCode.Keypad4;
+        internal static KeyCode ItemCategory = KeyCode.F2;
+        internal static KeyCode UnlockDoors = KeyCode.F1;
         internal static KeyCode AimbotKey = KeyCode.LeftControl;
 
         //players
@@ -21,21 +21,23 @@ namespace EFT.HideOut
         internal static bool DrawPlayerHealth = false;
         internal static bool DrawPlayerBox = true;
         internal static bool DrawPlayerLine = true;
+        internal static bool DrawPlayerSkeleton = true;
+        internal static float DrawPlayersDistance = 200f;
+
 
         //misc visuals
         internal static bool DrawLootItems = false;
         internal static float DrawLootItemsDistance = 300f;
         internal static float DrawLootableContainersDistance = 10f;
-        internal static float DrawPlayersDistance = 200f;
-        internal static bool DrawLootableContainers = false;
+        internal static bool DrawLootableContainers = true;
         internal static bool DrawExfiltrationPoints = true;
         internal static bool DrawEmptyContainers = false;
         internal static bool DrawContainersContent = true;
 
         //aimboot
         internal static bool Aimbot = true;
+        public static int AimBotDistance = 300;
         internal static float AimbotFOV = 10f;
-
 
         //misc
         internal static bool DoorUnlocker = true;
@@ -43,7 +45,7 @@ namespace EFT.HideOut
         internal static bool NoVisor = true;
         internal static bool ThermalVison = false;
         internal static bool SpeedHack = true;
-        internal static float SpeedValue = 2f;
+        internal static float SpeedValue = 1.3f;
 
         //Weapon
         internal static bool NoRecoil = true;

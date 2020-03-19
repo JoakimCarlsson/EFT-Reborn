@@ -10,13 +10,17 @@ namespace EFT.HideOut
     public static class Render
     {
         public static GUIStyle StringStyle { get; set; } = new GUIStyle(GUI.skin.label);
+        public static Material DrawMaterial;
 
         public static Color Color
         {
             get => GUI.color;
             set => GUI.color = value;
         }
-
+        public static void Circle(float X, float Y, float radius)
+        {
+            DrawBox(X - (radius / 2), Y - (radius / 2), radius, radius, Color.red);
+        }
         public static void DrawLine(Vector2 from, Vector2 to, float thickness, Color color)
         {
             Color = color;

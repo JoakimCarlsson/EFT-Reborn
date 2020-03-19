@@ -34,6 +34,7 @@ namespace EFT.HideOut
             HookObject.AddComponent<Misc>();
             DontDestroyOnLoad(HookObject);
             GameScene.CurrentGameScene = new Scene();
+
         }
 
         public void FixedUpdate()

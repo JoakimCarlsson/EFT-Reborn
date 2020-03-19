@@ -59,10 +59,6 @@ namespace EFT.HideOut
                             if (Settings.DrawPlayerName)
                             {
                                 string playerText;
-                                //string weapon;
-                                //weapon = gamePlayer.Player.Weapon.Template.ShortName.Contains("Item") ? gamePlayer.Player.Weapon.Template.Name : gamePlayer.Player.Weapon.Template.ShortName;
-                                //Console.WriteLine(weapon);
-
                                 if (player.Player.Profile.Info.Settings.IsBoss())
                                 {
                                     playerText = $"Boss [{player.FormattedDistance}]";
@@ -95,6 +91,33 @@ namespace EFT.HideOut
                             if (Settings.DrawPlayerLine && GameUtils.IsPlayerAlive(player.Player))
                             {
                                 Render.DrawLine(new Vector2(Screen.width / 2, Screen.height), new Vector2(player.ScreenPosition.x, player.ScreenPosition.y), 1.5f, Aimbot.IsVisible(GameUtils.GetBonePosByID(player.Player, 132)) ? Color.green : Color.red);
+                            }
+
+                            if (Settings.DrawPlayerSkeleton && GameUtils.IsPlayerAlive(player.Player) && player.Distance < 100f)
+                            {
+                                var rightPalm = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.RightPalm.position);
+                                var leftPalm = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.LeftPalm.position);
+                                var leftShoulder = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.LeftShoulder.position);
+                                var rightShoulder = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.RightShoulder.position);
+                                var neck = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.Neck.position);
+                                var pelvis = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.Pelvis.position);
+                                var rightFoot = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.KickingFoot.position);
+                                var leftFoot = Main.MainCamera.WorldToScreenPoint(GameUtils.GetBonePosByID(player.Player, 18));
+                                var pllBowVect = Main.MainCamera.WorldToScreenPoint(GameUtils.GetBonePosByID(player.Player, 91));
+                                var plrBowVect = Main.MainCamera.WorldToScreenPoint(GameUtils.GetBonePosByID(player.Player, 112));
+                                var pllKneeVect = Main.MainCamera.WorldToScreenPoint(GameUtils.GetBonePosByID(player.Player, 17));
+                                var plrKneeVect = Main.MainCamera.WorldToScreenPoint(GameUtils.GetBonePosByID(player.Player, 22));
+
+                                Render.DrawLine(new Vector2(neck.x, Screen.height - neck.y), new Vector2(pelvis.x, Screen.height - pelvis.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(leftShoulder.x, Screen.height - leftShoulder.y), new Vector2(pllBowVect.x, Screen.height - pllBowVect.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(rightShoulder.x, Screen.height - rightShoulder.y), new Vector2(plrBowVect.x, Screen.height - plrBowVect.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(pllBowVect.x, Screen.height - pllBowVect.y), new Vector2(leftPalm.x, Screen.height - leftPalm.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(plrBowVect.x, Screen.height - plrBowVect.y), new Vector2(rightPalm.x, Screen.height - rightPalm.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(rightShoulder.x, Screen.height - rightShoulder.y), new Vector2(leftShoulder.x, Screen.height - leftShoulder.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(pllKneeVect.x, Screen.height - pllKneeVect.y), new Vector2(pelvis.x, Screen.height - pelvis.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(plrKneeVect.x, Screen.height - plrKneeVect.y), new Vector2(pelvis.x, Screen.height - pelvis.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(pllKneeVect.x, Screen.height - pllKneeVect.y), new Vector2(leftFoot.x, Screen.height - leftFoot.y), 1.5f, Color.white);
+                                Render.DrawLine(new Vector2(plrKneeVect.x, Screen.height - plrKneeVect.y), new Vector2(rightFoot.x, Screen.height - rightFoot.y), 1.5f, Color.white);
                             }
                         }
 
