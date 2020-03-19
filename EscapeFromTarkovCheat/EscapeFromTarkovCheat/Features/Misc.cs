@@ -134,10 +134,17 @@ namespace EFT.HideOut
 
         private void NoRecoil()
         {
-            if (Main.LocalPlayer == null && !Settings.NoRecoil)
+            if (Main.LocalPlayer == null)
                 return;
 
-            Main.LocalPlayer.ProceduralWeaponAnimation.Shootingg.Intensity = 0f;
+            if (Settings.NoRecoil)
+            {
+                  Main.LocalPlayer.ProceduralWeaponAnimation.Shootingg.Intensity = 0f;
+            }
+            else
+            {
+                Main.LocalPlayer.ProceduralWeaponAnimation.Shootingg.Intensity = 1f;
+            }
         }
 
         private static void NoVisor()
