@@ -33,8 +33,6 @@ namespace EFT.HideOut
             }
         }
 
-
-
         private void Aim()
         {
             if (_target == null)
