@@ -104,7 +104,7 @@ namespace EFT.HideOut
                     break;
                 case 4:
                     Settings.MaxSkills = GUILayout.Toggle(Settings.MaxSkills, "Max Skills");
-                    Settings.DoorUnlocker = GUILayout.Toggle(Settings.DoorUnlocker, "Door Unlocker. Press numpad 4 for unlock.");
+                    Settings.DoorUnlocker = GUILayout.Toggle(Settings.DoorUnlocker, "Door Unlocker. Press F1");
                     Settings.NoVisor = GUILayout.Toggle(Settings.NoVisor, "No Visor");
                     Settings.ThermalVison = GUILayout.Toggle(Settings.ThermalVison, "Thermal Vison");
                     Settings.DrawWeaponInfo = GUILayout.Toggle(Settings.DrawWeaponInfo, "Draw Weapon Info");

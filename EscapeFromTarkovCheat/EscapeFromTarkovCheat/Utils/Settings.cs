@@ -11,8 +11,8 @@ namespace EFT.HideOut
     class Settings
     {
         //Keybinds
-        internal static KeyCode ItemCategory = KeyCode.Keypad5;
-        internal static KeyCode UnlockDoors = KeyCode.Keypad4;
+        internal static KeyCode ItemCategory = KeyCode.F2;
+        internal static KeyCode UnlockDoors = KeyCode.F1;
         internal static KeyCode AimbotKey = KeyCode.LeftControl;
 
         //players
