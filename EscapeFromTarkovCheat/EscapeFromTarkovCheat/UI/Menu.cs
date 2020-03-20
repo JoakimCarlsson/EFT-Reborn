@@ -79,9 +79,30 @@ namespace EFT.HideOut
                     Settings.DrawPlayerBox = GUILayout.Toggle(Settings.DrawPlayerBox, "Draw Player Box");
                     Settings.DrawPlayerName = GUILayout.Toggle(Settings.DrawPlayerName, "Draw Player Name");
                     Settings.DrawPlayerLine = GUILayout.Toggle(Settings.DrawPlayerLine, "Draw Player Line");
-                    Settings.DrawPlayerHealthBar = GUILayout.Toggle(Settings.DrawPlayerHealthBar, "Draw Player Health");
+                    Settings.DrawPlayerHealthBar = GUILayout.Toggle(Settings.DrawPlayerHealthBar, "Draw Player Health Bar");
+                    Settings.DrawPlayerHealth = GUILayout.Toggle(Settings.DrawPlayerHealth, "Draw Player Health");
+                    Settings.DrawPlayerSkeleton = GUILayout.Toggle(Settings.DrawPlayerSkeleton, "Draw Player Skeleton");
+                    Settings.DrawPlayerWeapon = GUILayout.Toggle(Settings.DrawPlayerWeapon, "Draw Player Weapon");
+                    Settings.DrawPlayerLevel = GUILayout.Toggle(Settings.DrawPlayerLevel, "Draw Player Level");
+                    Settings.DrawPlayerSkeleton = GUILayout.Toggle(Settings.DrawPlayerSkeleton, "Draw Player Skeleton");
+                    Settings.DrawCorpses = GUILayout.Toggle(Settings.DrawCorpses, "Draw Corpses");
+                    GUILayout.Label($"Player Skeleton Distance {(int)Settings.DrawPlayerSkeletonDistance} m");
+                    Settings.DrawPlayerSkeletonDistance = GUILayout.HorizontalSlider(Settings.DrawPlayerSkeletonDistance, 0f, 2000f);
                     GUILayout.Label($"Player Distance {(int)Settings.DrawPlayersDistance} m");
-                    Settings.DrawPlayersDistance = GUILayout.HorizontalSlider(Settings.DrawPlayersDistance,0f, 2000f);
+                    Settings.DrawPlayersDistance = GUILayout.HorizontalSlider(Settings.DrawPlayersDistance, 0f, 2000f);
+
+                    //Bots / scavs
+                    Settings.DrawBots = GUILayout.Toggle(Settings.DrawBots, "Draw Scavs");
+                    Settings.DrawBotBox = GUILayout.Toggle(Settings.DrawBotBox, "Draw Scav Box");
+                    Settings.DrawBotsName = GUILayout.Toggle(Settings.DrawBotsName, "Draw Scav Name");
+                    Settings.DrawBotLine = GUILayout.Toggle(Settings.DrawBotLine, "Draw Scav Line");
+                    Settings.DrawBotHealthBar = GUILayout.Toggle(Settings.DrawBotHealthBar, "Draw Scav Health Bar");
+                    Settings.DrawBotHealth = GUILayout.Toggle(Settings.DrawBotHealth, "Draw Scav Health");
+                    Settings.DrawBotSkeleton = GUILayout.Toggle(Settings.DrawBotSkeleton, "Draw Scav Skeleton");
+                    GUILayout.Label($"Scav Skeleton Distance {(int)Settings.DrawBotSkeletonDistance} m");
+                    Settings.DrawBotSkeletonDistance = GUILayout.HorizontalSlider(Settings.DrawBotSkeletonDistance, 0f, 2000f);
+                    GUILayout.Label($"Scav Distance {(int)Settings.DrawBotDistance} m");
+                    Settings.DrawBotDistance = GUILayout.HorizontalSlider(Settings.DrawBotDistance, 0f, 2000f);
                     break;
 
                 case 2:

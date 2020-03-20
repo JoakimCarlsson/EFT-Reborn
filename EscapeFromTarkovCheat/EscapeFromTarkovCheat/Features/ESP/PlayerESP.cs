@@ -25,38 +25,7 @@ namespace EFT.HideOut
             {
                 if (Settings.DrawPlayers && GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive && Main.MainCamera != null)
                 {
-                    foreach (GamePlayer player in Main.GamePlayers)
-                    {
-                        if (!player.IsOnScreen || player.Distance > Settings.DrawPlayersDistance || player.Player == Main.LocalPlayer)
-                            continue;
-
-
-                        if (Settings.DrawPlayerBox && GameUtils.IsPlayerAlive(player.Player))
-                        {
-                            DrawBox(player);
-                        }
-
-                        if (Settings.DrawPlayerHealthBar)
-                        {
-                            DrawHealthBar(player);
-                        }
-
-
-                        if (Settings.DrawPlayerName)
-                        {
-                            DrawName(player);
-                        }
-
-                        if (Settings.DrawPlayerLine && GameUtils.IsPlayerAlive(player.Player))
-                        {
-                            DrawSnapLine(player);
-                        }
-
-                        if (Settings.DrawPlayerSkeleton && GameUtils.IsPlayerAlive(player.Player) && player.Distance < 100f)
-                        {
-                            DrawSkeleton(player);
-                        }
-                    }
+                    
                 }
             }
             catch
@@ -164,6 +133,21 @@ namespace EFT.HideOut
             Render.DrawLine(new Vector2(plrKneeVect.x, Screen.height - plrKneeVect.y), new Vector2(pelvis.x, Screen.height - pelvis.y), 1.5f, Color.white);
             Render.DrawLine(new Vector2(pllKneeVect.x, Screen.height - pllKneeVect.y), new Vector2(leftFoot.x, Screen.height - leftFoot.y), 1.5f, Color.white);
             Render.DrawLine(new Vector2(plrKneeVect.x, Screen.height - plrKneeVect.y), new Vector2(rightFoot.x, Screen.height - rightFoot.y), 1.5f, Color.white);
+        }
+
+        private static void DrawPlayerWeapon(GamePlayer player)
+        {
+
+        }
+
+        private static void DrawPlayerLevel(GamePlayer player)
+        {
+
+        }
+
+        private static void DrawPlayerHealthNumber(GamePlayer player)
+        {
+
         }
     }
 }
