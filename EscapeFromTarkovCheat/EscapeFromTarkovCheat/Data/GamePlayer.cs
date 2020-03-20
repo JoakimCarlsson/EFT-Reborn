@@ -11,9 +11,9 @@ namespace EFT.HideOut
 
         public Player Player { get; }
 
-        public Vector3 ScreenPosition => screenPosition;
+        public Vector3 ScreenPosition => _screenPosition;
 
-        public Vector3 HeadScreenPosition => headScreenPosition;
+        public Vector3 HeadScreenPosition => _headScreenPosition;
 
         public bool IsOnScreen { get; private set; }
 
@@ -25,8 +25,19 @@ namespace EFT.HideOut
 
         public string FormattedDistance => $"{(int)Math.Round(Distance)}m";
 
-        private Vector3 screenPosition;
-        private Vector3 headScreenPosition;
+        private Vector3 _screenPosition;
+        private Vector3 _headScreenPosition;
+
+
+
+        public enum PlayerType
+        {
+            Scav,
+            PlayerScav,
+            Player,
+            TeamMate,
+            Boss
+        }
 
         public GamePlayer(Player player)
         {
@@ -34,8 +45,8 @@ namespace EFT.HideOut
                 throw new ArgumentNullException(nameof(player));
 
             Player = player;
-            screenPosition = default;
-            headScreenPosition = default;
+            _screenPosition = default;
+            _headScreenPosition = default;
             IsOnScreen = false;
             Distance = 0f;
             IsAI = true;
@@ -47,12 +58,12 @@ namespace EFT.HideOut
             if (!GameUtils.IsPlayerValid(Player))
                 return;
 
-            screenPosition = GameUtils.WorldPointToScreenPoint(Player.Transform.position);
+            _screenPosition = GameUtils.WorldPointToScreenPoint(Player.Transform.position);
 
             if (Player.PlayerBones != null)
-                headScreenPosition = GameUtils.WorldPointToScreenPoint(Player.PlayerBones.Head.position);
+                _headScreenPosition = GameUtils.WorldPointToScreenPoint(Player.PlayerBones.Head.position);
 
-            IsOnScreen = GameUtils.IsScreenPointVisible(screenPosition);
+            IsOnScreen = GameUtils.IsScreenPointVisible(_screenPosition);
             Distance = Vector3.Distance(Main.MainCamera.transform.position, Player.Transform.position);
             IsVisible = IsVisibles();
             Fov = GetFov();
@@ -79,7 +90,7 @@ namespace EFT.HideOut
         {
             Vector3 myPos = Main.MainCamera.transform.position;
             Vector3 forward = Main.MainCamera.transform.forward;
-            Vector3 normalized = (Player.Transform.position - myPos).normalized;
+            Vector3 normalized = (GameUtils.GetBonePosByID(Player, Settings.AimBotBone) - myPos).normalized;
             return Mathf.Acos(Mathf.Clamp(Vector3.Dot(forward, normalized), -1f, 1f)) * 57.29578f;
         }
     }

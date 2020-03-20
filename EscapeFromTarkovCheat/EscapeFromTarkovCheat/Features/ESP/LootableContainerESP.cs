@@ -94,7 +94,10 @@ namespace EFT.HideOut
                             x -= 20;
                         }
                     }
-                    Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, LootableContainerColor);
+                    else
+                    {
+                         Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, LootableContainerColor);
+                    }
                 }
 
             }
