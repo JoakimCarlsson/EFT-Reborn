@@ -43,7 +43,8 @@ namespace EFT.HideOut
 
         //misc
         internal static bool DoorUnlocker = true;
-        internal static bool MaxSkills = true;
+        internal static bool InfiniteStamina = true;
+        internal static bool MaxSkills = false;
         internal static bool NoVisor = true;
         internal static bool ThermalVison = false;
 

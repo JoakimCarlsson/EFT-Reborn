@@ -107,6 +107,7 @@ namespace EFT.HideOut
 
                 case 4:
                     Settings.MaxSkills = GUILayout.Toggle(Settings.MaxSkills, "Max Skills");
+                    Settings.InfiniteStamina = GUILayout.Toggle(Settings.InfiniteStamina, "Infinite Stamina");
                     Settings.DoorUnlocker = GUILayout.Toggle(Settings.DoorUnlocker, "Door Unlocker. (F8)");
                     Settings.NoVisor = GUILayout.Toggle(Settings.NoVisor, "No Visor");
                     Settings.ThermalVison = GUILayout.Toggle(Settings.ThermalVison, "Thermal Vison");
