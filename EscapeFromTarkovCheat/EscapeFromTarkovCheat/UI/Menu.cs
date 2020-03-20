@@ -79,7 +79,7 @@ namespace EFT.HideOut
                     Settings.DrawPlayerBox = GUILayout.Toggle(Settings.DrawPlayerBox, "Draw Player Box");
                     Settings.DrawPlayerName = GUILayout.Toggle(Settings.DrawPlayerName, "Draw Player Name");
                     Settings.DrawPlayerLine = GUILayout.Toggle(Settings.DrawPlayerLine, "Draw Player Line");
-                    Settings.DrawPlayerHealth = GUILayout.Toggle(Settings.DrawPlayerHealth, "Draw Player Health");
+                    Settings.DrawPlayerHealthBar = GUILayout.Toggle(Settings.DrawPlayerHealthBar, "Draw Player Health");
                     GUILayout.Label($"Player Distance {(int)Settings.DrawPlayersDistance} m");
                     Settings.DrawPlayersDistance = GUILayout.HorizontalSlider(Settings.DrawPlayersDistance,0f, 2000f);
                     break;
