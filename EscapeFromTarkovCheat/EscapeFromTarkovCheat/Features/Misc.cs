@@ -33,10 +33,22 @@ namespace EFT.HideOut
                     ThermalVison();
                     //Teleport();
                     HotKeys();
+                    InfiniteStamina();
                 }
             }
             catch
             {
+            }
+        }
+
+        private void InfiniteStamina()
+        {
+            if (Settings.InfiniteStamina && Main.LocalPlayer != null && Main.MainCamera != null)
+            {
+                Main.LocalPlayer.Physical.StaminaRestoreRate = 10000f;
+                Main.LocalPlayer.Physical.Stamina.Current = 100f;
+                Main.LocalPlayer.Physical.HandsRestoreRate = 1000f;
+                Main.LocalPlayer.Physical.HandsStamina.Current = 100f;
             }
         }
 
@@ -159,7 +171,7 @@ namespace EFT.HideOut
 
             if (Settings.NoRecoil)
             {
-                  Main.LocalPlayer.ProceduralWeaponAnimation.Shootingg.Intensity = 0f;
+                Main.LocalPlayer.ProceduralWeaponAnimation.Shootingg.Intensity = 0f;
             }
             else
             {
@@ -234,13 +246,39 @@ namespace EFT.HideOut
 
         private void MaxStats()
         {
-            if (Settings.MaxSkills && Main.LocalPlayer != null && Main.MainCamera != null)
+            try
             {
-                Main.LocalPlayer.Physical.StaminaRestoreRate = 10000f;
-                Main.LocalPlayer.Physical.Stamina.Current = 100f;
-                Main.LocalPlayer.Physical.HandsRestoreRate = 1000f;
-                Main.LocalPlayer.Physical.HandsStamina.Current = 1000f;
-                Main.LocalPlayer.Physical.CapacityBuff = 1000f;
+                //if (_oldLevels.Count == 0)
+                //{
+                //    _oldLevels = Main.LocalPlayer.Skills.Skills.ToList();
+                //}
+
+                if (Settings.MaxSkills && Main.LocalPlayer != null && Main.MainCamera != null)
+                {
+                    foreach (var skill in Main.LocalPlayer.Skills.Skills)
+                    {
+                        if (skill.Level == 51)
+                            continue;
+                        skill.SetLevel(51);
+                    }
+                }
+                //else if (!Settings.MaxSkills && Main.LocalPlayer != null && Main.MainCamera != null)
+                //{
+                //    foreach (var skill in Main.LocalPlayer.Skills.Skills)
+                //    {
+                //        foreach (var oldLevel in _oldLevels)
+                //        {
+                //            if (skill == oldLevel)
+                //            {
+                //                skill.SetLevel(oldLevel.Level);
+                //            }
+                //        }
+                //    }
+                //}
+            }
+            catch
+            {
+                
             }
         }
     }

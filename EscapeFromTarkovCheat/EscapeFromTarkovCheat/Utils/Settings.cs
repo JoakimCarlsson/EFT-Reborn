@@ -42,8 +42,9 @@ namespace EFT.HideOut
         internal static float AimbotFOV = 10f;
 
         //misc
+        internal static bool InfiniteStamina = true;
         internal static bool DoorUnlocker = true;
-        internal static bool MaxSkills = true;
+        internal static bool MaxSkills = false;
         internal static bool NoVisor = true;
         internal static bool ThermalVison = false;
         internal static bool SpeedHack = true;
