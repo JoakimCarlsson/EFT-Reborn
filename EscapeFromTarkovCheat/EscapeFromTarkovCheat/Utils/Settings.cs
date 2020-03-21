@@ -18,11 +18,29 @@ namespace EFT.HideOut
         //players
         internal static bool DrawPlayers = true;
         internal static bool DrawPlayerName = true;
+        internal static bool DrawPlayerHealthBar = false;
         internal static bool DrawPlayerHealth = false;
         internal static bool DrawPlayerBox = true;
         internal static bool DrawPlayerLine = true;
         internal static bool DrawPlayerSkeleton = true;
-        internal static float DrawPlayersDistance = 200f;
+        internal static bool DrawPlayerWeapon = true;
+        internal static bool DrawPlayerLevel = true;
+        internal static bool DrawPlayerDistance = true;
+        internal static float DrawPlayersRange = 200f;
+        internal static float DrawPlayerSkeletonDistance = 100f;
+        internal static bool DrawPlayerCorpses = true;
+        internal static bool DrawScavCorpses = true;
+        internal static bool DrawScavs = true;
+        internal static bool DrawScavName = true;
+        internal static bool DrawScavWeapon = true;
+        internal static bool DrawScavDistance = true;
+        internal static bool DrawScavHealth = false;
+        internal static bool DrawScavBox = true;
+        internal static bool DrawScavHealthBar = false;
+        internal static bool DrawScavLine = false;
+        internal static bool DrawScavSkeleton = false;
+        internal static float DrawScavSkeletonDistance = 100f;
+        internal static float DrawScavRange = 200f;
 
 
         //misc visuals

@@ -78,9 +78,6 @@ namespace EFT.HideOut
 
                             foreach (Player player in FindObjectsOfType<Player>())
                             {
-                                if ((Vector3.Distance(MainCamera.transform.position, player.Transform.position) >
-                                     Settings.DrawPlayersDistance))
-                                    continue;
                                 GamePlayers.Add(new GamePlayer(player));
                             }
 
@@ -97,6 +94,12 @@ namespace EFT.HideOut
                 
             }
 
+        }
+
+        internal static bool ShouldUpdate()
+        {
+            //We don't need this many checks.
+            return GameScene.IsLoaded() && GameScene.InMatch() && LocalPlayer != null && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive && MainCamera != null;
         }
     }
 }
