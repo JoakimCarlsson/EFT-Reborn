@@ -14,7 +14,7 @@ namespace EFT.HideOut
     public class PlayerESP : MonoBehaviour
     {
         private static readonly Color _playerColor = Color.green;
-        private static readonly Color _playerScavColor = Color.blue;
+        private static readonly Color _playerScavColor = new Color(241, 0, 35, 1);
         private static readonly Color _deadPlayerColor = Color.gray;
         private static readonly Color _botColor = Color.yellow;
         private static readonly Color _healthColor = Color.green;
@@ -28,18 +28,118 @@ namespace EFT.HideOut
                     return;
 
                 if (Settings.DrawPlayers)
-                {
                     DrawPlayers();
-                }
 
                 if (Settings.DrawScavs)
-                {
                     DrawScavs();
-                }
             }
             catch
             {
 
+            }
+        }
+
+        private static void DrawPlayers()
+        {
+            foreach (GamePlayer player in Main.GamePlayers)
+            {
+                if (!player.IsOnScreen || player.Distance > Settings.DrawPlayersRange || player.Player.IsYourPlayer() || player.IsAI)
+                    continue;
+
+                Color playerColor;
+                string playerTextLabel1 = string.Empty;
+                string playerTextLabel2 = string.Empty;
+
+                playerColor = player.Player.Profile.Info.Side == EPlayerSide.Savage ? _playerScavColor : _playerColor;
+
+                if (!GameUtils.IsPlayerAlive(player.Player))
+                {
+                    playerColor = _deadPlayerColor;
+                }
+
+                float boxPositionY = (player.HeadScreenPosition.y - 10f);
+                float boxHeight = (Math.Abs(player.HeadScreenPosition.y - player.ScreenPosition.y) + 10f);
+                float boxWidth = (boxHeight * 0.65f);
+
+                if (Settings.DrawPlayerName && GameUtils.IsPlayerAlive(player.Player))
+                {
+                    playerTextLabel1 = $"{player.Player.Profile.Info.Nickname} ]";
+                }
+
+                if (Settings.DrawPlayerCorpses && !GameUtils.IsPlayerAlive(player.Player))
+                {
+                    playerTextLabel1 = "* Dead * ";
+                }
+
+                if (Settings.DrawPlayerDistance && GameUtils.IsPlayerAlive(player.Player))
+                {
+                    playerTextLabel1 += $" [{player.FormattedDistance}] ";
+                }
+
+                if (Settings.DrawPlayerHealth && GameUtils.IsPlayerAlive(player.Player))
+                {
+                    float currentPlayerHealth =
+                        player.Player.HealthController.GetBodyPartHealth(EBodyPart.Common).Current;
+                    playerTextLabel1 += $"[HP: {(int)currentPlayerHealth}]";
+                }
+
+                if (Settings.DrawPlayerWeapon && GameUtils.IsPlayerAlive(player.Player))
+                {
+                    var weapon = player.Player.Weapon.GetRootItem();
+                    string weaponName = weapon.ShortName.Localized();
+
+                    var mag = weapon?.GetCurrentMagazine();
+
+                    if (mag != null)
+                    {
+                        playerTextLabel2 = $"{weaponName} {mag.Count}/{mag.MaxCount} ";
+                    }
+                }
+
+                if (Settings.DrawPlayerLevel && GameUtils.IsPlayerAlive(player.Player))
+                {
+                    playerTextLabel2 += $"Lvl: {player.Player.Profile.Info.Level}";
+                }
+
+                var playerTextVectorLabel1 = GUI.skin.GetStyle(playerTextLabel1).CalcSize(new GUIContent(playerTextLabel1));
+                var playerTextVectorLabel2 = GUI.skin.GetStyle(playerTextLabel2).CalcSize(new GUIContent(playerTextLabel2));
+                Vector3 boundingVector = Camera.main.WorldToScreenPoint(player.Player.Transform.position);
+                var playerHeadVector = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.Head.position);
+                float boxVectorY = playerHeadVector.y + 10f;
+
+                if (playerTextLabel1 != "")
+                {
+                    Render.DrawLabel(
+                        new Rect(boundingVector.x - playerTextVectorLabel1.x / 2f, Screen.height - boxVectorY - 20f,
+                            300f, 50f), playerTextLabel1, playerColor);
+                }
+
+                if (playerTextLabel2 != "")
+                {
+                    Render.DrawLabel(
+                        new Rect(boundingVector.x - playerTextVectorLabel2.x / 2f, Screen.height - boundingVector.y,
+                            300f, 50f), playerTextLabel2, playerColor);
+                }
+
+                if (Settings.DrawPlayerLine && GameUtils.IsPlayerAlive(player.Player))
+                {
+                    DrawSnapLine(player);
+                }
+
+                if (Settings.DrawScavSkeleton && GameUtils.IsPlayerAlive(player.Player) && player.Distance < Settings.DrawScavSkeletonDistance)
+                {
+                    DrawSkeleton(player);
+                }
+
+                if (Settings.DrawPlayerBox && GameUtils.IsPlayerAlive(player.Player))
+                {
+                    Render.DrawBox((player.ScreenPosition.x - (boxWidth / 2f)), boxPositionY, boxWidth, boxHeight, playerColor);
+                }
+
+                if (Settings.DrawPlayerHealthBar && GameUtils.IsPlayerAlive(player.Player))
+                {
+                    DrawHealthBar(player, boxHeight, boxWidth, boxPositionY);
+                }
             }
         }
 
@@ -115,12 +215,12 @@ namespace EFT.HideOut
 
                 if (playerTextLabel1 != "")
                 {
-                     Render.DrawLabel(new Rect(boundingVector.x - playerTextVectorLabel1.x / 2f, Screen.height - boxVectorY - 20f, 300f, 50f), playerTextLabel1, playerColor);
+                    Render.DrawLabel(new Rect(boundingVector.x - playerTextVectorLabel1.x / 2f, Screen.height - boxVectorY - 20f, 300f, 50f), playerTextLabel1, playerColor);
                 }
 
                 if (playerTextLabel2 != "")
                 {
-                     Render.DrawLabel(new Rect(boundingVector.x - playerTextVectorLabel2.x / 2f, Screen.height - boundingVector.y , 300f, 50f), playerTextLabel2, playerColor);
+                    Render.DrawLabel(new Rect(boundingVector.x - playerTextVectorLabel2.x / 2f, Screen.height - boundingVector.y, 300f, 50f), playerTextLabel2, playerColor);
                 }
 
                 if (Settings.DrawScavLine && GameUtils.IsPlayerAlive(player.Player))
@@ -198,110 +298,6 @@ namespace EFT.HideOut
                 Aimbot.IsVisible(GameUtils.GetBonePosByID(player.Player, 132)) ? Color.green : Color.red);
         }
 
-        private static void DrawPlayers()
-        {
-            foreach (GamePlayer player in Main.GamePlayers)
-            {
-                if (!player.IsOnScreen || player.Distance > Settings.DrawPlayersRange || player.Player.IsYourPlayer() || player.IsAI)
-                    continue;
 
-                Color playerColor;
-                string playerTextLabel1 = string.Empty;
-                string playerTextLabel2 = string.Empty;
-
-                playerColor = player.Player.Profile.Info.Side == EPlayerSide.Savage ? _playerScavColor : _playerColor;
-
-                if (!GameUtils.IsPlayerAlive(player.Player))
-                {
-                    playerColor = _deadPlayerColor;
-                }
-
-
-                float boxPositionY = (player.HeadScreenPosition.y - 10f);
-                float boxHeight = (Math.Abs(player.HeadScreenPosition.y - player.ScreenPosition.y) + 10f);
-                float boxWidth = (boxHeight * 0.65f);
-
-                if (Settings.DrawPlayerName && GameUtils.IsPlayerAlive(player.Player))
-                {
-                    playerTextLabel1 = $"{player.Player.Profile.Info.Nickname} [{player.FormattedDistance}]";
-                }
-
-                if (Settings.DrawPlayerCorpses && !GameUtils.IsPlayerAlive(player.Player))
-                {
-                    playerTextLabel1 = "* Dead * ";
-                }
-
-                if (Settings.DrawPlayerDistance && GameUtils.IsPlayerAlive(player.Player)) 
-                {
-                    playerTextLabel1 += $"[{player.FormattedDistance}] ";
-                }
-
-                if (Settings.DrawPlayerHealth && GameUtils.IsPlayerAlive(player.Player))
-                {
-                    float currentPlayerHealth =
-                        player.Player.HealthController.GetBodyPartHealth(EBodyPart.Common).Current;
-                    playerTextLabel1 += $"[HP: {(int) currentPlayerHealth}]";
-                }
-
-                if (Settings.DrawPlayerWeapon && GameUtils.IsPlayerAlive(player.Player))
-                {
-                    var weapon = player.Player.Weapon.GetRootItem();
-                    string weaponName = weapon.ShortName.Localized();
-
-                    var mag = weapon?.GetCurrentMagazine();
-
-                    if (mag != null)
-                    {
-                        playerTextLabel2 = $"{weaponName} {mag.Count}/{mag.MaxCount} ";
-                    }
-                }
-
-                if (Settings.DrawPlayerLevel && GameUtils.IsPlayerAlive(player.Player))
-                {
-                    playerTextLabel2 += $"Lvl: {player.Player.Profile.Info.Level}";
-                }
-
-                var playerTextVectorLabel1 = GUI.skin.GetStyle(playerTextLabel1).CalcSize(new GUIContent(playerTextLabel1));
-                var playerTextVectorLabel2 = GUI.skin.GetStyle(playerTextLabel2).CalcSize(new GUIContent(playerTextLabel2));
-                Vector3 boundingVector = Camera.main.WorldToScreenPoint(player.Player.Transform.position);
-                var playerHeadVector = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.Head.position);
-                float boxVectorY = playerHeadVector.y + 10f;
-
-                if (playerTextLabel1 != "")
-                {
-                    Render.DrawLabel(
-                        new Rect(boundingVector.x - playerTextVectorLabel1.x / 2f, Screen.height - boxVectorY - 20f,
-                            300f, 50f), playerTextLabel1, playerColor);
-                }
-
-                if (playerTextLabel2 != "")
-                {
-                    Render.DrawLabel(
-                        new Rect(boundingVector.x - playerTextVectorLabel2.x / 2f, Screen.height - boundingVector.y,
-                            300f, 50f), playerTextLabel2, playerColor);
-                }
-
-                if (Settings.DrawPlayerLine && GameUtils.IsPlayerAlive(player.Player))
-                {
-                    DrawSnapLine(player);
-                }
-
-                if (Settings.DrawScavSkeleton && GameUtils.IsPlayerAlive(player.Player) && player.Distance < Settings.DrawScavSkeletonDistance)
-                {
-                    DrawSkeleton(player);
-                }
-
-                if (Settings.DrawPlayerBox && GameUtils.IsPlayerAlive(player.Player))
-                {
-                    Render.DrawBox((player.ScreenPosition.x - (boxWidth / 2f)), boxPositionY, boxWidth, boxHeight, playerColor);
-                }
-
-                if (Settings.DrawPlayerHealthBar && GameUtils.IsPlayerAlive(player.Player))
-                {
-                    DrawHealthBar(player, boxHeight, boxWidth, boxPositionY);
-                }
-            }
-        }
     }
 }
-

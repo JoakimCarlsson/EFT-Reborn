@@ -90,7 +90,7 @@ namespace EFT.HideOut
                     Settings.DrawPlayerSkeletonDistance = GUILayout.HorizontalSlider(Settings.DrawPlayerSkeletonDistance, 0f, 2000f);
                     GUILayout.Label($"Player Distance {(int)Settings.DrawPlayersRange} m");
                     Settings.DrawPlayersRange = GUILayout.HorizontalSlider(Settings.DrawPlayersRange, 0f, 2000f);
-                   
+
                     GUILayout.Label("");
                     GUILayout.Label("Scavs");
                     Settings.DrawScavs = GUILayout.Toggle(Settings.DrawScavs, "Draw Scavs");
