@@ -135,6 +135,7 @@ namespace EFT.HideOut
                     Settings.AimbotFOV = GUILayout.HorizontalSlider(Settings.AimbotFOV, 0f, 180);
                     GUILayout.Label($"Aimbot Distance {Settings.AimBotDistance} m");
                     Settings.AimBotDistance = (int)GUILayout.HorizontalSlider(Settings.AimBotDistance, 0, 1000);
+
                     break;
 
                 case 4:
@@ -158,6 +159,13 @@ namespace EFT.HideOut
                     break;
             }
             GUI.DragWindow();
+            //if (GUILayout.Button("Aimlock Key: " + Settings.AimbotKey))
+            //    Settings.AimbotKey = KeyCode.None;
+            //if (Settings.AimbotKey == KeyCode.None)
+            //{
+            //    Event e = Event.current;
+            //    Settings.AimbotKey = e.keyCode;
+            //}
         }
     }
 }
