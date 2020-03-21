@@ -67,7 +67,7 @@ namespace EFT.HideOut
         {
             try
             {
-                if (Settings.DrawPlayers && GameScene.IsLoaded() && GameScene.InMatch() && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive && LocalPlayer != null)
+                if (ShouldUpdate())
                 {
                     if (Time.time >= _nextPlayerCacheTime)
                     {

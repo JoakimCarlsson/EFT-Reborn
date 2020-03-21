@@ -97,7 +97,7 @@ namespace EFT.HideOut
         {
             try
             {
-                if (Settings.DrawLootItems)
+                if (Settings.DrawLootItems && (GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && (Main.GameWorld.ExfiltrationController.ExfiltrationPoints != null)) && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive && Main.MainCamera != null)
                 {
                     foreach (var item in _gameLootItems)
                     {
@@ -137,19 +137,19 @@ namespace EFT.HideOut
             }
             catch
             {
-                
+
             }
         }
 
         public bool IsSpecialLootItem(LootItem lootItem)
         {
-                if ((lootItem == null) || (lootItem.Item == null))
-                    return false;
+            if ((lootItem == null) || (lootItem.Item == null))
+                return false;
 
-                string formattedLootItemName = lootItem.Item.Name.Localized();
-                string formattedLootItemShortName = lootItem.Item.ShortName.Localized();
+            string formattedLootItemName = lootItem.Item.Name.Localized();
+            string formattedLootItemShortName = lootItem.Item.ShortName.Localized();
 
-                return SpecialLootItems.Contains(formattedLootItemName) || SpecialLootItems.Contains(formattedLootItemShortName);
+            return SpecialLootItems.Contains(formattedLootItemName) || SpecialLootItems.Contains(formattedLootItemShortName);
 
         }
     }

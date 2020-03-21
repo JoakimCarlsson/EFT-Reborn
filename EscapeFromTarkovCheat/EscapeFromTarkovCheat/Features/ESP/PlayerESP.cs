@@ -43,7 +43,10 @@ namespace EFT.HideOut
         {
             foreach (GamePlayer player in Main.GamePlayers)
             {
-                if (!player.IsOnScreen || player.Distance > Settings.DrawPlayersRange || player.Player.IsYourPlayer() || player.IsAI)
+                if (!player.IsOnScreen || player.Player.IsYourPlayer() || player.IsAI)
+                    continue;
+
+                if (player.Distance > Settings.DrawPlayersRange)
                     continue;
 
                 Color playerColor;
@@ -71,7 +74,7 @@ namespace EFT.HideOut
                     playerTextLabel1 = "* Dead * ";
                 }
 
-                if (Settings.DrawPlayerDistance && GameUtils.IsPlayerAlive(player.Player))
+                if (Settings.DrawPlayerDistance)
                 {
                     playerTextLabel1 += $" [{player.FormattedDistance}] ";
                 }
@@ -126,7 +129,7 @@ namespace EFT.HideOut
                     DrawSnapLine(player);
                 }
 
-                if (Settings.DrawScavSkeleton && GameUtils.IsPlayerAlive(player.Player) && player.Distance < Settings.DrawScavSkeletonDistance)
+                if (Settings.DrawPlayerSkeleton && GameUtils.IsPlayerAlive(player.Player) && player.Distance < Settings.DrawPlayerSkeletonDistance)
                 {
                     DrawSkeleton(player);
                 }
@@ -153,7 +156,9 @@ namespace EFT.HideOut
                 string playerTextLabel1 = string.Empty;
                 string playerTextLabel2 = string.Empty;
 
-                Color playerColor = _botColor;
+                Color playerColor;
+
+                playerColor = player.Player.Profile.Info.Settings.IsBoss() ? _bossColor : _botColor;
 
                 if (!GameUtils.IsPlayerAlive(player.Player))
                 {
@@ -184,7 +189,7 @@ namespace EFT.HideOut
                     playerColor = _deadPlayerColor;
                 }
 
-                if (Settings.DrawScavDistance && GameUtils.IsPlayerAlive(player.Player))
+                if (Settings.DrawScavDistance)
                 {
                     playerTextLabel1 += $"[{player.FormattedDistance}] ";
                 }
