@@ -88,14 +88,20 @@ namespace EFT.HideOut
 
                 if (Settings.DrawPlayerWeapon && GameUtils.IsPlayerAlive(player.Player))
                 {
-                    var weapon = player.Player.Weapon.GetRootItem();
-                    string weaponName = weapon.ShortName.Localized();
-
-                    var mag = weapon?.GetCurrentMagazine();
-
-                    if (mag != null)
+                    try
                     {
-                        playerTextLabel2 = $"{weaponName} {mag.Count}/{mag.MaxCount} ";
+                        var weapon = player.Player.Weapon.GetRootItem();
+                        string weaponName = weapon.ShortName.Localized();
+                        var mag = weapon?.GetCurrentMagazine();
+
+                        if (mag != null)
+                        {
+                            playerTextLabel2 = $"{weaponName} {mag.Count}/{mag.MaxCount} ";
+                        }
+                    }
+                    catch
+                    {
+                        playerTextLabel2 = $"Unkown Weapon ";
                     }
                 }
 
@@ -202,13 +208,20 @@ namespace EFT.HideOut
 
                 if (Settings.DrawScavWeapon && GameUtils.IsPlayerAlive(player.Player))
                 {
-                    var weapon = player.Player.Weapon;
-                    string weaponName = weapon.Template.Name.Localized();
-                    var mag = weapon?.GetCurrentMagazine();
-
-                    if (mag != null)
+                    try
                     {
-                        playerTextLabel2 = $"{weaponName} {mag.Count}/{mag.MaxCount}";
+                        var weapon = player.Player.Weapon.GetRootItem();
+                        string weaponName = weapon.ShortName.Localized();
+                        var mag = weapon?.GetCurrentMagazine();
+
+                        if (mag != null)
+                        {
+                            playerTextLabel2 = $"{weaponName} {mag.Count}/{mag.MaxCount} ";
+                        }
+                    }
+                    catch
+                    {
+                        playerTextLabel2 = $"Unkown Weapon ";
                     }
                 }
 
