@@ -54,7 +54,7 @@ namespace EFT.HideOut
 
             try
             {
-                if (Settings.DrawExfiltrationPoints)
+                if (Settings.DrawExfiltrationPoints && (GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && (Main.GameWorld.ExfiltrationController.ExfiltrationPoints != null)) && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive && Main.MainCamera != null)
                 {
                     foreach (var exfiltrationPoint in _gameExfiltrationPoints)
                     {

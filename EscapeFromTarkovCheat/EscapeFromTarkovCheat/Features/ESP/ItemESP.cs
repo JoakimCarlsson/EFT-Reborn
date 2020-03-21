@@ -97,7 +97,7 @@ namespace EFT.HideOut
         {
             try
             {
-                if (Settings.DrawLootItems)
+                if (Settings.DrawLootItems && (GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && (Main.GameWorld.ExfiltrationController.ExfiltrationPoints != null)) && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive && Main.MainCamera != null)
                 {
                     foreach (var item in _gameLootItems)
                     {

@@ -61,40 +61,45 @@ namespace EFT.HideOut
                 if (!Settings.DrawLootableContainers)
                     return;
                 int x = -20;
-                foreach (var gameLootContainer in _gameLootContainers)
+
+                if (Settings.DrawLootableContainers && (GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && (Main.GameWorld.ExfiltrationController.ExfiltrationPoints != null)) && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive && Main.MainCamera != null)
                 {
-                    if (!GameUtils.IsLootableContainerValid(gameLootContainer.LootableContainer) || !gameLootContainer.IsOnScreen || gameLootContainer.Distance > Settings.DrawLootableContainersDistance)
-                        continue;
 
-                    EFT.InventoryLogic.Item item = gameLootContainer.LootableContainer.ItemOwner.RootItem;
-
-                    if (!Settings.DrawEmptyContainers)
+                    foreach (var gameLootContainer in _gameLootContainers)
                     {
-                        if (item.GetAllItems().Count() == 1)
+                        if (!GameUtils.IsLootableContainerValid(gameLootContainer.LootableContainer) || !gameLootContainer.IsOnScreen || gameLootContainer.Distance > Settings.DrawLootableContainersDistance)
                             continue;
-                    }
 
-                    string lootItemName = item.Name.Localized();
+                        EFT.InventoryLogic.Item item = gameLootContainer.LootableContainer.ItemOwner.RootItem;
 
-                    if (Settings.DrawContainersContent)
-                    {
-                        foreach (var allItem in item.GetAllItems())
+                        if (!Settings.DrawEmptyContainers)
                         {
-                            if (item.GetAllItems().First() == allItem)
-                            {
-                                lootItemName = $"{allItem.Name.Localized()} [{gameLootContainer.FormattedDistance}]";
-                                LootableContainerColor = new Color(1f, 0.2f, 0.09f);
-                            }
-                            else
-                            {
-                                lootItemName = allItem.Name.Localized();
-                                LootableContainerColor = Color.white;
-                            }
-                            Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, LootableContainerColor);
-                            x -= 20;
+                            if (item.GetAllItems().Count() == 1)
+                                continue;
                         }
+
+                        string lootItemName = item.Name.Localized();
+
+                        if (Settings.DrawContainersContent)
+                        {
+                            foreach (var allItem in item.GetAllItems())
+                            {
+                                if (item.GetAllItems().First() == allItem)
+                                {
+                                    lootItemName = $"{allItem.Name.Localized()} [{gameLootContainer.FormattedDistance}]";
+                                    LootableContainerColor = new Color(1f, 0.2f, 0.09f);
+                                }
+                                else
+                                {
+                                    lootItemName = allItem.Name.Localized();
+                                    LootableContainerColor = Color.white;
+                                }
+                                Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, LootableContainerColor);
+                                x -= 20;
+                            }
+                        }
+                        Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, LootableContainerColor);
                     }
-                    Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, LootableContainerColor);
                 }
 
             }
