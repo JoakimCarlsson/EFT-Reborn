@@ -12,6 +12,7 @@ namespace EFT.HideOut
         private Rect _aimbotVisualWindow;
         private Rect _miscFeatureslVisualWindow;
         private Rect _weaponVisualWindow;
+        private Rect _hotKeysVisualWindow;
 
         private bool _visible = false;
 
@@ -20,6 +21,7 @@ namespace EFT.HideOut
         private bool _aimbotVisualVisible;
         private bool _miscFeatureslVisible;
         private bool _weaponFeatureslVisible;
+        private bool _hotKeysVisualVisible;
 
         private string watermark = "Reborn";
 
@@ -34,11 +36,12 @@ namespace EFT.HideOut
             _aimbotVisualWindow = new Rect(20f, 260f, 250f, 150f);
             _miscFeatureslVisualWindow = new Rect(20f, 260f, 250f, 150f);
             _weaponVisualWindow = new Rect(20f, 260f, 250f, 150f);
+            _hotKeysVisualWindow = new Rect(20f, 260f, 250f, 150f);
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Insert))
+            if (Input.GetKeyDown(Settings.ToggleMenu))
                 _visible = !_visible;
         }
 
@@ -60,6 +63,8 @@ namespace EFT.HideOut
                 _miscFeatureslVisualWindow = GUILayout.Window(4, _miscFeatureslVisualWindow, RenderUi, "Misc");
             if (_weaponFeatureslVisible)
                 _weaponVisualWindow = GUILayout.Window(5, _weaponVisualWindow, RenderUi, "Weapon");
+            if (_hotKeysVisualVisible)
+                _hotKeysVisualWindow = GUILayout.Window(6, _hotKeysVisualWindow, RenderUi, "Hot Keys");
         }
 
         private void RenderUi(int id)
@@ -68,7 +73,7 @@ namespace EFT.HideOut
             switch (id)
             {
                 case 0:
-                    GUILayout.Label("Insert For Menu");
+                    GUILayout.Label($"{Settings.ToggleMenu} For Menu");
                     if (GUILayout.Button("Player Visual"))
                         _playerEspVisualVisible = !_playerEspVisualVisible;
                     if (GUILayout.Button("Misc Visual"))
@@ -79,10 +84,12 @@ namespace EFT.HideOut
                         _miscFeatureslVisible = !_miscFeatureslVisible;
                     if (GUILayout.Button("Weapon Shit"))
                         _weaponFeatureslVisible = !_weaponFeatureslVisible;
+                    if (GUILayout.Button("HotKeys"))
+                        _hotKeysVisualVisible = !_hotKeysVisualVisible;
                     break;
 
                 case 1:
-                    Settings.DrawPlayers = GUILayout.Toggle(Settings.DrawPlayers, "Draw Players (F1)");
+                    Settings.DrawPlayers = GUILayout.Toggle(Settings.DrawPlayers, $"Draw Players {Settings.TogglePlayerESP}");
                     Settings.DrawPlayerBox = GUILayout.Toggle(Settings.DrawPlayerBox, "Draw Player Box");
                     Settings.DrawPlayerName = GUILayout.Toggle(Settings.DrawPlayerName, "Draw Player Name");
                     Settings.DrawPlayerDistance = GUILayout.Toggle(Settings.DrawPlayerDistance, "Draw Player Distance");
@@ -117,15 +124,15 @@ namespace EFT.HideOut
                     break;
 
                 case 2:
-                    Settings.DrawLootItems = GUILayout.Toggle(Settings.DrawLootItems, "Draw Loot Items (F2)");
+                    Settings.DrawLootItems = GUILayout.Toggle(Settings.DrawLootItems, $"Draw Loot Items {Settings.ToggleItemESP}");
                     GUILayout.Label($"Loot Item Distance {(int)Settings.DrawLootItemsDistance} m");
                     Settings.DrawLootItemsDistance = GUILayout.HorizontalSlider(Settings.DrawLootItemsDistance, 0f, 1000f);
-                    Settings.DrawLootableContainers = GUILayout.Toggle(Settings.DrawLootableContainers, "Draw Containers (F4)");
+                    Settings.DrawLootableContainers = GUILayout.Toggle(Settings.DrawLootableContainers, $"Draw Containers {Settings.ToggleLootableContainerESP}");
                     Settings.DrawContainersContent = GUILayout.Toggle(Settings.DrawContainersContent, "Draw Containers Content");
                     Settings.DrawEmptyContainers = GUILayout.Toggle(Settings.DrawEmptyContainers, "Draw Empty Containers");
                     GUILayout.Label($"Container Distance {(int)Settings.DrawLootableContainersDistance} m");
                     Settings.DrawLootableContainersDistance = GUILayout.HorizontalSlider(Settings.DrawLootableContainersDistance, 0f, 1000f);
-                    Settings.DrawExfiltrationPoints = GUILayout.Toggle(Settings.DrawExfiltrationPoints, "Draw Exits (F6)");
+                    Settings.DrawExfiltrationPoints = GUILayout.Toggle(Settings.DrawExfiltrationPoints, $"Draw Exits {Settings.ToggleExitPoints}");
                     break;
 
                 case 3:
@@ -135,16 +142,18 @@ namespace EFT.HideOut
                     Settings.AimbotFOV = GUILayout.HorizontalSlider(Settings.AimbotFOV, 0f, 180);
                     GUILayout.Label($"Aimbot Distance {Settings.AimBotDistance} m");
                     Settings.AimBotDistance = (int)GUILayout.HorizontalSlider(Settings.AimBotDistance, 0, 1000);
+                    if (GUILayout.Button("Aimbot Key: " + Settings.AimbotKey))
+                        Settings.AimbotKey = KeyCode.None;
 
                     break;
 
                 case 4:
                     Settings.MaxSkills = GUILayout.Toggle(Settings.MaxSkills, "Max Skills");
                     Settings.InfiniteStamina = GUILayout.Toggle(Settings.InfiniteStamina, "Infinite Stamina");
-                    Settings.DoorUnlocker = GUILayout.Toggle(Settings.DoorUnlocker, "Door Unlocker. (F8)");
+                    Settings.DoorUnlocker = GUILayout.Toggle(Settings.DoorUnlocker, $"Door Unlocker. {Settings.DoorUnlocker}");
                     Settings.NoVisor = GUILayout.Toggle(Settings.NoVisor, "No Visor");
                     Settings.ThermalVison = GUILayout.Toggle(Settings.ThermalVison, "Thermal Vison");
-                    Settings.SpeedHack = GUILayout.Toggle(Settings.SpeedHack, $"Speedhack {Settings.SpeedValue} (F7)");
+                    Settings.SpeedHack = GUILayout.Toggle(Settings.SpeedHack, $"Speedhack {Settings.SpeedValue} {Settings.ToggleSpeedHack}");
                     Settings.SpeedValue = GUILayout.HorizontalSlider(Settings.SpeedValue, 1f, 3);
                     break;
                 case 5:
@@ -157,15 +166,73 @@ namespace EFT.HideOut
                     Settings.SuperBullet = GUILayout.Toggle(Settings.SuperBullet, "Super Bullet");
                     Settings.NoSway = GUILayout.Toggle(Settings.NoSway, "No Sway");
                     break;
+
+                case 6:
+                    if (GUILayout.Button("Toogle Menu: " + Settings.ToggleMenu))
+                        Settings.ToggleMenu = KeyCode.None;
+                    if (GUILayout.Button("Player ESP: " + Settings.TogglePlayerESP))
+                        Settings.TogglePlayerESP = KeyCode.None;
+                    if (GUILayout.Button("Item ESP: " + Settings.ToggleItemESP))
+                        Settings.ToggleItemESP = KeyCode.None;
+                    if (GUILayout.Button("Item ESP Cycles: " + Settings.ItemCategory))
+                        Settings.ItemCategory = KeyCode.None;
+                    if (GUILayout.Button("Lootable Container: " + Settings.ToggleLootableContainerESP))
+                        Settings.ToggleLootableContainerESP = KeyCode.None;
+                    if (GUILayout.Button("Exit Points: " + Settings.ToggleExitPoints))
+                        Settings.ToggleExitPoints = KeyCode.None;
+                    if (GUILayout.Button("Speed Hack: " + Settings.ToggleSpeedHack))
+                        Settings.ToggleSpeedHack = KeyCode.None;
+                    if (GUILayout.Button("Unlock Doors: " + Settings.UnlockDoors))
+                        Settings.UnlockDoors = KeyCode.None;
+                    break;
             }
             GUI.DragWindow();
-            //if (GUILayout.Button("Aimlock Key: " + Settings.AimbotKey))
-            //    Settings.AimbotKey = KeyCode.None;
-            //if (Settings.AimbotKey == KeyCode.None)
-            //{
-            //    Event e = Event.current;
-            //    Settings.AimbotKey = e.keyCode;
-            //}
+
+            if (Settings.AimbotKey == KeyCode.None)
+            {
+                Event e = Event.current;
+                Settings.AimbotKey = e.keyCode;
+            }
+            if (Settings.TogglePlayerESP == KeyCode.None)
+            {
+                Event e = Event.current;
+                Settings.TogglePlayerESP = e.keyCode;
+            }
+            if (Settings.ToggleMenu == KeyCode.None)
+            {
+                Event e = Event.current;
+                Settings.ToggleMenu = e.keyCode;
+            }
+            if (Settings.ToggleItemESP == KeyCode.None)
+            {
+                Event e = Event.current;
+                Settings.ToggleItemESP = e.keyCode;
+            }
+            if (Settings.ItemCategory == KeyCode.None)
+            {
+                Event e = Event.current;
+                Settings.ItemCategory = e.keyCode;
+            }
+            if (Settings.ToggleLootableContainerESP == KeyCode.None)
+            {
+                Event e = Event.current;
+                Settings.ToggleLootableContainerESP = e.keyCode;
+            }
+            if (Settings.ToggleExitPoints == KeyCode.None)
+            {
+                Event e = Event.current;
+                Settings.ToggleExitPoints = e.keyCode;
+            }
+            if (Settings.ToggleSpeedHack == KeyCode.None)
+            {
+                Event e = Event.current;
+                Settings.ToggleSpeedHack = e.keyCode;
+            }
+            if (Settings.UnlockDoors == KeyCode.None)
+            {
+                Event e = Event.current;
+                Settings.UnlockDoors = e.keyCode;
+            }
         }
     }
 }

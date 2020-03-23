@@ -54,16 +54,15 @@ namespace EFT.HideOut
 
         private void HotKeys()
         {
-            if (Input.GetKeyDown(KeyCode.F1))
+            if (Input.GetKeyDown(Settings.TogglePlayerESP))
                 Settings.DrawPlayers = !Settings.DrawPlayers;
-
-            if (Input.GetKeyDown(KeyCode.F2))
+            if (Input.GetKeyDown(Settings.ToggleItemESP))
                 Settings.DrawLootItems = !Settings.DrawLootItems;
-            if (Input.GetKeyDown(KeyCode.F4))
+            if (Input.GetKeyDown(Settings.ToggleLootableContainerESP))
                 Settings.DrawLootableContainers = !Settings.DrawLootableContainers;
-            if (Input.GetKeyDown(KeyCode.F6))
+            if (Input.GetKeyDown(Settings.ToggleExitPoints))
                 Settings.DrawExfiltrationPoints = !Settings.DrawExfiltrationPoints;
-            if (Input.GetKeyDown(KeyCode.F7))
+            if (Input.GetKeyDown(Settings.ToggleSpeedHack))
                 Settings.SpeedHack = !Settings.SpeedHack;
         }
 
