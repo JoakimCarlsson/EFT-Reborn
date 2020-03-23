@@ -11,7 +11,12 @@ namespace EFT.HideOut
     class Settings
     {
         //Keybinds
+        internal static KeyCode ToggleMenu = KeyCode.Insert;
+        internal static KeyCode TogglePlayerESP = KeyCode.F1;
+        internal static KeyCode ToggleItemESP = KeyCode.F2;
         internal static KeyCode ItemCategory = KeyCode.F3;
+        internal static KeyCode ToggleLootableContainerESP = KeyCode.F4;
+        internal static KeyCode ToggleExitPoints = KeyCode.F6;
         internal static KeyCode UnlockDoors = KeyCode.F8;
         internal static KeyCode AimbotKey = KeyCode.LeftControl;
 
