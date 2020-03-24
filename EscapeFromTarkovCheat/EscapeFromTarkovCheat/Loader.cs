@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
 #if DEBUG
         public class Loader
@@ -24,8 +24,8 @@ namespace EFT.HideOut
 
     public class Loader : MonoBehaviour
     {
-        public GameObject HookObject;
-        public void Load()
+        public static GameObject HookObject;
+        public static void Load()
         {
             HookObject = new GameObject();
             HookObject.AddComponent<Main>();

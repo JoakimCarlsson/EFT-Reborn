@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
     [ExecuteInEditMode]
     [RequireComponent(typeof(Renderer))]

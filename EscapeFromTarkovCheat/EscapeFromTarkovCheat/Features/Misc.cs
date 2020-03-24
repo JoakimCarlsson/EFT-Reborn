@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BSG.CameraEffects;
-using EFT.HideOut;
+using EFT.Reborn;
 using EFT.Interactive;
 using EFT.InventoryLogic;
 using UnityEngine;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
     class Misc : MonoBehaviour
     {

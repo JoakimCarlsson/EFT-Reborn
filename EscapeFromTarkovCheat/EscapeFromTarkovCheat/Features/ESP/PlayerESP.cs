@@ -7,7 +7,7 @@ using EFT.Interactive;
 using EFT.UI;
 using UnityEngine;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
 
 

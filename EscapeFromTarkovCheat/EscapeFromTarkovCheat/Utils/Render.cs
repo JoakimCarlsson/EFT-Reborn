@@ -5,7 +5,7 @@
 
 using UnityEngine;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
     public static class Render
     {

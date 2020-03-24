@@ -9,7 +9,7 @@ using EFT.UI;
 using JsonType;
 using UnityEngine;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
     class Aimbot : MonoBehaviour
     {

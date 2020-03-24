@@ -8,7 +8,7 @@ using EFT.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
     class Main : MonoBehaviour
     {

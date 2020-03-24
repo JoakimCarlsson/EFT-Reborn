@@ -6,7 +6,7 @@ using UnityEngine;
 
 //Credits myshmeh
 //https://github.com/myshmeh/AllocConsole-for-Unity
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
     public static class AllocConsoleHandler
     {

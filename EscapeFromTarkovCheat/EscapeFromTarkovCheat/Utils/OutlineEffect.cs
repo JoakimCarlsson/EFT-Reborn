@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Rendering;
 using UnityEngine.VR;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Camera))]

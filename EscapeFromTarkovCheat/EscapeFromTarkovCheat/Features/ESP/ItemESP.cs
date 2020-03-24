@@ -8,7 +8,7 @@ using EFT.UI;
 using JsonType;
 using UnityEngine;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
     public class ItemESP : MonoBehaviour
     {
