@@ -36,6 +36,8 @@ namespace EFT.HideOut
         internal static KeyCode ToggleSpeedHack = KeyCode.F7;
         internal static KeyCode UnlockDoors = KeyCode.F8;
         internal static KeyCode AimbotKey = KeyCode.LeftControl;
+        internal static KeyCode ToggleThermalVison = KeyCode.F9;
+
 
         //players
         internal static bool DrawPlayers = true;

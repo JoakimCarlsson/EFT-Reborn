@@ -31,7 +31,6 @@ namespace EFT.HideOut
                     SpeedHack();
                     PrepareHud();
                     ThermalVison();
-                    //Teleport();
                     HotKeys();
                     InfiniteStamina();
                 }
@@ -64,15 +63,9 @@ namespace EFT.HideOut
                 Settings.DrawExfiltrationPoints = !Settings.DrawExfiltrationPoints;
             if (Input.GetKeyDown(Settings.ToggleSpeedHack))
                 Settings.SpeedHack = !Settings.SpeedHack;
+            if (Input.GetKeyDown(Settings.ToggleThermalVison))
+                Settings.ThermalVison = !Settings.ThermalVison;
         }
-
-        //private void Teleport()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.UpArrow))
-        //    {
-        //        Main.LocalPlayer.Transform.position += Main.MainCamera.transform.forward * 0.5f;
-        //    }
-        //}
 
         private void SuperWeapon()
         {

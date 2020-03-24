@@ -68,8 +68,6 @@
     <Compile Include="UI\Menu.cs" />
     <Compile Include="Utils\AllocConsoleHandler.cs" />
     <Compile Include="Utils\GameUtils.cs" />
-    <Compile Include="Utils\Outline.cs" />
-    <Compile Include="Utils\OutlineEffect.cs" />
     <Compile Include="Utils\Render.cs" />
     <Compile Include="Utils\Settings.cs" />
   </ItemGroup>
