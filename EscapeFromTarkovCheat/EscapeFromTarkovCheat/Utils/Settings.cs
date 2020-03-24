@@ -19,12 +19,12 @@ namespace EFT.HideOut
         internal static Color LootableContainerColor = new Color(1f, 0.2f, 0.09f);
         internal static Color ExfiltrationPointColour = Color.green;
 
-        internal static Color PlayerColor = Color.green;
-        internal static Color PlayerScavColor = new Color(241, 0, 35, 1);
-        internal static Color DeadPlayerColor = Color.gray;
-        internal static Color BotColor = new Color(1, 1, 0, 1);
-        internal static Color HealthColor = Color.green;
-        internal static Color BossColor = Color.red;
+        internal static Color PlayerColor = new Color(0f, 0.7f, 0f, 1f);
+        internal static Color PlayerScavColor = new Color(1, 0.5f, 0, 1);
+        internal static Color DeadPlayerColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+        internal static Color BotColor = new Color(1, 1, 0, 1f);
+        internal static Color HealthColor = new Color(0f, 0.7f,0f, 1f);
+        internal static Color BossColor = new Color(0.7f, 0f,0f,1f);
 
         //Keybinds
         internal static KeyCode ToggleMenu = KeyCode.Insert;
