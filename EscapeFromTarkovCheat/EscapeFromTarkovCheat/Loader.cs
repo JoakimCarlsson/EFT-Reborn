@@ -1,4 +1,4 @@
-﻿using EFT.HideOut;
+﻿using EFT.Reborn;
 using UnityEngine;
 
 namespace EFT.Reborn
@@ -23,10 +23,10 @@ namespace EFT.Reborn
     }
 #else
 
-    public class Loader
+    public class Loader : MonoBehaviour
     {
-        public GameObject HookObject;
-        public void Load()
+        public static GameObject HookObject;
+        public static void Load()
         {
             HookObject = new GameObject();
             HookObject.AddComponent<Main>();

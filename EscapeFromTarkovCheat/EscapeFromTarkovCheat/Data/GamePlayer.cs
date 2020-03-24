@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using EFT;
 using UnityEngine;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
 
     public class GamePlayer

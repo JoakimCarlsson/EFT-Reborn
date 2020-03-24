@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
     class GameScene
     {

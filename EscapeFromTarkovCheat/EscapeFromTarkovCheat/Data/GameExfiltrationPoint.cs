@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using EFT.Interactive;
 using UnityEngine;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
     class GameExfiltrationPoint
     {

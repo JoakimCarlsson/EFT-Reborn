@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
     public class Menu : MonoBehaviour
     {
