@@ -15,11 +15,7 @@ namespace EFT.HideOut
         private static readonly float CacheLootItemsInterval = 1.5f;
         private float _nextLootItemCacheTime;
 
-        private static readonly Color SpecialColor = new Color(1f, 0.2f, 0.09f);
-        private static readonly Color QuestColor = Color.yellow;
-        private static readonly Color CommonColor = Color.white;
-        private static readonly Color RareColor = new Color(0.38f, 0.43f, 1f);
-        private static readonly Color SuperRareColor = new Color(1f, 0.29f, 0.36f);
+
 
         private List<GameLootItem> _gameLootItems = new List<GameLootItem>();
         public static List<string> SpecialLootItems;
@@ -106,16 +102,16 @@ namespace EFT.HideOut
 
                         bool isSpecialLootItem = IsSpecialLootItem(item.LootItem);
 
-                        Color lootItemColor = CommonColor;
+                        Color lootItemColor = Settings.CommonColor;
 
                         if (isSpecialLootItem)
-                            lootItemColor = SpecialColor;
+                            lootItemColor = Settings.SpecialColor;
                         else if (item.LootItem.Item.QuestItem)
-                            lootItemColor = QuestColor;
+                            lootItemColor = Settings.QuestColor;
                         else if (item.LootItem.Item.Template.Rarity == ELootRarity.Rare)
-                            lootItemColor = RareColor;
+                            lootItemColor = Settings.RareColor;
                         else if (item.LootItem.Item.Template.Rarity == ELootRarity.Superrare)
-                            lootItemColor = SuperRareColor;
+                            lootItemColor = Settings.SuperRareColor;
 
                         string lootItemName = $"{item.LootItem.Item.ShortName.Localized()} [{item.FormattedDistance}]";
 

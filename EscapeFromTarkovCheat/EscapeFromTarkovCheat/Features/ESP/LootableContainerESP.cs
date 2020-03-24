@@ -15,7 +15,6 @@ namespace EFT.HideOut
         private static readonly float CacheLootItemsInterval = 1.5f;
         private float _nextLootContainerCacheTime;
         private List<GameLootContainer> _gameLootContainers;
-        private static Color LootableContainerColor = new Color(1f, 0.2f, 0.09f);
 
         public void Start()
         {
@@ -87,18 +86,21 @@ namespace EFT.HideOut
                                 if (item.GetAllItems().First() == allItem)
                                 {
                                     lootItemName = $"{allItem.Name.Localized()} [{gameLootContainer.FormattedDistance}]";
-                                    LootableContainerColor = new Color(1f, 0.2f, 0.09f);
+                                    Settings.LootableContainerColor = new Color(1f, 0.2f, 0.09f);
                                 }
                                 else
                                 {
                                     lootItemName = allItem.Name.Localized();
-                                    LootableContainerColor = Color.white;
+                                    Settings.LootableContainerColor = Color.white;
                                 }
-                                Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, LootableContainerColor);
+                                Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, Settings.LootableContainerColor);
                                 x -= 20;
                             }
                         }
-                        Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, LootableContainerColor);
+                        else
+                        {
+                            Render.DrawString(new Vector2(gameLootContainer.ScreenPosition.x, gameLootContainer.ScreenPosition.y - x), lootItemName, Settings.LootableContainerColor);
+                        }
                     }
                 }
 

@@ -15,13 +15,12 @@ namespace EFT.HideOut
         private static readonly float CacheExfiltrationPointInterval = 1.5f;
         private float _nextLootItemCacheTime;
 
-        private static readonly Color ExfiltrationPointColour = Color.green;
 
         public void FixedUpdate()
         {
             try
             {
-                if (!Settings.DrawExfiltrationPoints)
+                if (!Settings.DrawExfiltrationPoints || !Main.ShouldUpdate())
                     return;
 
                 if (Time.time >= _nextLootItemCacheTime)
@@ -74,16 +73,20 @@ namespace EFT.HideOut
 
             try
             {
-                if (Settings.DrawExfiltrationPoints && (GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && (Main.GameWorld.ExfiltrationController.ExfiltrationPoints != null)) && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive && Main.MainCamera != null)
+                if (Main.ShouldUpdate())
                 {
                     foreach (var exfiltrationPoint in _gameExfiltrationPoints)
                     {
-                        if (!GameUtils.IsExfiltrationPointValid(exfiltrationPoint.ExfiltrationPoint) || !exfiltrationPoint.IsOnScreen)
+                        if (!GameUtils.IsExfiltrationPointValid(exfiltrationPoint.ExfiltrationPoint) ||
+                            !exfiltrationPoint.IsOnScreen)
                             continue;
 
-                        string exfiltrationPointText = $"{exfiltrationPoint.ExfiltrationPoint.Settings.Name} [{exfiltrationPoint.FormattedDistance}]";
+                        string exfiltrationPointText =
+                            $"{exfiltrationPoint.ExfiltrationPoint.Settings.Name} [{exfiltrationPoint.FormattedDistance}]";
 
-                        Render.DrawString(new Vector2(exfiltrationPoint.ScreenPosition.x - 50f, exfiltrationPoint.ScreenPosition.y), exfiltrationPointText, ExfiltrationPointColour);
+                        Render.DrawString(
+                            new Vector2(exfiltrationPoint.ScreenPosition.x - 50f, exfiltrationPoint.ScreenPosition.y),
+                            exfiltrationPointText, Settings.ExfiltrationPointColour);
                     }
                 }
             }

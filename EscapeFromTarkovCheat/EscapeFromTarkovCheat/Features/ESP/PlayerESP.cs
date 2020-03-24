@@ -13,12 +13,7 @@ namespace EFT.HideOut
 
     public class PlayerESP : MonoBehaviour
     {
-        private static readonly Color _playerColor = Color.green;
-        private static readonly Color _playerScavColor = new Color(241, 0, 35, 1);
-        private static readonly Color _deadPlayerColor = Color.gray;
-        private static readonly Color _botColor = Color.yellow;
-        private static readonly Color _healthColor = Color.green;
-        private static readonly Color _bossColor = Color.red;
+
 
         public void OnGUI()
         {
@@ -53,11 +48,11 @@ namespace EFT.HideOut
                 string playerTextLabel1 = string.Empty;
                 string playerTextLabel2 = string.Empty;
 
-                playerColor = player.Player.Profile.Info.Side == EPlayerSide.Savage ? _playerScavColor : _playerColor;
+                playerColor = player.Player.Profile.Info.Side == EPlayerSide.Savage ? Settings.PlayerScavColor : Settings.PlayerColor;
 
                 if (!GameUtils.IsPlayerAlive(player.Player))
                 {
-                    playerColor = _deadPlayerColor;
+                    playerColor = Settings.DeadPlayerColor;
                 }
 
                 float boxPositionY = (player.HeadScreenPosition.y - 10f);
@@ -112,7 +107,7 @@ namespace EFT.HideOut
 
                 var playerTextVectorLabel1 = GUI.skin.GetStyle(playerTextLabel1).CalcSize(new GUIContent(playerTextLabel1));
                 var playerTextVectorLabel2 = GUI.skin.GetStyle(playerTextLabel2).CalcSize(new GUIContent(playerTextLabel2));
-                Vector3 boundingVector = Main.MainCamera.WorldToScreenPoint(player.Player.Transform.position);
+                Vector3 boundingVector = Camera.main.WorldToScreenPoint(player.Player.Transform.position);
                 var playerHeadVector = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.Head.position);
                 float boxVectorY = playerHeadVector.y + 10f;
 
@@ -164,11 +159,11 @@ namespace EFT.HideOut
 
                 Color playerColor;
 
-                playerColor = player.Player.Profile.Info.Settings.IsBoss() ? _bossColor : _botColor;
+                playerColor = player.Player.Profile.Info.Settings.IsBoss() ? Settings.BossColor : Settings.BotColor;
 
                 if (!GameUtils.IsPlayerAlive(player.Player))
                 {
-                    playerColor = _deadPlayerColor;
+                    playerColor = Settings.DeadPlayerColor;
                 }
 
                 float boxPositionY = (player.HeadScreenPosition.y - 10f);
@@ -180,19 +175,19 @@ namespace EFT.HideOut
                     if (player.Player.Profile.Info.Settings.IsBoss())
                     {
                         playerTextLabel1 = $"Boss ";
-                        playerColor = _bossColor;
+                        playerColor = Settings.BossColor;
                     }
                     else
                     {
                         playerTextLabel1 = "Bot ";
-                        playerColor = _botColor;
+                        playerColor = Settings.BotColor;
                     }
                 }
 
                 if (Settings.DrawScavCorpses && !GameUtils.IsPlayerAlive(player.Player))
                 {
                     playerTextLabel1 = "* Dead *";
-                    playerColor = _deadPlayerColor;
+                    playerColor = Settings.DeadPlayerColor;
                 }
 
                 if (Settings.DrawScavDistance)
@@ -227,7 +222,7 @@ namespace EFT.HideOut
 
                 var playerTextVectorLabel1 = GUI.skin.GetStyle(playerTextLabel1).CalcSize(new GUIContent(playerTextLabel1));
                 var playerTextVectorLabel2 = GUI.skin.GetStyle(playerTextLabel2).CalcSize(new GUIContent(playerTextLabel2));
-                Vector3 boundingVector = Main.MainCamera.WorldToScreenPoint(player.Player.Transform.position);
+                Vector3 boundingVector = Camera.main.WorldToScreenPoint(player.Player.Transform.position);
                 var playerHeadVector = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.Head.position);
                 float boxVectorY = playerHeadVector.y + 10f;
 
@@ -269,7 +264,7 @@ namespace EFT.HideOut
             float maximumPlayerHealth = player.Player.HealthController.GetBodyPartHealth(EBodyPart.Common).Maximum;
 
             float healthBarHeight = GameUtils.Map(currentPlayerHealth, 0f, maximumPlayerHealth, 0f, boxHeight);
-            Render.DrawLine(new Vector2((player.ScreenPosition.x - (boxWidth / 2f) - 3f), (boxPositionY + boxHeight - healthBarHeight)), new Vector2((player.ScreenPosition.x - (boxWidth / 2f) - 3f), (boxPositionY + boxHeight)), 3f, _healthColor);
+            Render.DrawLine(new Vector2((player.ScreenPosition.x - (boxWidth / 2f) - 3f), (boxPositionY + boxHeight - healthBarHeight)), new Vector2((player.ScreenPosition.x - (boxWidth / 2f) - 3f), (boxPositionY + boxHeight)), 3f, Settings.HealthColor);
         }
 
         private static void DrawSkeleton(GamePlayer player)
