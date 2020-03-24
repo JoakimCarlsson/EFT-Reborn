@@ -23,7 +23,7 @@ namespace EFT.Reborn
     }
 #else
 
-    public class Loader : MonoBehaviour
+    public class Loader
     {
         public GameObject HookObject;
         public void Load()
