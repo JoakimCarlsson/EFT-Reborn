@@ -21,6 +21,11 @@ namespace EFT.Reborn
         {
             return lootItem != null;
         }
+
+        public static bool IsFriend(Player player)
+        {
+            return Main.LocalPlayer.Profile.Info.GroupId == player.Profile.Info.GroupId && player.Profile.Info.GroupId != "0" && player.Profile.Info.GroupId != "" && player.Profile.Info.GroupId != null;
+        }
         public static bool IsLootItemValid(LootItem lootItem)
         {
             return lootItem != null && lootItem.Item != null && lootItem.Item.Template != null;

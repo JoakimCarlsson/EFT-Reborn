@@ -48,7 +48,12 @@ namespace EFT.Reborn
                 string playerTextLabel1 = string.Empty;
                 string playerTextLabel2 = string.Empty;
 
-                playerColor = player.Player.Profile.Info.Side == EPlayerSide.Savage ? Settings.PlayerScavColor : Settings.PlayerColor;
+                if (GameUtils.IsFriend(player.Player))
+                    playerColor = Settings.FriendColor;
+                else if (player.Player.Profile.Info.Side == EPlayerSide.Savage)
+                    playerColor = Settings.PlayerScavColor;
+                else
+                    playerColor = Settings.PlayerColor;
 
                 if (!GameUtils.IsPlayerAlive(player.Player))
                 {

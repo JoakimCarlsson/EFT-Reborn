@@ -89,6 +89,9 @@ namespace EFT.Reborn
 
             foreach (var gamePlayer in _targetList)
             {
+                if (GameUtils.IsFriend(gamePlayer.Player))
+                    continue;
+                
                 if (gamePlayer.Distance > Settings.AimBotDistance) //change 300 hot a value ewe store in settings.
                     continue;
 
