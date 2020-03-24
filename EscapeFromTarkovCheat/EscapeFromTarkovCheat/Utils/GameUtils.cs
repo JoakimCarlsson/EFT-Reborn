@@ -30,7 +30,10 @@ namespace EFT.Reborn
         {
             return lootableContainer != null && lootableContainer.Template != null;
         }
-
+        public static bool IsFriend(Player player)
+        {
+            return Main.LocalPlayer.Profile.Info.GroupId == player.Profile.Info.GroupId && player.Profile.Info.GroupId != "0" && player.Profile.Info.GroupId != "" && player.Profile.Info.GroupId != null;
+        }
         public static bool IsPlayerAlive(Player player)
         {
             if (!IsPlayerValid(player))

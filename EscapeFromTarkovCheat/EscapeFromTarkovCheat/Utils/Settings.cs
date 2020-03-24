@@ -25,6 +25,7 @@ namespace EFT.Reborn
         internal static Color BotColor = new Color(1, 1, 0, 1);
         internal static Color HealthColor = Color.green;
         internal static Color BossColor = Color.red;
+        internal static Color FriendColor = Color.magenta;
 
         //Keybinds
         internal static KeyCode ToggleMenu = KeyCode.Insert;
