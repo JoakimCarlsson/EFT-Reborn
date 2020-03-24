@@ -55,6 +55,8 @@ namespace EFT.HideOut
                 Settings.DrawLootableContainers = !Settings.DrawLootableContainers;
             if (Input.GetKeyDown(Settings.ToggleExitPoints))
                 Settings.DrawExfiltrationPoints = !Settings.DrawExfiltrationPoints;
+            if (Input.GetKeyDown(Settings.ToggleThermalVison))
+                Settings.ThermalVison = !Settings.ThermalVison;
         }
         public void OnGUI()
         {

@@ -161,6 +161,8 @@ namespace EFT.HideOut
                         Settings.ToggleExitPoints = KeyCode.None;
                     if (GUILayout.Button("Unlock Doors: " + Settings.UnlockDoors))
                         Settings.UnlockDoors = KeyCode.None;
+                    if (GUILayout.Button("Thermal Vison: " + Settings.ToggleThermalVison))
+                        Settings.ToggleThermalVison = KeyCode.None;
                     break;
 
 
@@ -206,6 +208,11 @@ namespace EFT.HideOut
             {
                 Event e = Event.current;
                 Settings.UnlockDoors = e.keyCode;
+            }
+            if (Settings.ToggleThermalVison == KeyCode.None)
+            {
+                Event e = Event.current;
+                Settings.ToggleThermalVison = e.keyCode;
             }
         }
     }
