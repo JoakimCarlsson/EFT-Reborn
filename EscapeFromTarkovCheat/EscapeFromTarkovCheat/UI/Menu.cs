@@ -33,7 +33,7 @@ namespace EFT.HideOut
             _mainWindow = new Rect(20f, 60f, 250f, 150f);
             _playerVisualWindow = new Rect(20f, 220f, 250f, 150f);
             _miscVisualWindow = new Rect(20f, 260f, 250f, 150f);
-            _aimbotVisualWindow = new Rect(20f, 260f, 250f, 150f);
+            _aimbotVisualWindow = new Rect(20f, 260f, 250, 150f);
             _miscFeatureslVisualWindow = new Rect(20f, 260f, 250f, 150f);
             _weaponVisualWindow = new Rect(20f, 260f, 250f, 150f);
             _hotKeysVisualWindow = new Rect(20f, 260f, 250f, 150f);
@@ -144,7 +144,18 @@ namespace EFT.HideOut
                     Settings.AimBotDistance = (int)GUILayout.HorizontalSlider(Settings.AimBotDistance, 0, 1000);
                     if (GUILayout.Button("Aimbot Key: " + Settings.AimbotKey))
                         Settings.AimbotKey = KeyCode.None;
+                    GUILayout.Space(20);
+                    //GUILayout.BeginHorizontal();
 
+                    //if (GUILayout.Button("Head"))
+                    //    Settings.AimBotBone = 133;
+                    //if (GUILayout.Button("Neck"))
+                    //    Settings.AimBotBone = 132;
+                    //if (GUILayout.Button("Stomach"))
+                    //    Settings.AimBotBone = 66;
+
+
+                    //GUILayout.EndHorizontal();
                     break;
 
                 case 4:

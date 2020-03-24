@@ -50,8 +50,7 @@ namespace EFT.HideOut
 
                         if (_target != null)
                         {
-                            Vector3 aimPos = GameUtils.GetBonePosByID(_target.Player, Settings.AimBotBone);
-
+                            Vector3 aimPos = _target.Player.PlayerBones.Head.position;
                             float travelTime = _target.Distance / Main.LocalPlayer.Weapon.CurrentAmmoTemplate.InitialSpeed;
                             aimPos.x += (_target.Player.Velocity.x * travelTime);
                             aimPos.y += (_target.Player.Velocity.y * travelTime);

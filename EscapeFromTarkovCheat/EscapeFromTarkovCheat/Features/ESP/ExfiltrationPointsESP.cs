@@ -15,7 +15,6 @@ namespace EFT.HideOut
         private static readonly float CacheExfiltrationPointInterval = 1.5f;
         private float _nextLootItemCacheTime;
 
-        private static readonly Color ExfiltrationPointColour = Color.green;
 
         public void FixedUpdate()
         {
@@ -87,7 +86,7 @@ namespace EFT.HideOut
 
                         Render.DrawString(
                             new Vector2(exfiltrationPoint.ScreenPosition.x - 50f, exfiltrationPoint.ScreenPosition.y),
-                            exfiltrationPointText, ExfiltrationPointColour);
+                            exfiltrationPointText, Settings.ExfiltrationPointColour);
                     }
                 }
             }

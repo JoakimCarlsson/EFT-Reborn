@@ -10,6 +10,22 @@ namespace EFT.HideOut
 {
     class Settings
     {
+        //Colours
+        internal static Color SpecialColor = new Color(1f, 0.2f, 0.09f);
+        internal static Color QuestColor = Color.yellow;
+        internal static Color CommonColor = Color.white;
+        internal static Color RareColor = new Color(0.38f, 0.43f, 1f);
+        internal static Color SuperRareColor = new Color(1f, 0.29f, 0.36f);
+        internal static Color LootableContainerColor = new Color(1f, 0.2f, 0.09f);
+        internal static Color ExfiltrationPointColour = Color.green;
+
+        internal static Color PlayerColor = Color.green;
+        internal static Color PlayerScavColor = new Color(241, 0, 35, 1);
+        internal static Color DeadPlayerColor = Color.gray;
+        internal static Color BotColor = new Color(1, 1, 0, 1);
+        internal static Color HealthColor = Color.green;
+        internal static Color BossColor = Color.red;
+
         //Keybinds
         internal static KeyCode ToggleMenu = KeyCode.Insert;
         internal static KeyCode TogglePlayerESP = KeyCode.F1;
@@ -62,7 +78,7 @@ namespace EFT.HideOut
         internal static bool Aimbot = true;
         internal static bool DrawAimbotPoint = true;
         internal static int AimBotDistance = 300;
-        internal static int AimBotBone = 132;
+        internal static int AimBotBone = 66;
         internal static float AimbotFOV = 10f;
 
         //misc
