@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using EFT.HideOut;
+using UnityEngine;
 
-namespace EFT.HideOut
+namespace EFT.Reborn
 {
 #if DEBUG
         public class Loader
