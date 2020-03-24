@@ -25,25 +25,127 @@ namespace EFT.Reborn
         {
             SpecialLootItems = new List<string>
             {
-                "LEDX",
-                "Red",
-                "Paracord",
-                "Keycard",
-                "Virtex",
-                "Defibrillator",
-                "0.2BTC",
-                "Prokill",
-                "Flash drive",
-                "Violet",
-                "Blue",
-                "RB - PSP2",
-                "RB - MP22",
-                "RB - GN",
-                "RR",
-                "T - 7",
-                "Green",
-                "San.301",
-                "Tetriz",
+"LedX",
+"Virtex",
+"VPX",
+"Bitcoin",
+"intelligence",
+"reap-ir",
+"defibulator",
+"opthomalscope",
+"Green keycard",
+"blue keycard",
+"black keycard",
+"red keycard",
+"Ultra medical storage key",
+"11SR keycard",
+"RB-ps81 key",
+"T-7 thermal goggles",
+"RB-GN",
+"RB-MP22",
+"Red Rebel Ice pick",
+"RB-op",
+"RB-PSP2",
+"RB-KSM",
+"RB-KORL",
+"RB-AK",
+"Key to kiba store outlet",
+"RB-RS",
+"RB-OB",
+"RB-ORB2",
+"21ws Keycard",
+"Goshan Cash register key",
+"HEP storage Station",
+"USEC stash on customs key",
+"Shturman key",
+"RB-ST Key",
+"Labs managers office key",
+"Graphics card",
+"2nd to top tier",
+"All Stims",
+"dry fuel - 590a373286f774287540368b",
+"fuel conditioner",
+"Beard oil",
+"klean flame",
+"firesteel",
+"West wing room 219",
+"West wing room 222",
+"West wing room 301",
+"health resort management office safe key",
+"East wing room 313",
+"RB-AO",
+"East wing room 216",
+"Office 112",
+"East wing room 206",
+"military base checkpoint key",
+"Labs acces keycard",
+"East wing room 222",
+"east wing room 226",
+"Factory exit key  ",
+"West Wing Room 218",
+"East wing room 205",
+"West wing room 221 key",
+"RB-RH key",
+"Bitcoin",
+"West wing 216 key",
+"Weapons case",
+"Money case",
+"Documents case",
+"Health resort warehouse safe key",
+"Prokill",
+"West wing room 303 key",
+"Dry fuel",
+"SSD Drive",
+"Items Case",
+"KIBA outlet grate door",
+"RB-AM",
+"RFID",
+"Tetriz",
+"Roler",
+"Military thermal vision module Iridium",
+"Paracord",
+"OFZ 30x160mm shell",
+"Grenade case",
+"Military COFDM wireless Signal Transmitter",
+"SI Advanced receiver extension buffer tube (anodized red)",
+"FLIR RS-32 2.25-9x 35mm 60Hz thermal riflescope",
+"Golden Star Balm",
+"Gold skull ring",
+"Military power filter",
+"Golden 1GPhone",
+"Phased array element",
+"Pressure gauge",
+"Ammo case",
+"6-STEN-140-M military battery",
+"Military circuit board",
+"Analog thermometer",
+"KEKTAPE duct tape",
+"GP coin",
+"Battered antique Book",
+"Golden neck chain",
+"B&T Rotex 2 4.6x30 silencer",
+"Daniel Defence Wave QD Sound Suppressor",
+"Surefire SOCOM556-MONSTER 5.56x45 silencer",
+"Gemtech ONE 7.62x51 Sound Suppressor",
+"Rotor 43 7.62x54 muzzle brake",
+"NIXXOR lens",
+"Broken GPhone X",
+"Bronze lion",
+"Bottle of Dan Jackiel Whiskey",
+"Condensed milk",
+"Military gyrotachometer",
+"Golden rooster",
+"Antique teapot",
+"Pestily plague mask",
+"FP-100 filter absorber",
+"Military cable",
+"Wooden clock",
+"Bottle of vodka Tarkovskaya",
+
+
+
+
+
             };
         }
 
@@ -132,19 +234,19 @@ namespace EFT.Reborn
             }
             catch
             {
-                
+
             }
         }
 
         public bool IsSpecialLootItem(LootItem lootItem)
         {
-                if ((lootItem == null) || (lootItem.Item == null))
-                    return false;
+            if ((lootItem == null) || (lootItem.Item == null))
+                return false;
 
-                string formattedLootItemName = lootItem.Item.Name.Localized();
-                string formattedLootItemShortName = lootItem.Item.ShortName.Localized();
+            string formattedLootItemName = lootItem.Item.Name.Localized();
+            string formattedLootItemShortName = lootItem.Item.ShortName.Localized();
 
-                return SpecialLootItems.Contains(formattedLootItemName) || SpecialLootItems.Contains(formattedLootItemShortName);
+            return SpecialLootItems.Contains(formattedLootItemName) || SpecialLootItems.Contains(formattedLootItemShortName);
 
         }
     }
