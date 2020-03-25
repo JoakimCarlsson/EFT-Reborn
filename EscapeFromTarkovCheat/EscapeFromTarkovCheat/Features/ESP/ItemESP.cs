@@ -146,7 +146,7 @@ namespace EFT.Reborn
 
 
 
-            };
+            }.ConvertAll(x => x.ToLower());
         }
 
         public void FixedUpdate()
@@ -247,7 +247,7 @@ namespace EFT.Reborn
             string formattedLootItemName = lootItem.Item.Name.Localized();
             string formattedLootItemShortName = lootItem.Item.ShortName.Localized();
 
-            return SpecialLootItems.Contains(formattedLootItemName) || SpecialLootItems.Contains(formattedLootItemShortName);
+            return SpecialLootItems.Contains(formattedLootItemName.ToLower()) || SpecialLootItems.Contains(formattedLootItemShortName.ToLower());
 
         }
     }
