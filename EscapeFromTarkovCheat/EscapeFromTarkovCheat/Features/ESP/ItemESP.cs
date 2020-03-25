@@ -146,7 +146,7 @@ namespace EFT.Reborn
 
 
 
-            };
+            }.ConvertAll(x => x.ToLower());
         }
 
         public void FixedUpdate()
@@ -243,11 +243,10 @@ namespace EFT.Reborn
             if ((lootItem == null) || (lootItem.Item == null))
                 return false;
 
-            string formattedLootItemName = lootItem.Item.Name.Localized();
-            string formattedLootItemShortName = lootItem.Item.ShortName.Localized();
+            string formattedLootItemName = lootItem.Item.Name.Localized().ToLower();
+            string formattedLootItemShortName = lootItem.Item.ShortName.Localized().ToLower();
 
             return SpecialLootItems.Contains(formattedLootItemName) || SpecialLootItems.Contains(formattedLootItemShortName);
-
         }
     }
 }
