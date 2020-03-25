@@ -31,6 +31,7 @@ namespace EFT.Reborn
             HookObject.AddComponent<LootableContainerESP>();
             HookObject.AddComponent<ExfiltrationPointsESP>();
             HookObject.AddComponent<Aimbot>();
+            HookObject.AddComponent<GrenadeESP>();
             HookObject.AddComponent<Misc>();
             DontDestroyOnLoad(HookObject);
             GameScene.CurrentGameScene = new Scene();

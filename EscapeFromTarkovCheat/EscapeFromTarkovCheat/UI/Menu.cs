@@ -23,7 +23,7 @@ namespace EFT.Reborn
         private bool _weaponFeatureslVisible;
         private bool _hotKeysVisualVisible;
 
-        private string watermark = "Reborn Elite";
+        private string watermark = "LET ME TEST IN PEACE";
 
         private void Start()
         {
