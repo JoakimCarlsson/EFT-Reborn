@@ -56,7 +56,7 @@ namespace EFT.Reborn
                             aimPos.y += (_target.Player.Velocity.y * travelTime);
 
                             _aimTarget = aimPos;
-                            Vector3 eulerAngles = Quaternion.LookRotation((aimPos - Main.MainCamera.transform.position).normalized).eulerAngles;
+                            Vector3 eulerAngles = Quaternion.LookRotation((aimPos - Main.LocalPlayer.PlayerBones.Fireport.position).normalized).eulerAngles;
 
                             if (eulerAngles.x > 180f)
                                 eulerAngles.x -= 360f;
