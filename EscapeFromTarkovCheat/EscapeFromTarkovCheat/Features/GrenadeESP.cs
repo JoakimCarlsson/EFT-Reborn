@@ -12,14 +12,14 @@ namespace EFT.Reborn
     {
         private List<Throwable> _grenadeList;
         private float _nextCameraCacheTime;
-        private static readonly float _cacheCameraInterval = 0.5f;
+        private static readonly float _cacheCameraInterval = 1.5f;
 
 
         public void FixedUpdate()
         {
             try
             {
-                if (!Main.ShouldUpdate())
+                if (!Main.ShouldUpdate() && !Settings.GrenadeESP)
                     return;
 
                 if (Time.time >= _nextCameraCacheTime && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive)
@@ -40,7 +40,7 @@ namespace EFT.Reborn
         {
             try
             {
-                if (!Main.ShouldUpdate())
+                if (!Main.ShouldUpdate() && !Settings.GrenadeESP)
                     return;
 
                 string text;
@@ -57,8 +57,15 @@ namespace EFT.Reborn
                     Vector3 screenPosition = GameUtils.WorldPointToScreenPoint(throwable.transform.position);
                     text = $"Grenade: {distance}m";
 
-                    Render.DrawBox(screenPosition, new Vector2(10f, 10f),1f, Color.red );
-                    Render.DrawString(new Vector2(screenPosition.x - 50f, screenPosition.y), text, Color.red);
+                    Render.DrawBox(screenPosition, new Vector2(10f, 10f),1f, Settings.SpecialColor );
+                    Render.DrawString(new Vector2(screenPosition.x - 50f, screenPosition.y), text, Settings.SpecialColor);
+
+                    if (distance<10f)
+                    {
+                        var textStyle = new GUIStyle(GUI.skin.label) { fontSize = 25 };
+                        GUI.Label(new Rect(1024, Screen.height - 48, 512, 48), $"Grenade close: {distance}", textStyle);
+                    }
+
                 }
             }
             catch
