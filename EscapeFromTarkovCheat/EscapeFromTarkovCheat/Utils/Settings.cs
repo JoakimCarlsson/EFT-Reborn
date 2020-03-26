@@ -74,6 +74,7 @@ namespace EFT.Reborn
         internal static bool DrawExfiltrationPoints = true;
         internal static bool DrawEmptyContainers = false;
         internal static bool DrawContainersContent = true;
+        internal static bool GrenadeESP = true;
 
         //aimbot
         internal static bool Aimbot = true;

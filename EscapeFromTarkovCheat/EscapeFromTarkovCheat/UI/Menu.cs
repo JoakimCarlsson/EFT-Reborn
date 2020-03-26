@@ -123,6 +123,7 @@ namespace EFT.Reborn
                     Settings.DrawEmptyContainers = GUILayout.Toggle(Settings.DrawEmptyContainers, "Draw Empty Containers");
                     GUILayout.Label($"Container Distance {(int)Settings.DrawLootableContainersDistance} m");
                     Settings.DrawLootableContainersDistance = GUILayout.HorizontalSlider(Settings.DrawLootableContainersDistance, 0f, 1000f);
+                    Settings.GrenadeESP = GUILayout.Toggle(Settings.GrenadeESP, "Grenade ESP");
                     Settings.DrawExfiltrationPoints = GUILayout.Toggle(Settings.DrawExfiltrationPoints, $"Draw Exits {Settings.ToggleExitPoints}");
                     break;
 

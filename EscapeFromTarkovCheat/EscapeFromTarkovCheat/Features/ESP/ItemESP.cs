@@ -26,6 +26,7 @@ namespace EFT.Reborn
             SpecialLootItems = new List<string>
             {
                 "LEDX Skin Transilluminator",
+                "LEDX",
                 "Virtex programmable processor",
                 "VPX Flash Storage Module",
                 "Physical bitcoin",
@@ -37,6 +38,7 @@ namespace EFT.Reborn
                 "Lab. Violet keycard",
                 "Lab. Black keycard",
                 "Lab. Red keycard",
+                "Lab",
                 "ULTRA medical storage key",
                 "Object 11SR keycard",
                 "RB-PS81 key",
