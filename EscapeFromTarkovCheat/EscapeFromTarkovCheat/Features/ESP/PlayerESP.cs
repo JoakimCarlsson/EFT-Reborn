@@ -112,7 +112,7 @@ namespace EFT.Reborn
 
                 var playerTextVectorLabel1 = GUI.skin.GetStyle(playerTextLabel1).CalcSize(new GUIContent(playerTextLabel1));
                 var playerTextVectorLabel2 = GUI.skin.GetStyle(playerTextLabel2).CalcSize(new GUIContent(playerTextLabel2));
-                Vector3 boundingVector = Camera.main.WorldToScreenPoint(player.Player.Transform.position);
+                Vector3 boundingVector = Main.MainCamera.WorldToScreenPoint(player.Player.Transform.position);
                 var playerHeadVector = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.Head.position);
                 float boxVectorY = playerHeadVector.y + 10f;
 
@@ -227,7 +227,7 @@ namespace EFT.Reborn
 
                 var playerTextVectorLabel1 = GUI.skin.GetStyle(playerTextLabel1).CalcSize(new GUIContent(playerTextLabel1));
                 var playerTextVectorLabel2 = GUI.skin.GetStyle(playerTextLabel2).CalcSize(new GUIContent(playerTextLabel2));
-                Vector3 boundingVector = Camera.main.WorldToScreenPoint(player.Player.Transform.position);
+                Vector3 boundingVector = Main.MainCamera.WorldToScreenPoint(player.Player.Transform.position);
                 var playerHeadVector = Main.MainCamera.WorldToScreenPoint(player.Player.PlayerBones.Head.position);
                 float boxVectorY = playerHeadVector.y + 10f;
 

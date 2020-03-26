@@ -19,7 +19,7 @@ namespace EFT.Reborn
         public static GameObject HookObject;
         private float _nextPlayerCacheTime;
         private float _nextCameraCacheTime;
-        private static readonly float _cachePlayersInterval = 5f;
+        private static readonly float _cachePlayersInterval = 1.5f;
         private static readonly float _cacheCameraInterval = 10f;
 
         public void Awake()
@@ -69,7 +69,7 @@ namespace EFT.Reborn
         {
             try
             {
-                if (ShouldUpdate())
+                if (ShouldUpdate() && Settings.DrawPlayers)
                 {
                     if (Time.time >= _nextPlayerCacheTime)
                     {

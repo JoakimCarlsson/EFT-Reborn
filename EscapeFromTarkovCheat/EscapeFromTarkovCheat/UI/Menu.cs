@@ -69,7 +69,7 @@ namespace EFT.Reborn
 
         private void RenderUi(int id)
         {
-            GUI.color = new Color(28,36,33);
+            GUI.color = new Color(28, 36, 33);
             switch (id)
             {
                 case 0:
@@ -86,6 +86,21 @@ namespace EFT.Reborn
                         _weaponFeatureslVisible = !_weaponFeatureslVisible;
                     if (GUILayout.Button("HotKeys"))
                         _hotKeysVisualVisible = !_hotKeysVisualVisible;
+                    if (GUILayout.Button("HotKeys"))
+                    {
+                        //Do Colours here.
+                    }
+                    GUILayout.Space(20);
+                    GUILayout.BeginHorizontal();
+                    if (GUILayout.Button("Save"))
+                    {
+                        //Do Save here
+                    }
+                    if (GUILayout.Button("Load"))
+                    {
+                        //Do Load here
+                    }
+                    GUILayout.EndHorizontal();
                     break;
 
                 case 1:
