@@ -86,21 +86,21 @@ namespace EFT.Reborn
                         _weaponFeatureslVisible = !_weaponFeatureslVisible;
                     if (GUILayout.Button("HotKeys"))
                         _hotKeysVisualVisible = !_hotKeysVisualVisible;
-                    if (GUILayout.Button("HotKeys"))
-                    {
-                        //Do Colours here.
-                    }
-                    GUILayout.Space(20);
-                    GUILayout.BeginHorizontal();
-                    if (GUILayout.Button("Save"))
-                    {
-                        //Do Save here
-                    }
-                    if (GUILayout.Button("Load"))
-                    {
-                        //Do Load here
-                    }
-                    GUILayout.EndHorizontal();
+                    //if (GUILayout.Button("Colors"))
+                    //{
+                    //    //Do Colours here.
+                    //}
+                    //GUILayout.Space(20);
+                    //GUILayout.BeginHorizontal();
+                    //if (GUILayout.Button("Save"))
+                    //{
+                    //    //Do Save here
+                    //}
+                    //if (GUILayout.Button("Load"))
+                    //{
+                    //    //Do Load here
+                    //}
+                    //GUILayout.EndHorizontal();
                     break;
 
                 case 1:
