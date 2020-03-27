@@ -15,29 +15,7 @@ namespace EFT.Reborn
     {
         private IEnumerable<GamePlayer> _targetList;
         private GamePlayer _target;
-        private Vector3 _aimTarget = Vector3.zero;
-
-
-        //public void Update()
-        //{
-        //    try
-        //    {
-        //        if (Main.GameWorld != null && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null)
-        //        {
-        //            if (Settings.Aimbot && Input.GetKey(Settings.AimbotKey))
-        //                Aim();
-
-        //            if (Input.GetKeyUp(Settings.AimbotKey))
-        //                _target = null;
-        //        }
-        //    }
-        //    catch
-        //    {
-
-        //    }
-        //}
-
-        public void OnGUI()
+        public void FixedUpdate()
         {
             try
             {
@@ -55,7 +33,6 @@ namespace EFT.Reborn
                             aimPos.x += (_target.Player.Velocity.x * travelTime);
                             aimPos.y += (_target.Player.Velocity.y * travelTime);
 
-                            _aimTarget = aimPos;
                             Vector3 eulerAngles = Quaternion.LookRotation((aimPos - Main.LocalPlayer.PlayerBones.Fireport.position).normalized).eulerAngles;
 
                             if (eulerAngles.x > 180f)
@@ -67,11 +44,6 @@ namespace EFT.Reborn
                     else
                     {
                         _target = null;
-                    }
-
-                    if (_aimTarget != Vector3.zero && Settings.DrawAimbotPoint)
-                    {
-                        Render.Circle(Main.MainCamera.WorldToScreenPoint(_aimTarget).x, Main.MainCamera.WorldToScreenPoint(_aimTarget).y, 10);
                     }
                 }
             }

@@ -153,7 +153,6 @@ namespace EFT.Reborn
 
                 case 3:
                     Settings.Aimbot = GUILayout.Toggle(Settings.Aimbot, "Aimbot");
-                    Settings.DrawAimbotPoint = GUILayout.Toggle(Settings.DrawAimbotPoint, "Aimbot Point");
                     GUILayout.Label($"Aimbot FOV {(int)Settings.AimbotFOV} m");
                     Settings.AimbotFOV = GUILayout.HorizontalSlider(Settings.AimbotFOV, 0f, 180);
                     GUILayout.Label($"Aimbot Distance {Settings.AimBotDistance} m");

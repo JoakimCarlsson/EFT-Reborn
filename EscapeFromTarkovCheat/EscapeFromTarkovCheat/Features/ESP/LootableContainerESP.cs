@@ -12,7 +12,7 @@ namespace EFT.Reborn
 {
     public class LootableContainerESP : MonoBehaviour
     {
-        private static readonly float CacheLootItemsInterval = 1.5f;
+        private static readonly float CacheLootItemsInterval = 10f;
         private float _nextLootContainerCacheTime;
         private List<GameLootContainer> _gameLootContainers;
 
@@ -34,6 +34,7 @@ namespace EFT.Reborn
                     {
                         _gameLootContainers.Clear();
 
+                        //Get this from the gameworld
                         foreach (LootableContainer lootableContainer in FindObjectsOfType<LootableContainer>())
                         {
                             if (!GameUtils.IsLootableContainerValid(lootableContainer) || (Vector3.Distance(Main.MainCamera.transform.position, lootableContainer.transform.position) > Settings.DrawLootableContainersDistance))

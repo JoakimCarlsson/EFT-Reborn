@@ -80,7 +80,6 @@ namespace EFT.Reborn
 
         //aimboot
         internal static bool Aimbot = true;
-        internal static bool DrawAimbotPoint = true;
         internal static int AimBotDistance = 300;
         internal static int AimBotBone = 66;
         internal static float AimbotFOV = 10f;
