@@ -7,6 +7,8 @@ using EFT.Interactive;
 using EFT.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+
 
 namespace EFT.Reborn
 {
@@ -19,9 +21,9 @@ namespace EFT.Reborn
         public static GameObject HookObject;
         private float _nextPlayerCacheTime;
         private float _nextCameraCacheTime;
-        private static readonly float _cachePlayersInterval = 5f;
+        private static readonly float _cachePlayersInterval = 10f;
         private static readonly float _cacheCameraInterval = 10f;
-
+        private IEnumerator _coroutineUpdateMain;
         public void Awake()
         {
             HookObject = new GameObject();
@@ -31,44 +33,56 @@ namespace EFT.Reborn
             HookObject.AddComponent<LootableContainerESP>();
             HookObject.AddComponent<ExfiltrationPointsESP>();
             HookObject.AddComponent<Aimbot>();
-            HookObject.AddComponent<Misc>();
             HookObject.AddComponent<GrenadeESP>();
+            HookObject.AddComponent<Misc>();
             DontDestroyOnLoad(HookObject);
             GameScene.CurrentGameScene = new Scene();
+
         }
 
-        public void FixedUpdate()
+        public void Start()
         {
-            try
-            {
-                GameScene.GetScene();
-                if (Time.time >= _nextCameraCacheTime && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive)
-                {
-                    GameWorld = Singleton<GameWorld>.Instance;
-                    MainCamera = Camera.main;
-                    _nextCameraCacheTime = (Time.time + _cacheCameraInterval);
+            _coroutineUpdateMain = UpdateMain(10f);
+            StartCoroutine(_coroutineUpdateMain);
+        }
 
-                    foreach (var player in FindObjectsOfType<Player>())
+        public IEnumerator UpdateMain(float waitTime)
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(waitTime);
+                try
+                {
+                    GameScene.GetScene();
+                    if (Time.time >= _nextCameraCacheTime && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive)
                     {
-                        if (player.IsYourPlayer())
+                        GameWorld = Singleton<GameWorld>.Instance;
+                        MainCamera = Camera.main;
+                        _nextCameraCacheTime = (Time.time + _cacheCameraInterval);
+
+                        foreach (var player in GameWorld.RegisteredPlayers)
                         {
-                            LocalPlayer = player;
-                            break;
+                            if (player.IsYourPlayer())
+                            {
+                                LocalPlayer = player;
+                                break;
+                            }
                         }
                     }
                 }
-                UpdatePlayers();
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
-            catch
-            {
-            }
+
         }
 
-        private void UpdatePlayers()
+        private void FixedUpdate()
         {
             try
             {
-                if (ShouldUpdate())
+                if (ShouldUpdate() && Settings.DrawPlayers)
                 {
                     if (Time.time >= _nextPlayerCacheTime)
                     {
@@ -76,7 +90,7 @@ namespace EFT.Reborn
                         {
                             GamePlayers.Clear();
 
-                            foreach (Player player in FindObjectsOfType<Player>())
+                            foreach (Player player in GameWorld.RegisteredPlayers)
                             {
                                 GamePlayers.Add(new GamePlayer(player));
                             }
@@ -89,9 +103,9 @@ namespace EFT.Reborn
                         gamePlayer.RecalculateDynamics();
                 }
             }
-            catch 
+            catch (Exception e)
             {
-                
+                Console.WriteLine(e.Message);
             }
 
         }

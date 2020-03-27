@@ -57,7 +57,7 @@
     <Compile Include="Data\GamePlayer.cs" />
     <Compile Include="Data\GameScene.cs" />
     <Compile Include="Features\Aimbot.cs" />
-    <Compile Include="Features\GrenadeESP.cs" />
+    <Compile Include="Features\ESP\GrenadeESP.cs" />
     <Compile Include="Features\Misc.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Features\ESP\ExfiltrationPointsESP.cs" />

@@ -12,7 +12,7 @@ namespace EFT.Reborn
 {
     public class LootableContainerESP : MonoBehaviour
     {
-        private static readonly float CacheLootItemsInterval = 1.5f;
+        private static readonly float CacheLootItemsInterval = 10f;
         private float _nextLootContainerCacheTime;
         private List<GameLootContainer> _gameLootContainers;
 
