@@ -161,10 +161,9 @@ namespace EFT.Reborn
             if ((lootItem == null) || (lootItem.Item == null))
                 return false;
 
-            string formattedLootItemName = lootItem.Item.Name.Localized();
-            string formattedLootItemShortName = lootItem.Item.ShortName.Localized();
+            string formattedLootItemName = lootItem.Item.TemplateId;
 
-            return SpecialLootItems.Contains(formattedLootItemName.ToLower()) || SpecialLootItems.Contains(formattedLootItemShortName.ToLower());
+            return SpecialLootItems.Contains(formattedLootItemName.ToLower());
 
         }
     }
