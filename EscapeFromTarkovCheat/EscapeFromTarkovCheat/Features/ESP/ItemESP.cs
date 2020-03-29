@@ -84,7 +84,7 @@ namespace EFT.Reborn
 
                         for (int i = 0; i < Main.GameWorld.LootItems.Count; i++)
                         {
-                            LootItem lootItem = Main.GameWorld.LootItems.GetByIndex(i);
+                            var lootItem = Main.GameWorld.LootItems.GetByIndex(i);
 
                             if (!GameUtils.IsLootItemValid(lootItem) || (Vector3.Distance(Main.MainCamera.transform.position, lootItem.transform.position) > Settings.DrawLootItemsDistance))
                                 continue;
@@ -158,10 +158,9 @@ namespace EFT.Reborn
             if ((lootItem == null) || (lootItem.Item == null))
                 return false;
 
-            string formattedLootItemName = lootItem.Item.Name.Localized().ToLower();
-            string formattedLootItemShortName = lootItem.Item.ShortName.Localized().ToLower();
+            string formattedLootItemName = lootItem.Item.TemplateId;
 
-            return SpecialLootItems.Contains(formattedLootItemName) || SpecialLootItems.Contains(formattedLootItemShortName);
+            return Settings._rareItems.Contains(formattedLootItemName);
         }
     }
 }

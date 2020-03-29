@@ -224,7 +224,7 @@ namespace EFT.Reborn
 
                 if (Input.GetKeyDown(Settings.UnlockDoors))
                 {
-                    foreach (var door in FindObjectsOfType<WorldInteractiveObject>())
+                    foreach (var door in FindObjectsOfType<Door>())
                     {
                         if (door.DoorState == EDoorState.Open ||
                             Vector3.Distance(door.transform.position, Main.LocalPlayer.Position) > 20f)

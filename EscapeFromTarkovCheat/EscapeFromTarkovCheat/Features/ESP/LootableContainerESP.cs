@@ -23,6 +23,14 @@ namespace EFT.Reborn
 
         public void FixedUpdate()
         {
+
+            //List<GInterface7>.Enumerator enumerator = Main.GameWorld.LootList.FindAll(container => container is LootableContainer).GetEnumerator();
+            //while (enumerator.MoveNext())
+            //{
+            //    GInterface7 ginterface = enumerator.Current;
+            //    LootableContainer container = ginterface as LootableContainer;
+
+            //}
             try
             {
                 if (!Settings.DrawLootableContainers)
