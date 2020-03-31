@@ -17,8 +17,7 @@ namespace EFT.Reborn
             {
                 if (Main.ShouldUpdate() && Settings.DrawPlayerCorpses)
                 {
-
-                    List<GInterface7>.Enumerator enumerator = Main.GameWorld.LootList.FindAll((GInterface7 item) => item is Corpse).GetEnumerator();
+                    List<GInterface7>.Enumerator enumerator = Main.GameWorld.LootList.FindAll(item => item is Corpse).GetEnumerator();
                     while (enumerator.MoveNext())
                     {
                         Corpse corpse = enumerator.Current as Corpse;
@@ -32,7 +31,8 @@ namespace EFT.Reborn
                                 Vector3 screenPosition = GameUtils.WorldPointToScreenPoint(corpse.transform.position);
                                 if (GameUtils.IsScreenPointVisible(screenPosition))
                                 {
-                                    string txt = $"[Dead {(int)Math.Sqrt(num)}m]";
+                                    //TODO FIX DISTANCE:
+                                    string txt = $"* Dead *  [{num}m]";
                                     GUI.Label(new Rect(screenPosition.x - 50f, screenPosition.y, 200, 60), txt);
                                 }
 
