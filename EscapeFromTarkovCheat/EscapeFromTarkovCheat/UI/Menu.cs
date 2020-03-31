@@ -106,7 +106,6 @@ namespace EFT.Reborn
                     Settings.DrawScavHealthBar = GUILayout.Toggle(Settings.DrawScavHealthBar, "Draw Scav Health Bar");
                     Settings.DrawScavHealth = GUILayout.Toggle(Settings.DrawScavHealth, "Draw Scav Health Number");
                     Settings.DrawScavWeapon = GUILayout.Toggle(Settings.DrawScavWeapon, "Draw Scav Weapon");
-                    Settings.DrawScavCorpses = GUILayout.Toggle(Settings.DrawScavCorpses, "Draw Scav Corpses");
                     Settings.DrawScavSkeleton = GUILayout.Toggle(Settings.DrawScavSkeleton, "Draw Scav Skeleton");
                     GUILayout.Label($"Scav Skeleton Distance {(int)Settings.DrawScavSkeletonDistance} m");
                     Settings.DrawScavSkeletonDistance = GUILayout.HorizontalSlider(Settings.DrawScavSkeletonDistance, 0f, 2000f);

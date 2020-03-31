@@ -9,6 +9,10 @@ namespace EFT.Reborn
 
     public static class GameUtils
     {
+        public static float InPoint(Vector3 c1, Vector3 c2)
+        {
+            return (c1 - c2).sqrMagnitude;
+        }
         public static float Map(float value, float sourceFrom, float sourceTo, float destinationFrom, float destinationTo)
         {
             return (value - sourceFrom) / (sourceTo - sourceFrom) * (destinationTo - destinationFrom) + destinationFrom;

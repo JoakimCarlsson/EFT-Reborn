@@ -9,7 +9,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-
 namespace EFT.Reborn
 {
     class Main : MonoBehaviour
@@ -31,6 +30,7 @@ namespace EFT.Reborn
             HookObject.AddComponent<PlayerESP>();
             HookObject.AddComponent<ItemESP>();
             HookObject.AddComponent<LootableContainerESP>();
+            HookObject.AddComponent<CorpseESP>();
             HookObject.AddComponent<ExfiltrationPointsESP>();
             HookObject.AddComponent<Aimbot>();
             HookObject.AddComponent<GrenadeESP>();

@@ -21,7 +21,6 @@ namespace EFT.Reborn
 
         internal static Color PlayerColor = Color.green;
         internal static Color PlayerScavColor = new Color(241, 0, 35, 1);
-        internal static Color DeadPlayerColor = Color.gray;
         internal static Color BotColor = new Color(1, 1, 0, 1);
         internal static Color HealthColor = Color.green;
         internal static Color BossColor = Color.red;
@@ -52,7 +51,6 @@ namespace EFT.Reborn
         internal static float DrawPlayersRange = 200f;
         internal static float DrawPlayerSkeletonDistance = 100f;
         internal static bool DrawPlayerCorpses = true;
-        internal static bool DrawScavCorpses = true;
         internal static bool DrawScavs = true;
         internal static bool DrawScavName = true;
         internal static bool DrawScavWeapon = true;
