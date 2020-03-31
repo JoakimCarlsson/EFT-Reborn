@@ -145,6 +145,9 @@ namespace EFT.Reborn
                     }
 
                     GUI.Label(new Rect(20, 40, 200, 60), LootItemRarity.ToString());
+
+
+
                 }
             }
             catch

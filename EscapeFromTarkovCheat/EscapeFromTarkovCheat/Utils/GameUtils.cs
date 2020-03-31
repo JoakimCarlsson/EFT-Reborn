@@ -21,7 +21,10 @@ namespace EFT.Reborn
         {
             return lootItem != null;
         }
-
+        public static float InPoint(Vector3 c1, Vector3 c2)
+        {
+            return (c1 - c2).sqrMagnitude;
+        }
         public static bool IsFriend(Player player)
         {
             return Main.LocalPlayer.Profile.Info.GroupId == player.Profile.Info.GroupId && player.Profile.Info.GroupId != "0" && player.Profile.Info.GroupId != "" && player.Profile.Info.GroupId != null;

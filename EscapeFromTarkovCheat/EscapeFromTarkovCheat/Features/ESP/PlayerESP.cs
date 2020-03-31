@@ -55,11 +55,6 @@ namespace EFT.Reborn
                 else
                     playerColor = Settings.PlayerColor;
 
-                if (!GameUtils.IsPlayerAlive(player.Player))
-                {
-                    playerColor = Settings.DeadPlayerColor;
-                }
-
                 float boxPositionY = (player.HeadScreenPosition.y - 10f);
                 float boxHeight = (Math.Abs(player.HeadScreenPosition.y - player.ScreenPosition.y) + 10f);
                 float boxWidth = (boxHeight * 0.65f);
@@ -69,12 +64,7 @@ namespace EFT.Reborn
                     playerTextLabel1 = $"{player.Player.Profile.Info.Nickname} ]";
                 }
 
-                if (Settings.DrawPlayerCorpses && !GameUtils.IsPlayerAlive(player.Player))
-                {
-                    playerTextLabel1 = "* Dead * ";
-                }
-
-                if (Settings.DrawPlayerDistance)
+                if (Settings.DrawPlayerDistance && GameUtils.IsPlayerAlive(player.Player))
                 {
                     playerTextLabel1 += $" [{player.FormattedDistance}] ";
                 }
@@ -166,11 +156,6 @@ namespace EFT.Reborn
 
                 playerColor = player.Player.Profile.Info.Settings.IsBoss() ? Settings.BossColor : Settings.BotColor;
 
-                if (!GameUtils.IsPlayerAlive(player.Player))
-                {
-                    playerColor = Settings.DeadPlayerColor;
-                }
-
                 float boxPositionY = (player.HeadScreenPosition.y - 10f);
                 float boxHeight = (Math.Abs(player.HeadScreenPosition.y - player.ScreenPosition.y) + 10f);
                 float boxWidth = (boxHeight * 0.65f);
@@ -189,13 +174,7 @@ namespace EFT.Reborn
                     }
                 }
 
-                if (Settings.DrawScavCorpses && !GameUtils.IsPlayerAlive(player.Player))
-                {
-                    playerTextLabel1 = "* Dead *";
-                    playerColor = Settings.DeadPlayerColor;
-                }
-
-                if (Settings.DrawScavDistance)
+                if (Settings.DrawScavDistance && GameUtils.IsPlayerAlive(player.Player))
                 {
                     playerTextLabel1 += $"[{player.FormattedDistance}] ";
                 }

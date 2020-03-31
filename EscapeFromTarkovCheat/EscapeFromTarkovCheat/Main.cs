@@ -32,12 +32,12 @@ namespace EFT.Reborn
             HookObject.AddComponent<ItemESP>();
             HookObject.AddComponent<LootableContainerESP>();
             HookObject.AddComponent<ExfiltrationPointsESP>();
+            HookObject.AddComponent<CorpseESP>();
             HookObject.AddComponent<Aimbot>();
             HookObject.AddComponent<GrenadeESP>();
             HookObject.AddComponent<Misc>();
             DontDestroyOnLoad(HookObject);
             GameScene.CurrentGameScene = new Scene();
-
         }
 
         public void Start()

@@ -10,7 +10,6 @@ namespace EFT.Reborn
     public static class Render
     {
         public static GUIStyle StringStyle { get; set; } = new GUIStyle(GUI.skin.label);
-        public static Material DrawMaterial;
 
         public static Color Color
         {
