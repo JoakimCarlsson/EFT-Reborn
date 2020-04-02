@@ -11,7 +11,8 @@ namespace EFT.Reborn
     class Settings
     {
         //Colours
-        internal static Color SpecialColor = new Color(1f, 0.2f, 0.09f);
+        internal static Color AimbotLockedColor = Color.white;
+		internal static Color SpecialColor = new Color(1f, 0.2f, 0.09f);
         internal static Color QuestColor = Color.yellow;
         internal static Color CommonColor = Color.white;
         internal static Color RareColor = new Color(0.38f, 0.43f, 1f);
@@ -290,5 +291,6 @@ namespace EFT.Reborn
 			"5e00c1ad86f774747333222c",
 			"5e01ef6886f77445f643baa4"
 });
-	}
+
+    }
 }

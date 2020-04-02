@@ -48,6 +48,7 @@ namespace EFT.Reborn
         private void OnGUI()
         {
             GUI.Label(new Rect(20, 20, 1000, 500), watermark);
+            
             if (!_visible)
                 return;
 
