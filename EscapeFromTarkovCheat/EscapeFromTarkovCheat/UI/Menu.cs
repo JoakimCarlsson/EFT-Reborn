@@ -31,12 +31,12 @@ namespace EFT.Reborn
             AllocConsoleHandler.Open();
 #endif
             _mainWindow = new Rect(20f, 60f, 250f, 150f);
-            _playerVisualWindow = new Rect(20f, 220f, 250f, 150f);
-            _miscVisualWindow = new Rect(20f, 260f, 250f, 150f);
-            _aimbotVisualWindow = new Rect(20f, 260f, 250, 150f);
-            _miscFeatureslVisualWindow = new Rect(20f, 260f, 250f, 150f);
-            _weaponVisualWindow = new Rect(20f, 260f, 250f, 150f);
-            _hotKeysVisualWindow = new Rect(20f, 260f, 250f, 150f);
+            _playerVisualWindow = new Rect(275f, 60f, 250f, 150f);
+            _miscVisualWindow = new Rect(530f, 60f, 250f, 150f);
+            _aimbotVisualWindow = new Rect(785f, 60f, 250, 150f);
+            _miscFeatureslVisualWindow = new Rect(1040f, 60f, 250f, 150f);
+            _weaponVisualWindow = new Rect(1295f, 60f, 250f, 150f);
+            _hotKeysVisualWindow = new Rect(1555f, 60f, 250f, 150f);
         }
 
         private void Update()
