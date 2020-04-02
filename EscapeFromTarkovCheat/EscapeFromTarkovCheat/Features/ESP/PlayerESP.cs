@@ -14,7 +14,6 @@ namespace EFT.Reborn
     public class PlayerESP : MonoBehaviour
     {
 
-
         public void OnGUI()
         {
             try
@@ -44,16 +43,9 @@ namespace EFT.Reborn
                 if (player.Distance > Settings.DrawPlayersRange)
                     continue;
 
-                Color playerColor;
+                Color playerColor = GetPlayerColor(player);
                 string playerTextLabel1 = string.Empty;
                 string playerTextLabel2 = string.Empty;
-
-                if (GameUtils.IsFriend(player.Player))
-                    playerColor = Settings.FriendColor;
-                else if (player.Player.Profile.Info.Side == EPlayerSide.Savage)
-                    playerColor = Settings.PlayerScavColor;
-                else
-                    playerColor = Settings.PlayerColor;
 
                 float boxPositionY = (player.HeadScreenPosition.y - 10f);
                 float boxHeight = (Math.Abs(player.HeadScreenPosition.y - player.ScreenPosition.y) + 10f);
@@ -152,9 +144,7 @@ namespace EFT.Reborn
                 string playerTextLabel1 = string.Empty;
                 string playerTextLabel2 = string.Empty;
 
-                Color playerColor;
-
-                playerColor = player.Player.Profile.Info.Settings.IsBoss() ? Settings.BossColor : Settings.BotColor;
+                Color playerColor = GetPlayerColor(player);
 
                 float boxPositionY = (player.HeadScreenPosition.y - 10f);
                 float boxHeight = (Math.Abs(player.HeadScreenPosition.y - player.ScreenPosition.y) + 10f);
@@ -163,15 +153,9 @@ namespace EFT.Reborn
                 if (Settings.DrawScavName && GameUtils.IsPlayerAlive(player.Player))
                 {
                     if (player.Player.Profile.Info.Settings.IsBoss())
-                    {
                         playerTextLabel1 = $"Boss ";
-                        playerColor = Settings.BossColor;
-                    }
                     else
-                    {
                         playerTextLabel1 = "Bot ";
-                        playerColor = Settings.BotColor;
-                    }
                 }
 
                 if (Settings.DrawScavDistance && GameUtils.IsPlayerAlive(player.Player))
@@ -295,6 +279,36 @@ namespace EFT.Reborn
                 Aimbot.IsVisible(GameUtils.GetBonePosByID(player.Player, 132)) ? Color.green : Color.red);
         }
 
+        public static Color GetPlayerColor(GamePlayer player)
+        {
+            //if (player == Aimbot.Target)
+            //{
+            //    return Settings.AimbotLockedColor;
+            //}
+            if (Aimbot.IsVisible(GameUtils.GetBonePosByID(player.Player, 132)))
+            {
+                return Color.green;
+            }
+            if (GameUtils.IsFriend(player.Player))
+            {
+                return Settings.FriendColor;
+            }
+            if (player.Player.Profile.Info.Settings.IsBoss())
+            {
+                return Settings.BossColor;
+            }
+            if (player.IsAI)
+            {
+                return Settings.BotColor;
+            }
 
+            if (player.Player.Profile.Info.Side == EPlayerSide.Savage)
+            {
+                return Settings.PlayerScavColor;
+            }
+
+
+            return Settings.PlayerColor;
+        }
     }
 }

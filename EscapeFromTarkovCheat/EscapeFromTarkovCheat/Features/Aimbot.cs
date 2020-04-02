@@ -14,7 +14,7 @@ namespace EFT.Reborn
     class Aimbot : MonoBehaviour
     {
         private IEnumerable<GamePlayer> _targetList;
-        private GamePlayer _target;
+        public static GamePlayer Target;
         public void FixedUpdate()
         {
             try
@@ -22,16 +22,16 @@ namespace EFT.Reborn
                 if (GameScene.IsLoaded() && GameScene.InMatch() && Main.LocalPlayer != null && Main.LocalPlayer.Weapon != null && !MonoBehaviourSingleton<PreloaderUI>.Instance.IsBackgroundBlackActive && Main.MainCamera != null)
                 {
 
-                    if (Input.GetKey(Settings.AimbotKey) && _target == null)
+                    if (Input.GetKey(Settings.AimbotKey) && Target == null)
                     {
-                        _target = GetTarget();
+                        Target = GetTarget();
 
-                        if (_target != null)
+                        if (Target != null)
                         {
-                            Vector3 aimPos = _target.Player.PlayerBones.Head.position;
-                            float travelTime = _target.Distance / Main.LocalPlayer.Weapon.CurrentAmmoTemplate.InitialSpeed;
-                            aimPos.x += (_target.Player.Velocity.x * travelTime);
-                            aimPos.y += (_target.Player.Velocity.y * travelTime);
+                            Vector3 aimPos = Target.Player.PlayerBones.Head.position;
+                            float travelTime = Target.Distance / Main.LocalPlayer.Weapon.CurrentAmmoTemplate.InitialSpeed;
+                            aimPos.x += (Target.Player.Velocity.x * travelTime);
+                            aimPos.y += (Target.Player.Velocity.y * travelTime);
 
                             Vector3 eulerAngles = Quaternion.LookRotation((aimPos - Main.LocalPlayer.PlayerBones.Fireport.position).normalized).eulerAngles;
 
@@ -43,7 +43,7 @@ namespace EFT.Reborn
                     }
                     else
                     {
-                        _target = null;
+                        Target = null;
                     }
                 }
             }
